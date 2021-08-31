@@ -1,44 +1,43 @@
 //
-//  RoundedTitleAndDescription.swift
+//  PageDescription.swift
 //  mylost
 //
-//  Created by Nato Egnatashvili on 6/22/21.
+//  Created by Nato Egnatashvili on 6/27/21.
 //
 
 import UIKit
 
-public class RoundedTitleAndDescription: UIView {
+public class PageDescription: UIView {
     
     private var verticalStack: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.spacing = 4
         view.axis = .vertical
-        view.alignment = .leading
+        view.alignment = .center
         
         return view
+    }()
+    
+    private var icon: UIImageView = {
+        let img = UIImageView()
+        img.height(equalTo: 100)
+        img.width(equalTo: 100)
+        img.translatesAutoresizingMaskIntoConstraints = false
+        return img
     }()
     
     private var titleLbl: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = Resourcebook.Font.caption1
+        lbl.font = Resourcebook.Font.captionBig
         return lbl
-    }()
-    
-    private var icon: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.roundCorners(with: .circle)
-        img.height(equalTo: 100)
-        img.width(equalTo: 100)
-        return img
     }()
     
     private var descriptionLbl: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = Resourcebook.Font.body1
+        lbl.font = Resourcebook.Font.caption2
         lbl.numberOfLines = 0
         return lbl
     }()
@@ -53,9 +52,9 @@ public class RoundedTitleAndDescription: UIView {
     
     public func configure(with model: ViewModel){
         titleLbl.text = model.title
-        icon.isHidden = model.icon == nil
-        icon.image = model.icon
         descriptionLbl.text = model.description
+        icon.image = model.imageType.image
+        icon.tintColor = model.imageType.tint
     }
     
     required init?(coder: NSCoder) {
@@ -64,9 +63,8 @@ public class RoundedTitleAndDescription: UIView {
     
 }
 
-extension RoundedTitleAndDescription {
+extension PageDescription {
     private func styleUI() {
-        self.roundCorners(with: .constant(radius: 10), with: .roundBottom)
         self.backgroundColor = .white
     }
     
@@ -77,20 +75,15 @@ extension RoundedTitleAndDescription {
     
     private func setUpVerticalStack() {
         self.addSubview(verticalStack)
-        verticalStack.top(toView: self, constant: 8)
-        verticalStack.left(toView: self)
-        verticalStack.right(toView: self)
-        verticalStack.bottom(toView: self, constant: 8)
+        verticalStack.stretchLayout(with: 8, to: self)
         
     }
     
     private func setUpTitleAndDescription() {
-        self.verticalStack.addArrangedSubview(titleLbl)
-        titleLbl.left(toView: verticalStack, constant: 16)
         self.verticalStack.addArrangedSubview(icon)
-        icon.left(toView: verticalStack, constant: 6)
+        
+        self.verticalStack.addArrangedSubview(titleLbl)
         self.verticalStack.addArrangedSubview(descriptionLbl)
-        descriptionLbl.left(toView: verticalStack, constant: 8)
     }
     
 }

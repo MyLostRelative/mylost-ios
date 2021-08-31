@@ -9,8 +9,6 @@ import UIKit
 
 class ProductContainer: PagerTabStripViewController {
     
-    
-    
     @IBOutlet weak var segments: ScrollableTabView!
     var lastSelectedIndex = 0
     var moduleVisitDate: Date = Date()
@@ -38,10 +36,9 @@ extension ProductContainer: ScrollableTabViewDelegate {
     }
     
     func itemSelected(at index: Int) {
-        guard viewControllers.count == 2 else { return }
-        
-        items[1 - index].state = .enabled
-        items[index].state = .active
+        for i in 0..<viewControllers.count {
+            items[i].state = i == index ? .active : .enabled
+        }
         self.moveTo(viewController: viewControllers[index])
     }
     
@@ -53,6 +50,10 @@ extension ProductContainer: ScrollableTabViewDelegate {
 extension ProductContainer: PagerTabStripDataSource {
     
     func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        guard let signVC = DIAssembly(uiAssemblies: [SignInAssembly()], networkAssemblies: [])
+                .resolver.resolve(SignInViewController.self) else {
+                    fatalError("errores")
+                }
         let otherPaymentConfigure = MyLostHomeConfiguratorImpl()
         let otherProductsVC = MyLostHomeController()
         otherPaymentConfigure.configure(otherProductsVC )
@@ -61,7 +62,7 @@ extension ProductContainer: PagerTabStripDataSource {
         let statementController = StatementsController()
         statementsConfigurator.configure(statementController )
 
-        return [otherProductsVC, statementController]
+        return [signVC, otherProductsVC, statementController]
     }
     
     func getDatasourceModels() -> [ProductTabModel] {

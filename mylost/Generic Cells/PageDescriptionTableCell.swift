@@ -1,17 +1,17 @@
 //
-//  RoundedTextFieldTableCell.swift
+//  PageDescriptionTableCell.swift
 //  mylost
 //
-//  Created by Nato Egnatashvili on 6/21/21.
+//  Created by Nato Egnatashvili on 6/27/21.
 //
 
 import UIKit
 
-public class RoundedTextFieldTableCell: ListRowCell {
-    public typealias Model = RoundedTextField.ViewModel
+public class PageDescriptionTableCell: ListRowCell {
+    public typealias Model = PageDescription.ViewModel
     
-    private let roundedTextField: RoundedTextField = {
-        let r = RoundedTextField()
+    private let pageDescription: PageDescription = {
+        let r = PageDescription()
         r.translatesAutoresizingMaskIntoConstraints = false
         return r
     }()
@@ -32,17 +32,17 @@ public class RoundedTextFieldTableCell: ListRowCell {
     }
 
     public func configure(with model: Model) {
-        roundedTextField.configure(with: model)
+        pageDescription.configure(with: model)
     }
     
     private func styleUI() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
+        pageDescription.roundCorners(with: .constant(radius: 10))
     }
     
     private func setUpConstraints() {
-        self.contentView.addSubview(roundedTextField)
-        roundedTextField.stretchLayout(with: 16, to: self.contentView)
+        self.contentView.addSubview(pageDescription)
+        pageDescription.stretchLayout(with: 8, to: self.contentView)
     }
 }
-

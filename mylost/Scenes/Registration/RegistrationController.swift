@@ -1,18 +1,18 @@
 //  
-//  MyLostHomeController.swift
-//  mylost
+//  RegistrationController.swift
+//  Registration
 //
-//  Created by Nato Egnatashvili on 6/21/21.
+//  Created by Nato Egnatashvili on 22.08.21.
 //
 
 import UIKit
 
-class MyLostHomeController: UIViewController {
+class RegistrationController: UIViewController {
 
-    var mypresenter: MyLostHomePresenter?
+    var presenter: RegistrationPresenter?
     var tableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
+        table.backgroundColor = .blue
         table.translatesAutoresizingMaskIntoConstraints = false
         table.separatorStyle = .none
         return table
@@ -20,7 +20,7 @@ class MyLostHomeController: UIViewController {
     
     override func viewDidLoad() {
         addTableView()
-        mypresenter?.viewDidLoad()
+        presenter?.viewDidLoad()
     }
     
     private func addTableView() {
@@ -33,9 +33,7 @@ class MyLostHomeController: UIViewController {
     }
 }
 
-extension MyLostHomeController: MyLostHomeView {
-    func displayBanner(type: Bannertype, title: String, description: String) {
-        self.displayBanner(banner: .init(type: type, title: title, description: description))
-    }
+extension RegistrationController: RegistrationView {
+    
 }
 

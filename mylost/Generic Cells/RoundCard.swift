@@ -1,17 +1,17 @@
 //
-//  RoundedTextFieldTableCell.swift
+//  RoundCard.swift
 //  mylost
 //
-//  Created by Nato Egnatashvili on 6/21/21.
+//  Created by Nato Egnatashvili on 6/25/21.
 //
 
 import UIKit
 
-public class RoundedTextFieldTableCell: ListRowCell {
-    public typealias Model = RoundedTextField.ViewModel
+public class RoundCard: ListRowCell {
+    public typealias Model = RoundedTitleAndDescription.ViewModel
     
-    private let roundedTextField: RoundedTextField = {
-        let r = RoundedTextField()
+    private let cardBottom: RoundedTitleAndDescription = {
+        let r = RoundedTitleAndDescription()
         r.translatesAutoresizingMaskIntoConstraints = false
         return r
     }()
@@ -28,21 +28,22 @@ public class RoundedTextFieldTableCell: ListRowCell {
 
     private func commonInit() {
         styleUI()
-        setUpConstraints()
+        setUp()
     }
 
     public func configure(with model: Model) {
-        roundedTextField.configure(with: model)
+        cardBottom.configure(with: model)
     }
     
     private func styleUI() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
+        cardBottom.roundCorners(with: .constant(radius: 10), with: .round)
     }
-    
-    private func setUpConstraints() {
-        self.contentView.addSubview(roundedTextField)
-        roundedTextField.stretchLayout(with: 16, to: self.contentView)
+
+    private func setUp() {
+        self.contentView.addSubview(cardBottom)
+        cardBottom.stretchLayout(with: 16, to: self.contentView)
     }
 }
 

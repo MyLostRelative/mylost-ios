@@ -10,9 +10,14 @@ import Foundation
 
 class ProductsTabDataSource {
     func models() -> [ProductTabModel] {
-        return [ ProductTabModel.init(
+        return [
+            ProductTabModel.init(
+               title: "Sign In",
+               state: ProductTabCell.State.active
+               )
+            , ProductTabModel.init(
             title: "My Lost",
-            state: ProductTabCell.State.active
+            state: ProductTabCell.State.disabled
             ) ,
         ProductTabModel.init(
             title: "Statement",

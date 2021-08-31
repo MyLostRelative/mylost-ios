@@ -22,7 +22,7 @@ struct ProductTabModel:  TabCollectionCellModel{
     var title: String
     var state: ProductTabCell.State
     var nibName: String {return "ProductTabCell"}
-    var tabTitleWidth: CGFloat {return title.width(withConstraintedHeight: 15, font: Resourcebook.Font.body2)}
+    var tabTitleWidth: CGFloat {return title.width(withConstraintedHeight: 15, font: Resourcebook.Font.captionBig)}
     
     var width: CGFloat {return tabTitleWidth + AppScrollableTabs.ProductTab.padding}
     var backgroundColor: UIColor? {return  AppScrollableTabs.ProductTab.Colors.background}

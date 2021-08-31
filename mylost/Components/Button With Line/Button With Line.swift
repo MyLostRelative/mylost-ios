@@ -77,7 +77,7 @@ extension ButtonWithLine {
     
     private func setUpSubviews() {
         self.stackView.addArrangedSubview(self.button)
-        self.stackView.addArrangedSubview(separatorLine)
+        //self.stackView.addArrangedSubview(separatorLine)
         
     }
 }

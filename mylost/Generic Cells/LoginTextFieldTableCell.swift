@@ -1,17 +1,18 @@
 //
-//  RoundedTextFieldTableCell.swift
-//  mylost
+//  LoginTextFieldTableCell.swift
+//  LoginTextFieldTableCell
 //
-//  Created by Nato Egnatashvili on 6/21/21.
+//  Created by Nato Egnatashvili on 30.08.21.
 //
 
 import UIKit
 
-public class RoundedTextFieldTableCell: ListRowCell {
-    public typealias Model = RoundedTextField.ViewModel
+
+public class LoginTextFieldTableCell: ListRowCell {
+    public typealias Model = LogInTextField.ViewModel
     
-    private let roundedTextField: RoundedTextField = {
-        let r = RoundedTextField()
+    private let roundedTextField: LogInTextField = {
+        let r = LogInTextField()
         r.translatesAutoresizingMaskIntoConstraints = false
         return r
     }()
@@ -42,7 +43,9 @@ public class RoundedTextFieldTableCell: ListRowCell {
     
     private func setUpConstraints() {
         self.contentView.addSubview(roundedTextField)
-        roundedTextField.stretchLayout(with: 16, to: self.contentView)
+        roundedTextField.top(toView: self.contentView)
+        roundedTextField.bottom(toView: self.contentView)
+        roundedTextField.right(toView: self.contentView, constant: 8)
+        roundedTextField.left(toView: self.contentView, constant: 8)
     }
 }
-

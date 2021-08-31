@@ -15,9 +15,11 @@ class MyLostHomeConfiguratorImpl: MyLostHomeConfigurator {
     
     func configure(_ controller: MyLostHomeController) {
         let router: MyLostHomeRouter = MyLostHomeRouterImpl(controller)
+        let gateway = StatementGatewayImpl()
         
         let presenter: MyLostHomePresenter = MyLostHomePresenterImpl(
             view: controller,
+            statementsGateway: gateway,
             router: router
         )
         

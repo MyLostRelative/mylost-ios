@@ -17,7 +17,7 @@ class ProductTabCell: UICollectionViewCell {
         let label: UILabel = .init()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = Resourcebook.Font.body2
+        label.font = Resourcebook.Font.captionBig
         label.textAlignment = .center
         label.lineBreakMode = .byTruncatingTail
         return label
@@ -138,9 +138,9 @@ extension ProductTabCell.State {
     func getLabelColor() -> UIColor? {
         switch self {
         case .active: return Resourcebook.Color.Invert.Component.solid500.uiColor
-        case .enabled: return Resourcebook.Color.Information.solid50.uiColor
-        case .pressed: return Resourcebook.Color.Information.solid50.uiColor
-        case .disabled: return Resourcebook.Color.Information.solid50.uiColor
+        case .enabled: return Resourcebook.Color.Black.tr100.uiColor
+        case .pressed: return Resourcebook.Color.Black.tr100.uiColor
+        case .disabled: return Resourcebook.Color.Black.tr100.uiColor
         }
     }
 }

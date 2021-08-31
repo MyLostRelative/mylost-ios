@@ -14,11 +14,12 @@ public class RoundedTextField: UIView  {
         field.textColor = Resourcebook.Color.Invert.Component.solid500.uiColor
         field.layer.borderColor = Resourcebook.Color.Invert.Background.canvas.cgColor
         field.layer.borderWidth = 3
-        field.roundCorners(with: .constant(radius: 5))
+        field.roundCorners(with: .constant(radius: 12))
         field.clipsToBounds = true
         field.delegate = self
         field.height(equalTo: 80)
         field.font = Resourcebook.Font.body1
+        field.textColor = .gray
         textViewDidChange(field)
         return field
     }()
@@ -97,5 +98,15 @@ extension RoundedTextField: UITextViewDelegate {
             textView.frame.size.height = textView.contentSize.height
             textView.isScrollEnabled = false
         }
+    }
+    
+    public func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
+        textView.textColor = .black
+    }
+    
+    public func textViewDidEndEditing(_ textView: UITextView) {
+        textView.text = "დაწერეთ რამე"
+        textView.textColor = .gray
     }
 }

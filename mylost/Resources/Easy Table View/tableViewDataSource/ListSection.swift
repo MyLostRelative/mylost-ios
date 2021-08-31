@@ -109,6 +109,7 @@ extension ListSection {
     }
 
     func tapOnRow(at index: Int) {
+        guard  rows.count > index else { return }
         rows[index].performTap(at: index)
     }
     
