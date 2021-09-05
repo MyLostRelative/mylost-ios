@@ -93,16 +93,11 @@ extension MyProfilePresenterImpl {
         return ListSection.init(
             id: "",
             rows: [self.userCardRow(), 
-                   self.textfield()] )
-    }
-    
-    private func textfield() -> ListRow <RoundedTextFieldTableCell>{
-        ListRow(model: RoundedTextFieldTableCell.Model(placeHolderText: "დაწერეთ",
-                                                       title: "დაპოსტვა",
-                                                       onTap: { (field) in
-                                                        print(field.getText())
-                                                       }),
-                height: UITableView.automaticDimension)
+                   self.clickableLabel(with: .init(title: "პოსტის შექმნა",
+                                                   colorStyle: .positive,
+                                                   onTap: { _ in
+                                                    self.router.move2CreatePost()
+                                                   }))] )
     }
     
 }

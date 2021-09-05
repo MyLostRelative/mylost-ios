@@ -10,6 +10,7 @@ import Foundation
 protocol MyProfileRouter {
     func attach(controller: MyProfileViewController)
     func move2ProfileDetails()
+    func move2CreatePost()
 }
 
 class MyProfileRouterImpl: MyProfileRouter {
@@ -22,5 +23,13 @@ class MyProfileRouterImpl: MyProfileRouter {
     func move2ProfileDetails() {
         guard let vc = DIAssembly(uiAssemblies: [DetailsAndLogOutAssembly()], networkAssemblies: []).resolver.resolve(DetailsAndLogOutController.self) else { return }
         controller?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func move2CreatePost() {
+        guard let vc = DIAssembly(uiAssemblies: [PostCreateAssembly()], networkAssemblies: [])
+                .resolver
+                .resolve(PostCreateViewController.self) else { return }
+        controller?.navigationController?.pushViewController(vc, animated: true)
+        
     }
 }

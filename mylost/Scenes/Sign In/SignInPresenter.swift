@@ -185,6 +185,7 @@ extension SignInPresenterImpl {
         var nameField: LoginTextFieldTableCell?
         var surnameField: LoginTextFieldTableCell?
         var emailField: LoginTextFieldTableCell?
+        var mobileField: LoginTextFieldTableCell?
         var usernameField: LoginTextFieldTableCell?
         var passwordField: LoginTextFieldTableCell?
         
@@ -202,6 +203,11 @@ extension SignInPresenterImpl {
             emailField = field
         }))
         
+        let mobile = modelConfigurator.getTextFieldModel(with: .mobileTextField(ontap: { field in
+            field.emptyTextField()
+            mobileField = field
+        }))
+        
         let usernameModel = modelConfigurator.getTextFieldModel(with: .usernameTextField(ontap: { field in
             field.emptyTextField()
             usernameField = field
@@ -216,11 +222,13 @@ extension SignInPresenterImpl {
                                     password: passwordField?.getText() ,
                                     firstName: nameField?.getText(),
                                     lastName: surnameField?.getText(),
-                                    email:emailField?.getText())
+                                    email:emailField?.getText(),
+                                    mobile: mobileField?.getText())
         }))
         let textFieldModels: [ListSection.Row] = [textField(with: nameModel) ,
                                                   textField(with: surnameModel),
                                                   textField(with: email),
+                                                  textField(with: mobile),
                                                   textField(with: usernameModel),
                                                   textField(with: passwordModel)]
         let registrationClickableLabelModel = modelConfigurator.getClickableLabelModel(with: .registration(onTap: { _ in
@@ -239,12 +247,13 @@ extension SignInPresenterImpl {
                                      password: String? ,
                                      firstName: String? ,
                                      lastName: String? ,
-                                     email: String? ) {
+                                     email: String? ,
+                                     mobile: String?) {
         if let username = username,
            let password = password,
            let firstName = firstName,
            let lastName = lastName,
-           let email = email {
+           let email = email{
             let params = ["username": username,
                                         "password": password,
                                         "firstName": firstName,

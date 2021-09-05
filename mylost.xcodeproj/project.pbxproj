@@ -32,6 +32,10 @@
 		5272FFC826DD26C600C24CC8 /* SignInModelConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5272FFC726DD26C600C24CC8 /* SignInModelConfigurator.swift */; };
 		527888CB26E516C100324041 /* RegistrationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888CA26E516C100324041 /* RegistrationEntity.swift */; };
 		527888CD26E516E300324041 /* RegistrationGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888CC26E516E300324041 /* RegistrationGateway.swift */; };
+		527888D226E526ED00324041 /* PostCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888CF26E526ED00324041 /* PostCreateRouter.swift */; };
+		527888D326E526ED00324041 /* PostCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D026E526ED00324041 /* PostCreateController.swift */; };
+		527888D426E526ED00324041 /* PostCreateAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D126E526ED00324041 /* PostCreateAssembly.swift */; };
+		527888D626E5273A00324041 /* PostCreatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D526E5273A00324041 /* PostCreatePresenter.swift */; };
 		528843882681A1760087A3E1 /* HeaderWithDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528843872681A1760087A3E1 /* HeaderWithDetails.swift */; };
 		5288438B2681A1840087A3E1 /* HeaderWithDetailsViewModel + Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288438A2681A1840087A3E1 /* HeaderWithDetailsViewModel + Constants.swift */; };
 		5288438E2681A9180087A3E1 /* HeaderWithDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288438D2681A9180087A3E1 /* HeaderWithDetailsCell.swift */; };
@@ -176,6 +180,10 @@
 		5272FFC726DD26C600C24CC8 /* SignInModelConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModelConfigurator.swift; sourceTree = "<group>"; };
 		527888CA26E516C100324041 /* RegistrationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationEntity.swift; sourceTree = "<group>"; };
 		527888CC26E516E300324041 /* RegistrationGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationGateway.swift; sourceTree = "<group>"; };
+		527888CF26E526ED00324041 /* PostCreateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateRouter.swift; sourceTree = "<group>"; };
+		527888D026E526ED00324041 /* PostCreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateController.swift; sourceTree = "<group>"; };
+		527888D126E526ED00324041 /* PostCreateAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateAssembly.swift; sourceTree = "<group>"; };
+		527888D526E5273A00324041 /* PostCreatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatePresenter.swift; sourceTree = "<group>"; };
 		5288437626814DFD0087A3E1 /* BOG-Headline-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BOG-Headline-SemiBold.ttf"; sourceTree = "<group>"; };
 		5288437726814DFD0087A3E1 /* BOG-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BOG-Bold.ttf"; sourceTree = "<group>"; };
 		5288437826814DFD0087A3E1 /* BOG-Headline-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BOG-Headline-Light.ttf"; sourceTree = "<group>"; };
@@ -427,6 +435,17 @@
 				5272FFC726DD26C600C24CC8 /* SignInModelConfigurator.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		527888CE26E526BE00324041 /* PostCreate */ = {
+			isa = PBXGroup;
+			children = (
+				527888CF26E526ED00324041 /* PostCreateRouter.swift */,
+				527888D026E526ED00324041 /* PostCreateController.swift */,
+				527888D126E526ED00324041 /* PostCreateAssembly.swift */,
+				527888D526E5273A00324041 /* PostCreatePresenter.swift */,
+			);
+			path = PostCreate;
 			sourceTree = "<group>";
 		};
 		5288438526814ED00087A3E1 /* headerWithDetails */ = {
@@ -862,6 +881,7 @@
 		52DC59CE2680D7EF00B35E35 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				527888CE26E526BE00324041 /* PostCreate */,
 				5297D9B826E4DCF90014F2FF /* BlogDetailsController */,
 				5297D97E26E382EF0014F2FF /* DetailsAndLogout */,
 				520E21B126E005A700A5EF70 /* MyProfile */,
@@ -1203,6 +1223,7 @@
 				5272FFB126DCD11500C24CC8 /* SignInViewController.swift in Sources */,
 				5297D98626E383500014F2FF /* DetailsAndLogOutController.swift in Sources */,
 				52DC5984267E2F5D00B35E35 /* ScrollableCellModel.swift in Sources */,
+				527888D326E526ED00324041 /* PostCreateController.swift in Sources */,
 				52DC59B22680D33900B35E35 /* ColorWrapper.swift in Sources */,
 				520E21B626E005D900A5EF70 /* MyProfilePresenter.swift in Sources */,
 				52DC59D82680D82A00B35E35 /* MyLostHomeConfigurator.swift in Sources */,
@@ -1215,6 +1236,7 @@
 				52DC59E02680DDC800B35E35 /* StatementsPresenter.swift in Sources */,
 				52D80C61264EF64200ACBC16 /* ViewController.swift in Sources */,
 				52DC5937267E295300B35E35 /* ListViewDataSource.swift in Sources */,
+				527888D426E526ED00324041 /* PostCreateAssembly.swift in Sources */,
 				52DC59EA2680E48E00B35E35 /* RoundedTextField.swift in Sources */,
 				52DC59F82680EF8B00B35E35 /* LocalButton.swift in Sources */,
 				52DC5924267E286400B35E35 /* DifCalculator.swift in Sources */,
@@ -1227,6 +1249,7 @@
 				5272FFBD26DCDFDA00C24CC8 /* LogInTextField.swift in Sources */,
 				520E21AD26DFF81000A5EF70 /* BlogGateway.swift in Sources */,
 				52DC592A267E28A600B35E35 /* Table Extensions.swift in Sources */,
+				527888D226E526ED00324041 /* PostCreateRouter.swift in Sources */,
 				5297D9A626E421AD0014F2FF /* RowItem.swift in Sources */,
 				52DC59CB2680D3B300B35E35 /* PagerTabStripViewController.swift in Sources */,
 				5272FFB726DCD1A600C24CC8 /* SignInAssembly.swift in Sources */,
@@ -1245,6 +1268,7 @@
 				5272FFBA26DCD1C700C24CC8 /* DIManager.swift in Sources */,
 				5272FFC826DD26C600C24CC8 /* SignInModelConfigurator.swift in Sources */,
 				52DC59FC2680F36800B35E35 /* ButtonWithLine View Model + COnstant.swift in Sources */,
+				527888D626E5273A00324041 /* PostCreatePresenter.swift in Sources */,
 				52DC59B82680D33900B35E35 /* FontWrapper.swift in Sources */,
 				5288438B2681A1840087A3E1 /* HeaderWithDetailsViewModel + Constants.swift in Sources */,
 				5226A5C326C6718B0087F8A8 /* UserController.swift in Sources */,
