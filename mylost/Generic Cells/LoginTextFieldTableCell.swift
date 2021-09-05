@@ -35,7 +35,7 @@ public class LoginTextFieldTableCell: ListRowCell {
         model.onTap?(self)
     }
     
-    public func getText()-> String {
+    public func getText()-> String? {
         roundedTextField.getTextFieldText()
     }
     

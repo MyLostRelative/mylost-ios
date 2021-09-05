@@ -21,7 +21,8 @@ class SignInAssembly: UIAssembly {
         
         container.register(SignInPresenterImpl.self) {resolver in
             let presenter = SignInPresenterImpl(router: resolver.resolve(SignInRouterImpl.self)!,
-                                                loginGateway: resolver.resolve(LoginGatewayImpl.self)!)
+                                                loginGateway: resolver.resolve(LoginGatewayImpl.self)!,
+                                                registrationGateway: resolver.resolve(RegistrationGatewayImpl.self)!)
             return presenter
         }
         

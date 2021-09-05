@@ -24,11 +24,15 @@ class SignInPresenterImpl: SignInPresenter {
     private var pageType: PageType = .signIn
     private let router: SignInRouter
     private let loginGateway: LoginGateway
+    private let registrationGateway: RegistrationGateway
     private let userDefaultManager = UserDefaultManager()
     
-    init(router: SignInRouter, loginGateway: LoginGateway) {
+    init(router: SignInRouter,
+         loginGateway: LoginGateway,
+         registrationGateway: RegistrationGateway) {
         self.router = router
         self.loginGateway = loginGateway
+        self.registrationGateway = registrationGateway
     }
     
     func attach(view: SignInView) {
@@ -42,6 +46,22 @@ class SignInPresenterImpl: SignInPresenter {
     
     private func callLogin(params: [String: Any]) {
         loginGateway.postLogin(params: params) {[weak self] result in
+            switch result {
+            case .success(let response):
+                guard let token = response.access_token else { return }
+                self?.tokenSuccesfullyFetched(token: token)
+                
+            case .failure(let error):
+                self?.view?.displayBanner(type: .negative,
+                                          title: "მოხდა შეცდომა",
+                                          description: "დაფიქსირდა შეცდომა , სცადეთ მოგვიანებით.")
+                print(error)
+            }
+        }
+    }
+    
+    private func callRegister(params: [String: Any]) {
+        registrationGateway.postRegistration(params: params) {[weak self] result in
             switch result {
             case .success(let response):
                 guard let token = response.access_token else { return }
@@ -158,46 +178,51 @@ extension SignInPresenterImpl {
     }
 }
 
-//MARK: TextField Models
-extension SignInPresenterImpl{
-    private func getRegistrationModels() -> [LoginTextFieldTableCell.Model] {
-        let nameModel = modelConfigurator.getTextFieldModel(with: .name(ontap: { field in
-            field.emptyTextField()
-        }))
-        let surnameModel = modelConfigurator.getTextFieldModel(with: .surname(ontap: { field in
-            field.emptyTextField()
-        }))
-        
-        let mobileModel = modelConfigurator.getTextFieldModel(with: .mobileTextField(ontap: { field in
-            field.emptyTextField()
-        }))
-        
-        let email = modelConfigurator.getTextFieldModel(with: .mailTextField(ontap: { field in
-            field.emptyTextField()
-        }))
-        
-        let age = modelConfigurator.getTextFieldModel(with: .ageTextField(ontap: { field in
-            field.emptyTextField()
-        }))
-        
-        let usernameModel = modelConfigurator.getTextFieldModel(with: .usernameTextField(ontap: { field in
-            field.emptyTextField()
-        }))
-        let passwordModel = modelConfigurator.getTextFieldModel(with: .passwordTextField(ontap: { field in
-            field.emptyTextField()
-        }))
-        return [nameModel, surnameModel, mobileModel, email, age, usernameModel, passwordModel]
-    }
-    
-}
 
 //MARK: Registration Section
 extension SignInPresenterImpl {
     private func registrationCaseSections() -> ListSection{
-        let registrationButton = modelConfigurator.getButtoModel(with: .registration(onTap: { _ in
-            print("click registration")
+        var nameField: LoginTextFieldTableCell?
+        var surnameField: LoginTextFieldTableCell?
+        var emailField: LoginTextFieldTableCell?
+        var usernameField: LoginTextFieldTableCell?
+        var passwordField: LoginTextFieldTableCell?
+        
+        let nameModel = modelConfigurator.getTextFieldModel(with: .name(ontap: { field in
+            field.emptyTextField()
+            nameField = field
         }))
-        let textFieldModels: [ListSection.Row] = getRegistrationModels().map({textField(with: $0)})
+        let surnameModel = modelConfigurator.getTextFieldModel(with: .surname(ontap: { field in
+            field.emptyTextField()
+            surnameField = field
+        }))
+        
+        let email = modelConfigurator.getTextFieldModel(with: .mailTextField(ontap: { field in
+            field.emptyTextField()
+            emailField = field
+        }))
+        
+        let usernameModel = modelConfigurator.getTextFieldModel(with: .usernameTextField(ontap: { field in
+            field.emptyTextField()
+            usernameField = field
+        }))
+        let passwordModel = modelConfigurator.getTextFieldModel(with: .passwordTextField(ontap: { field in
+            field.emptyTextField()
+            passwordField = field
+        }))
+        
+        let registrationButton = modelConfigurator.getButtoModel(with: .registration(onTap: { _ in
+            self.registrationClicked(username: usernameField?.getText() ,
+                                    password: passwordField?.getText() ,
+                                    firstName: nameField?.getText(),
+                                    lastName: surnameField?.getText(),
+                                    email:emailField?.getText())
+        }))
+        let textFieldModels: [ListSection.Row] = [textField(with: nameModel) ,
+                                                  textField(with: surnameModel),
+                                                  textField(with: email),
+                                                  textField(with: usernameModel),
+                                                  textField(with: passwordModel)]
         let registrationClickableLabelModel = modelConfigurator.getClickableLabelModel(with: .registration(onTap: { _ in
             self.pageType = .signIn
             self.constructDataSource()
@@ -208,5 +233,28 @@ extension SignInPresenterImpl {
             rows: [self.pageDescriptionRowRegistration()] + textFieldModels + [
                 self.button(with: registrationButton),
                 self.clickableLabel(with: registrationClickableLabelModel)] )
+    }
+    
+    private func registrationClicked(username: String? ,
+                                     password: String? ,
+                                     firstName: String? ,
+                                     lastName: String? ,
+                                     email: String? ) {
+        if let username = username,
+           let password = password,
+           let firstName = firstName,
+           let lastName = lastName,
+           let email = email {
+            let params = ["username": username,
+                                        "password": password,
+                                        "firstName": firstName,
+                                        "lastName": lastName,
+                                        "email": email]
+            callRegister(params: params)
+        }else {
+            self.view?.displayBanner(type: .negative,
+                                     title: "დაფიქსირდა შეცდომა",
+                                     description: "გთხოვთ შეავსოთ ყველა საჭირო ველი")
+        }
     }
 }

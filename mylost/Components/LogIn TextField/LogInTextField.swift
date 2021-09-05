@@ -47,8 +47,11 @@ public class LogInTextField: UIView , UITextFieldDelegate{
         textField.isSecureTextEntry = model.textType == .secury
     }
     
-    public func getTextFieldText() -> String {
-        textField.text ?? ""
+    public func getTextFieldText() -> String? {
+        if textField.text == "" {
+            return nil
+        }
+        return textField.text
     }
     
     public func emptyTextField() {

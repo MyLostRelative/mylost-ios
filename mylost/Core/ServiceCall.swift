@@ -29,6 +29,7 @@ enum ServiceMethods {
     case statementList
     case blogList
     case login
+    case registration
 }
 
 extension ServiceMethods {
@@ -40,6 +41,8 @@ extension ServiceMethods {
             return URL(string: "https://mylost-api.herokuapp.com/blogs")
         case .login:
             return URL(string: "https://mylost-api.herokuapp.com/users/login")
+        case .registration:
+            return URL(string: "https://mylost-api.herokuapp.com/users/register")
         }
     }
 }

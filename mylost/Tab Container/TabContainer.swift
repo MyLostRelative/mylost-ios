@@ -62,7 +62,7 @@ extension ProductContainer: ScrollableTabViewDelegate {
 extension ProductContainer: PagerTabStripDataSource {
     
     func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        guard let signVC = DIAssembly(uiAssemblies: [SignInAssembly()], networkAssemblies: [LoginNetworkAssembly()])
+        guard let signVC = DIAssembly(uiAssemblies: [SignInAssembly()], networkAssemblies: [LoginNetworkAssembly(), RegistrationNetworkAssembly()])
                 .resolver.resolve(SignInViewController.self) else {
                     fatalError("errores")
                 }

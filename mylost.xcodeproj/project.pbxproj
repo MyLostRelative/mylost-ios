@@ -30,6 +30,8 @@
 		5272FFC326DD1D9700C24CC8 /* TiTleButtonTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5272FFC226DD1D9700C24CC8 /* TiTleButtonTableCell.swift */; };
 		5272FFC526DD228100C24CC8 /* RoundedButtonTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5272FFC426DD228100C24CC8 /* RoundedButtonTableCell.swift */; };
 		5272FFC826DD26C600C24CC8 /* SignInModelConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5272FFC726DD26C600C24CC8 /* SignInModelConfigurator.swift */; };
+		527888CB26E516C100324041 /* RegistrationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888CA26E516C100324041 /* RegistrationEntity.swift */; };
+		527888CD26E516E300324041 /* RegistrationGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888CC26E516E300324041 /* RegistrationGateway.swift */; };
 		528843882681A1760087A3E1 /* HeaderWithDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528843872681A1760087A3E1 /* HeaderWithDetails.swift */; };
 		5288438B2681A1840087A3E1 /* HeaderWithDetailsViewModel + Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288438A2681A1840087A3E1 /* HeaderWithDetailsViewModel + Constants.swift */; };
 		5288438E2681A9180087A3E1 /* HeaderWithDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288438D2681A9180087A3E1 /* HeaderWithDetailsCell.swift */; };
@@ -172,6 +174,8 @@
 		5272FFC226DD1D9700C24CC8 /* TiTleButtonTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiTleButtonTableCell.swift; sourceTree = "<group>"; };
 		5272FFC426DD228100C24CC8 /* RoundedButtonTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonTableCell.swift; sourceTree = "<group>"; };
 		5272FFC726DD26C600C24CC8 /* SignInModelConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModelConfigurator.swift; sourceTree = "<group>"; };
+		527888CA26E516C100324041 /* RegistrationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationEntity.swift; sourceTree = "<group>"; };
+		527888CC26E516E300324041 /* RegistrationGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationGateway.swift; sourceTree = "<group>"; };
 		5288437626814DFD0087A3E1 /* BOG-Headline-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BOG-Headline-SemiBold.ttf"; sourceTree = "<group>"; };
 		5288437726814DFD0087A3E1 /* BOG-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BOG-Bold.ttf"; sourceTree = "<group>"; };
 		5288437826814DFD0087A3E1 /* BOG-Headline-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BOG-Headline-Light.ttf"; sourceTree = "<group>"; };
@@ -608,6 +612,7 @@
 				520E21AA26DFF6C100A5EF70 /* BlogListEntity.swift */,
 				52D2809326887D3A00E6260C /* StatementListEntity.swift */,
 				5297D9A226E40C9C0014F2FF /* LoginEntity.swift */,
+				527888CA26E516C100324041 /* RegistrationEntity.swift */,
 			);
 			path = "Response Entities";
 			sourceTree = "<group>";
@@ -618,6 +623,7 @@
 				52D280982688809900E6260C /* StatementGateway.swift */,
 				520E21AC26DFF81000A5EF70 /* BlogGateway.swift */,
 				5297D9A026E40C630014F2FF /* LoginGateway.swift */,
+				527888CC26E516E300324041 /* RegistrationGateway.swift */,
 			);
 			path = Gateways;
 			sourceTree = "<group>";
@@ -1235,6 +1241,7 @@
 				52DC5978267E2F4B00B35E35 /* ScrollableTabsConstants.swift in Sources */,
 				52D80C5D264EF64200ACBC16 /* AppDelegate.swift in Sources */,
 				5202FBB526DE37E000D490E8 /* PickerViewCell.swift in Sources */,
+				527888CB26E516C100324041 /* RegistrationEntity.swift in Sources */,
 				5272FFBA26DCD1C700C24CC8 /* DIManager.swift in Sources */,
 				5272FFC826DD26C600C24CC8 /* SignInModelConfigurator.swift in Sources */,
 				52DC59FC2680F36800B35E35 /* ButtonWithLine View Model + COnstant.swift in Sources */,
@@ -1296,6 +1303,7 @@
 				5297D98726E383500014F2FF /* DetailsAndLogOutConfigurator.swift in Sources */,
 				5272FFBF26DCE06E00C24CC8 /* LogInTextField ViewModel.swift in Sources */,
 				5297D9AA26E422740014F2FF /* RowItemTableCell.swift in Sources */,
+				527888CD26E516E300324041 /* RegistrationGateway.swift in Sources */,
 				520E21B826E005E300A5EF70 /* MyProfileRouter.swift in Sources */,
 				5297D94826E14D8D0014F2FF /* UserProfile.swift in Sources */,
 				5297D9C626E4EE280014F2FF /* UserDefault.swift in Sources */,
