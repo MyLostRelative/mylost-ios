@@ -40,6 +40,7 @@ public class TiTleButtonTableCell: ListRowCell {
     public func configure(with model: Model) {
         title.text = model.title
         self.onTap = model.onTap
+        title.textColor = model.colorStyle?.color()
     }
     
     private func styleUI() {
@@ -59,7 +60,32 @@ public class TiTleButtonTableCell: ListRowCell {
 extension TiTleButtonTableCell {
     public struct ViewModel {
         let title: String?
+        let colorStyle: TitleStyle?
         let onTap: ((TiTleButtonTableCell) -> ())?
+        
+        internal init(title: String?, colorStyle: TitleStyle = .normal, onTap: ((TiTleButtonTableCell) -> ())?) {
+            self.title = title
+            self.colorStyle = colorStyle
+            self.onTap = onTap
+        }
+    }
+    
+    enum TitleStyle {
+        case normal
+        case positive
+        case negative
+        
+        func color() -> UIColor{
+            switch self {
+            case .negative:
+                return Resourcebook.Color.Negative.solid200.uiColor
+            case .positive:
+                return Resourcebook.Color.Positive.solid100.uiColor
+            default:
+                return Resourcebook.Color.Black.solid200.uiColor
+            }
+        }
+        
     }
 }
 

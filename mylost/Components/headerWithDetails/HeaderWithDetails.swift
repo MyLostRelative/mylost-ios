@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 public class HeaderWithDetails: UIView {
     private var mainStackView: UIStackView = {
@@ -30,16 +31,45 @@ public class HeaderWithDetails: UIView {
     private var icon: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
-        img.roundCorners(with: .circle)
-        img.height(equalTo: 32)
-        img.width(equalTo: 32)
+        img.layer.cornerRadius = 25
+        img.layer.masksToBounds = true
+        img.height(equalTo: 50)
+        img.width(equalTo: 50)
         return img
     }()
     
     private var titleLbl: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.font = Resourcebook.Font.body1
+        return lbl
+    }()
+    
+    private var infoLabel1: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = Resourcebook.Font.caption1
+        return lbl
+    }()
+    
+    private var infoLabel2: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.font = Resourcebook.Font.caption1
+        return lbl
+    }()
+    
+    private var infoLabel3: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.font = Resourcebook.Font.caption1
+        return lbl
+    }()
+    
+    private var infoLabel4: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.font = Resourcebook.Font.body2
         return lbl
     }()
     
@@ -58,8 +88,21 @@ public class HeaderWithDetails: UIView {
     }
     
     public func configure(with model: ViewModel){
-        icon.image = model.icon
+        switch model.icon {
+        case .withIcon(let img):
+            icon.image = img
+        case .withURL(let url):
+            DispatchQueue.main.async {
+                self.icon.sd_setImage(with: url, completed: nil)
+            }
+        case .none:
+            break
+        }
         titleLbl.text = model.title
+        infoLabel1.text = model.info1
+        infoLabel2.text = model.info2
+        infoLabel3.text = model.info3
+        infoLabel4.text = model.info4
         descriptionLbl.text = model.description
     }
     
@@ -93,6 +136,10 @@ extension HeaderWithDetails {
     
     private func setUpTitleAndDescription() {
         self.verticalStack.addArrangedSubview(titleLbl)
+        self.verticalStack.addArrangedSubview(infoLabel1)
+        self.verticalStack.addArrangedSubview(infoLabel2)
+        self.verticalStack.addArrangedSubview(infoLabel3)
+        self.verticalStack.addArrangedSubview(infoLabel4)
         self.verticalStack.addArrangedSubview(descriptionLbl)
     }
     

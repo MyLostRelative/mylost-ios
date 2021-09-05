@@ -34,6 +34,7 @@ class StatementsController: UIViewController {
 }
 
 extension StatementsController: StatementsView {
-    
+    func displayBanner(type: Bannertype, title: String, description: String) {
+        self.displayBanner(banner: .init(type: type, title: title, description: description))
+    }
 }
-

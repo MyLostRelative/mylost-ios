@@ -11,9 +11,9 @@ extension LogInTextField {
     public struct ViewModel {
         let title: String?
         let textType: textFieldType
-        let onTap: ((LogInTextField) -> ())?
+        let onTap: ((LoginTextFieldTableCell) -> ())?
         
-        public init(title: String?, textType: textFieldType = .normal, onTap:  ((LogInTextField) -> ())?) {
+        public init(title: String?, textType: textFieldType = .normal, onTap:  ((LoginTextFieldTableCell) -> ())?) {
             self.title = title
             self.textType = textType
             self.onTap = onTap

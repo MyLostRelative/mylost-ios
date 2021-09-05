@@ -1,18 +1,19 @@
-//  
-//  RegistrationController.swift
-//  Registration
 //
-//  Created by Nato Egnatashvili on 22.08.21.
+//  BlogDetailsViewController.swift
+//  mylost
+//
+//  Created by Nato Egnatashvili on 05.09.21.
 //
 
 import UIKit
 
-class RegistrationController: UIViewController {
+class BlogDetailsViewController: UIViewController , BlogDetailsView{
 
-    var presenter: RegistrationPresenter?
+    var presenter: BlogDetailsPresenter?
+    
     var tableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = .blue
+        table.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
         table.translatesAutoresizingMaskIntoConstraints = false
         table.separatorStyle = .none
         return table
@@ -32,8 +33,3 @@ class RegistrationController: UIViewController {
         tableView.bottom(toView: self.view)
     }
 }
-
-extension RegistrationController: RegistrationView {
-    
-}
-

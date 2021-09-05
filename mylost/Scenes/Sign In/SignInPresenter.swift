@@ -22,6 +22,14 @@ class SignInPresenterImpl: SignInPresenter {
     private var tableViewDataSource: ListViewDataSource?
     private let modelConfigurator: SignInModelConfigurator = SignInModelConfiguratorImpl()
     private var pageType: PageType = .signIn
+    private let router: SignInRouter
+    private let loginGateway: LoginGateway
+    private let userDefaultManager = UserDefaultManager()
+    
+    init(router: SignInRouter, loginGateway: LoginGateway) {
+        self.router = router
+        self.loginGateway = loginGateway
+    }
     
     func attach(view: SignInView) {
         self.view = view
@@ -30,6 +38,29 @@ class SignInPresenterImpl: SignInPresenter {
     func viewDidLoad() {
         configureDataSource()
         constructDataSource()
+    }
+    
+    private func callLogin(params: [String: Any]) {
+        loginGateway.postLogin(params: params) {[weak self] result in
+            switch result {
+            case .success(let response):
+                guard let token = response.access_token else { return }
+                self?.tokenSuccesfullyFetched(token: token)
+                
+            case .failure(let error):
+                self?.view?.displayBanner(type: .negative,
+                                          title: "მოხდა შეცდომა",
+                                          description: "დაფიქსირდა შეცდომა , სცადეთ მოგვიანებით.")
+                print(error)
+            }
+        }
+    }
+    
+    private func tokenSuccesfullyFetched(token: String) {
+        DispatchQueue.main.async {
+            self.userDefaultManager.saveKeyName(key: "token", value: token)
+            self.router.changeToUser()
+        }
     }
     
     private func configureDataSource() {
@@ -63,10 +94,18 @@ class SignInPresenterImpl: SignInPresenter {
     }
     
     private func pageDescriptionRow() -> ListRow <PageDescriptionTableCell>  {
-        ListRow(model: PageDescriptionTableCell.Model(imageType: (image: Resourcebook.Image.Icons24.channelPaybox.template,
+        ListRow(model: PageDescriptionTableCell.Model(imageType: (image: Resourcebook.Image.Icons24.systemSearch.template,
                                                                   tint: Resourcebook.Color.Positive.solid300.uiColor),
                                                       title: "My Lost",
                                                       description: "გაიარეთ რეგისტრაცია ან დალოგინდით"),
+                height: UITableView.automaticDimension)
+    }
+    
+    private func pageDescriptionRowRegistration() -> ListRow <PageDescriptionTableCell>  {
+        ListRow(model: PageDescriptionTableCell.Model(imageType: (image: Resourcebook.Image.Icons24.generalLoginHistory.template,
+                                                                  tint: Resourcebook.Color.Positive.solid300.uiColor),
+                                                      title: "Registration",
+                                                      description: nil),
                 height: UITableView.automaticDimension)
     }
     
@@ -88,19 +127,24 @@ class SignInPresenterImpl: SignInPresenter {
 //MARK: Sign Up Section
 extension SignInPresenterImpl {
     private func signInCaseSections() -> ListSection{
-        let usernameModel = modelConfigurator.getTextFieldModel(with: .usernameTextField(ontap: { _ in
-            print("username")
+        var nameField: LoginTextFieldTableCell?
+        var passwordField: LoginTextFieldTableCell?
+        let usernameModel = modelConfigurator.getTextFieldModel(with: .usernameTextField(ontap: { newNameField in
+            nameField = newNameField
         }))
-        let passwordModel = modelConfigurator.getTextFieldModel(with: .passwordTextField(ontap: { _ in
-            print("password")
+        let passwordModel = modelConfigurator.getTextFieldModel(with: .passwordTextField(ontap: { newpasswordField in
+            passwordField = newpasswordField
         }))
         
         let loginButton = modelConfigurator.getButtoModel(with: .login(onTap: { _ in
-            print("დალოგინება")
+            self.callLogin(params: ["username": nameField?.getText() ?? "",
+                                    "password": passwordField?.getText() ?? ""])
         }))
         
         let loginClickableLabelModel = modelConfigurator.getClickableLabelModel(with: .login(onTap: { _ in
             self.pageType = .registration
+            nameField = nil
+            passwordField = nil
             self.constructDataSource()
         }))
         return ListSection.init(
@@ -114,28 +158,46 @@ extension SignInPresenterImpl {
     }
 }
 
+//MARK: TextField Models
+extension SignInPresenterImpl{
+    private func getRegistrationModels() -> [LoginTextFieldTableCell.Model] {
+        let nameModel = modelConfigurator.getTextFieldModel(with: .name(ontap: { field in
+            field.emptyTextField()
+        }))
+        let surnameModel = modelConfigurator.getTextFieldModel(with: .surname(ontap: { field in
+            field.emptyTextField()
+        }))
+        
+        let mobileModel = modelConfigurator.getTextFieldModel(with: .mobileTextField(ontap: { field in
+            field.emptyTextField()
+        }))
+        
+        let email = modelConfigurator.getTextFieldModel(with: .mailTextField(ontap: { field in
+            field.emptyTextField()
+        }))
+        
+        let age = modelConfigurator.getTextFieldModel(with: .ageTextField(ontap: { field in
+            field.emptyTextField()
+        }))
+        
+        let usernameModel = modelConfigurator.getTextFieldModel(with: .usernameTextField(ontap: { field in
+            field.emptyTextField()
+        }))
+        let passwordModel = modelConfigurator.getTextFieldModel(with: .passwordTextField(ontap: { field in
+            field.emptyTextField()
+        }))
+        return [nameModel, surnameModel, mobileModel, email, age, usernameModel, passwordModel]
+    }
+    
+}
+
 //MARK: Registration Section
 extension SignInPresenterImpl {
     private func registrationCaseSections() -> ListSection{
-        let usernameModel = modelConfigurator.getTextFieldModel(with: .usernameTextField(ontap: { _ in
-            print("username")
-        }))
-        let passwordModel = modelConfigurator.getTextFieldModel(with: .passwordTextField(ontap: { _ in
-            print("password")
-        }))
-        
-        let age = modelConfigurator.getTextFieldModel(with: .ageTextField(ontap: { _ in
-            print("password")
-        }))
-        
-        let email = modelConfigurator.getTextFieldModel(with: .mailTextField(ontap: { _ in
-            print("password")
-        }))
-        
         let registrationButton = modelConfigurator.getButtoModel(with: .registration(onTap: { _ in
             print("click registration")
         }))
-        
+        let textFieldModels: [ListSection.Row] = getRegistrationModels().map({textField(with: $0)})
         let registrationClickableLabelModel = modelConfigurator.getClickableLabelModel(with: .registration(onTap: { _ in
             self.pageType = .signIn
             self.constructDataSource()
@@ -143,11 +205,7 @@ extension SignInPresenterImpl {
         
         return ListSection.init(
             id: "",
-            rows: [
-                self.textField(with: usernameModel),
-                self.textField(with: passwordModel),
-                self.textField(with: age),
-                self.textField(with: email),
+            rows: [self.pageDescriptionRowRegistration()] + textFieldModels + [
                 self.button(with: registrationButton),
                 self.clickableLabel(with: registrationClickableLabelModel)] )
     }

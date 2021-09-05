@@ -20,7 +20,8 @@ class SignInAssembly: UIAssembly {
         }
         
         container.register(SignInPresenterImpl.self) {resolver in
-            let presenter = SignInPresenterImpl()
+            let presenter = SignInPresenterImpl(router: resolver.resolve(SignInRouterImpl.self)!,
+                                                loginGateway: resolver.resolve(LoginGatewayImpl.self)!)
             return presenter
         }
         

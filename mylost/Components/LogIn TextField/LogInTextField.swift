@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class LogInTextField: UIView {
+public class LogInTextField: UIView , UITextFieldDelegate{
     
     private var verticalStack: UIStackView = {
         let view = UIStackView()
@@ -45,6 +45,14 @@ public class LogInTextField: UIView {
     public func configure(with model: ViewModel){
         titleLbl.text = model.title
         textField.isSecureTextEntry = model.textType == .secury
+    }
+    
+    public func getTextFieldText() -> String {
+        textField.text ?? ""
+    }
+    
+    public func emptyTextField() {
+        textField.text = ""
     }
     
     required init?(coder: NSCoder) {

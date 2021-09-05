@@ -9,6 +9,7 @@ import Foundation
 
 protocol SignInRouter {
     func attach(controller: SignInViewController)
+    func changeToUser() 
 }
 
 class SignInRouterImpl: SignInRouter {
@@ -16,6 +17,14 @@ class SignInRouterImpl: SignInRouter {
     
     func attach(controller: SignInViewController) {
         self.controller = controller
+    }
+    
+    func changeToUser() {
+        for i in self.controller?.navigationController?.viewControllers ?? [] {
+            if let vc = i as? ProductContainer {
+                vc.userType = .user
+            }
+        }
     }
     
 }

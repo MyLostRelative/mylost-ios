@@ -12,15 +12,31 @@ class ProductsTabDataSource {
     func models() -> [ProductTabModel] {
         return [
             ProductTabModel.init(
-               title: "Sign In",
+               title: "შესვლა",
                state: ProductTabCell.State.active
                )
             , ProductTabModel.init(
-            title: "My Lost",
+            title: "განცხადებები",
             state: ProductTabCell.State.disabled
             ) ,
         ProductTabModel.init(
-            title: "Statement",
+            title: "ბლოგები",
+            state: ProductTabCell.State.disabled
+            )]
+    }
+    
+    func loggedInmodels() -> [ProductTabModel] {
+        return [
+            ProductTabModel.init(
+               title: "პროფილი",
+               state: ProductTabCell.State.active
+               )
+            , ProductTabModel.init(
+            title: "განცხადებები",
+            state: ProductTabCell.State.disabled
+            ) ,
+        ProductTabModel.init(
+            title: "ბლოგები",
             state: ProductTabCell.State.disabled
             )]
     }

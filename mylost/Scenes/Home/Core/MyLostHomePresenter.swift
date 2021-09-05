@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol MyLostHomeView: AnyObject {
     var tableView: UITableView {get}
@@ -26,6 +27,7 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
     private let modelBuilder = ModelBuilder()
     private var isLoading = true
     private var statementsFetchFailed = false
+    private var filterState = false
     
     init(view: MyLostHomeView, statementsGateway: StatementGateway, router: MyLostHomeRouter) {
         self.view = view
@@ -90,7 +92,8 @@ extension MyLostHomePresenterImpl {
                     RoundCard.self,
                     PageDescriptionTableCell.self,
                     PageDescriptionWithButtonTableCell.self,
-                    PickerViewCell.self
+                    PickerViewCell.self,
+                    TiTleButtonTableCell.self
                 ],
                 reusableViews: [
                 ])
@@ -99,6 +102,7 @@ extension MyLostHomePresenterImpl {
     
     private func constructDataSource() {
         let stateDependent =  self.isLoading ? animationState() :
+            self.filterState ? filtersLoadedState() :
             self.statementsFetchFailed ? errorState() :
             self.statements.isEmpty ? emptyState() :
             cardLoadedState()
@@ -121,11 +125,15 @@ extension MyLostHomePresenterImpl {
     }
     
     private func cardLoadedState() -> [ListSection]{
-        [textFieldSections()]
+        [filterLabelSection(), cardSections() ]
+    }
+    
+    private func filtersLoadedState() -> [ListSection] {
+        [filterSection()]
     }
     
     private func emptyState() -> [ListSection]{
-        [emptyStatementsSection(), cardSections()]
+        [emptyStatementsSection()]
     }
     
     private func errorState() -> [ListSection]{
@@ -136,17 +144,38 @@ extension MyLostHomePresenterImpl {
 //MARK: Sections
 extension MyLostHomePresenterImpl {
     private func cardSections() -> ListSection {
-        let roundCardModels = self.statements.map({ modelBuilder.getCardModel(with: $0)})
-        let roundCardRows = roundCardModels.map({self.roundCard(model: $0)})
+        let cardRows = self.statements.map({statementRow(statement: $0)})
         return ListSection(
             id: "",
-            rows: roundCardRows)
+            rows: cardRows)
     }
     
     private func textFieldSections() -> ListSection {
         ListSection(
             id: "",
             rows:  [pickerRow(), pickerRowCity(), pickerRowAge()])
+    }
+    
+    private func filterLabelSection() -> ListSection {
+        ListSection(
+            id: "",
+            rows:  [clickableLabel(with: .init(title: "ფილტრის გამოყენება",
+                                               onTap: { _ in
+                                                self.filterState = true
+                                                self.constructDataSource()
+                                               })),
+                    ] )
+    }
+    
+    private func filterSection() -> ListSection {
+        ListSection(
+            id: "",
+            rows:  [clickableLabel(with: .init(title: "უკან დაბრუნება",
+                                               onTap: { _ in
+                                                self.filterState = false
+                                                self.constructDataSource()
+                                               })),
+                    pickerRow(), pickerRowCity(), pickerRowAge()])
     }
     
     private func emptyStatementsSection() -> ListSection {
@@ -172,6 +201,14 @@ extension MyLostHomePresenterImpl {
                 tapClosure: {_,_ in
             self.router.move2UserDetails()
         })
+    }
+    
+    private func roudCards() -> ListSection{
+        let rows = self.statements.map({roundCard(model: .init(title: $0.statementTitle,
+                                                    description: $0.statementDescription))})
+        return ListSection(
+            id: "",
+            rows:  rows)
     }
     
     
@@ -205,20 +242,55 @@ extension MyLostHomePresenterImpl {
     
     private func pickerRow() -> ListRow <PickerViewCell>{
         ListRow(
-            model: PickerViewCell.ViewModel(title: "სქესი", pickerData: [["მდედრობითი", "მამრობითი"]]),
+            model: PickerViewCell.ViewModel(title: "სქესი", pickerData: [["მდედრობითი", "მამრობითი"]], onTap:  {
+                pickers in
+                print(pickers)
+            }),
             height: UITableView.automaticDimension)
     }
     
     private func pickerRowCity() -> ListRow <PickerViewCell>{
         ListRow(
-            model: PickerViewCell.ViewModel(title: "ქალაქი", pickerData: [["თბილისი", "ბათუმი", "ქუთაისი"]]),
+            model: PickerViewCell.ViewModel(title: "ქალაქი", pickerData: [["თბილისი", "ბათუმი", "ქუთაისი"]],  onTap:  {
+                pickers in
+                print(pickers)
+            }),
             height: UITableView.automaticDimension)
     }
     
     private func pickerRowAge() -> ListRow <PickerViewCell>{
         ListRow(
             model: PickerViewCell.ViewModel(title: "ასაკი", pickerData: [["20 - დან", "21 - დან", "22 -დან"],
-                                                                                   ["20 - მდე", "21 - მდე", "22 -მდე"]]),
+                                                                                   ["20 - მდე", "21 - მდე", "22 -მდე"]],  onTap:  {
+                                                                                    pickers in
+                                                                                    print(pickers)
+                                                                                }),
             height: UITableView.automaticDimension)
+    }
+    
+    private func clickableLabel(with model: TiTleButtonTableCell.ViewModel) -> ListRow<TiTleButtonTableCell> {
+        ListRow(model: model,
+                height: UITableView.automaticDimension)
+    }
+    
+    private func statementRow(statement: Statement) -> ListRow <TitleAndDescriptionCardTableCell>{
+        return ListRow(
+            model: TitleAndDescriptionCardTableCell
+                .Model(headerModel:
+                        HeaderWithDetailsCell.Model(
+                            icon: .withURL(url: URL(string: statement.imageUrl ?? "")),
+                            title: "განცხადება: " + statement.statementTitle,
+                            info1: "სისხლის ჯგუფი: " + (statement.bloodType?.rawValue ?? "უცნობია"),
+                            info2: "სქესი: " + (statement.gender?.rawValue ?? "უცნობია"),
+                            info3: "ნათესაობის ტიპი: " + (statement.relationType?.rawValue ?? "უცნობია"),
+                            info4: "ქალაქი: " + (statement.city ?? "უცნობია"),
+                            description: nil),
+                       cardModel: .init(title: "",
+                                        description: statement.statementDescription)),
+            
+            height: UITableView.automaticDimension,
+            tapClosure: {_,_ in
+                print("dw")
+            })
     }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 protocol SignInView: AnyObject {
     var tableView: UITableView {get}
+    func displayBanner(type: Bannertype, title: String, description: String)
 }
 
 class SignInViewController: UIViewController {
@@ -41,6 +42,10 @@ class SignInViewController: UIViewController {
 }
 
 extension SignInViewController: SignInView {
-    
+    func displayBanner(type: Bannertype, title: String, description: String) {
+        DispatchQueue.main.async {
+            self.displayBanner(banner: .init(type: type, title: title, description: description))
+        }
+    }
 }
 

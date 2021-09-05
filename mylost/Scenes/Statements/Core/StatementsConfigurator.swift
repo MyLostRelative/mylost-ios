@@ -15,10 +15,11 @@ class StatementsConfiguratorImpl: StatementsConfigurator {
     
     func configure(_ controller: StatementsController) {
         let router: StatementsRouter = StatementsRouterImpl(controller)
-        
+        let gateway = BlogGatewayImpl()
         let presenter: StatementsPresenter = StatementsPresenterImpl(
             view: controller,
-            router: router
+            router: router,
+            blogGateway: gateway
         )
         
         controller.statementPresenter = presenter

@@ -6,8 +6,6 @@
 //
 
 import UIKit
-
-
 public class LoginTextFieldTableCell: ListRowCell {
     public typealias Model = LogInTextField.ViewModel
     
@@ -34,6 +32,15 @@ public class LoginTextFieldTableCell: ListRowCell {
 
     public func configure(with model: Model) {
         roundedTextField.configure(with: model)
+        model.onTap?(self)
+    }
+    
+    public func getText()-> String {
+        roundedTextField.getTextFieldText()
+    }
+    
+    public func emptyTextField() {
+        roundedTextField.emptyTextField()
     }
     
     private func styleUI() {

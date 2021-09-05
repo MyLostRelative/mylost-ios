@@ -8,7 +8,7 @@
 import Foundation
 
 protocol StatementsRouter {
-    
+    func move2BlogDetails(blog: Blog)
 }
 
 class StatementsRouterImpl: StatementsRouter {
@@ -17,6 +17,14 @@ class StatementsRouterImpl: StatementsRouter {
     
     init(_ controller: StatementsController?) {
         self.controller = controller
+    }
+    
+    func move2BlogDetails(blog: Blog) {
+        guard let vc = DIAssembly.init(uiAssemblies: [BlogDetailsAssembly(blog: blog)],
+                        networkAssemblies: [])
+            .resolver
+                .resolve(BlogDetailsViewController.self) else { return }
+        self.controller?.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

@@ -8,17 +8,29 @@
 import UIKit
 
 class ProductContainer: PagerTabStripViewController {
+    enum UserType {
+        case guest
+        case user
+    }
     
     @IBOutlet weak var segments: ScrollableTabView!
     var lastSelectedIndex = 0
     var moduleVisitDate: Date = Date()
-    
+    var userType: UserType = .guest {
+        didSet {
+            self.items = getDatasourceModels()
+            self.segments.collectionView.reloadData()
+            self.reloadPagerTabStripView()
+            
+        }
+    }
     lazy var items: [ProductTabModel] = {
        return getDatasourceModels()
     }()
     
     override func viewDidLoad() {
         self.datasource = self
+        self.navigationController?.view.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
         super.viewDidLoad()
         configureSegmentsCollectionView()
     }
@@ -50,10 +62,20 @@ extension ProductContainer: ScrollableTabViewDelegate {
 extension ProductContainer: PagerTabStripDataSource {
     
     func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        guard let signVC = DIAssembly(uiAssemblies: [SignInAssembly()], networkAssemblies: [])
+        guard let signVC = DIAssembly(uiAssemblies: [SignInAssembly()], networkAssemblies: [LoginNetworkAssembly()])
                 .resolver.resolve(SignInViewController.self) else {
                     fatalError("errores")
                 }
+        
+        guard let userVc = DIAssembly(uiAssemblies: [MyProfileAssembly()], networkAssemblies: [])
+                .resolver.resolve(MyProfileViewController.self) else {
+                    fatalError("errores")
+                }
+        var firstVc = self.userType == .guest ? signVC : userVc
+        if let _ = UserDefaultManager().getValue(key: "token") {
+            firstVc = userVc
+        }
+        
         let otherPaymentConfigure = MyLostHomeConfiguratorImpl()
         let otherProductsVC = MyLostHomeController()
         otherPaymentConfigure.configure(otherProductsVC )
@@ -62,12 +84,12 @@ extension ProductContainer: PagerTabStripDataSource {
         let statementController = StatementsController()
         statementsConfigurator.configure(statementController )
 
-        return [signVC, otherProductsVC, statementController]
+        return [firstVc, otherProductsVC, statementController]
     }
     
     func getDatasourceModels() -> [ProductTabModel] {
         let dataSource = ProductsTabDataSource.init()
-        return dataSource.models()
+        return self.userType == .guest ? dataSource.models() : dataSource.loggedInmodels()
     }
 
 }

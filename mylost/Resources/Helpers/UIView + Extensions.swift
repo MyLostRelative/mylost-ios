@@ -201,3 +201,18 @@ public extension Optional where Wrapped: Any {
         block(obj)
     }
 }
+
+extension String {
+    var convertedDate: String? {
+        let dateFormatter = DateFormatter()
+        let tempLocale = dateFormatter.locale // save locale temporarily
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        if let date = dateFormatter.date(from: self) {
+            dateFormatter.dateFormat = "MMM d , yyyy , h:mm a"
+            dateFormatter.locale = tempLocale // reset the locale
+            return  dateFormatter.string(from: date)
+        }
+        return nil
+    }
+}

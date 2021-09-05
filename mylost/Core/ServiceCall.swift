@@ -27,14 +27,19 @@ enum ErrorType {
  */
 enum ServiceMethods {
     case statementList
+    case blogList
+    case login
 }
 
 extension ServiceMethods {
     func getURL() -> URL?{
         switch self {
         case .statementList:
-            return URL(string: "https://run.mocky.io/v3/e9e1301c-fdd5-47ca-ba51-3fa7c51209ed")
-       
+            return URL(string: "https://mylost-api.herokuapp.com/ads")
+        case .blogList:
+            return URL(string: "https://mylost-api.herokuapp.com/blogs")
+        case .login:
+            return URL(string: "https://mylost-api.herokuapp.com/users/login")
         }
     }
 }
@@ -70,6 +75,46 @@ class Service : NSObject{
                 } )
             task.resume()
     }
+    
+    func post<T: Decodable> (serviceMethod: ServiceMethods ,
+                             parameters: [String: Any], withCompletion completion: @escaping (Result<T, Error>) -> Void) {
+        guard let url = serviceMethod.getURL() else {
+            completion(Result.failure(ErrorType.notHaveData as! Error))
+            return
+        }
+        var request = URLRequest(url: url)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = parameters.percentEncoded()
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+         
+            if error != nil || response == nil {
+                completion(Result.failure(error!))
+                return
+            }
+            guard let data = data else {
+                completion(Result.failure(error!))
+                return
+            }
+            
+            let wrapper = try? JSONDecoder().decode(T.self
+                                                    , from: data)
+            if let wrapper = wrapper {
+                completion(Result.success(wrapper))
+            }else{
+                guard let error = error else {
+                    return completion(Result.failure(LocalError()))
+                }
+                completion(Result.failure(error))
+            }
+            } )
+        task.resume()
+    }
+}
+
+class LocalError: Error {
+    
 }
 
 extension Error {
@@ -81,4 +126,27 @@ extension Error {
             return "No data"
         }
     }
+}
+
+extension Dictionary {
+    func percentEncoded() -> Data? {
+        return map { key, value in
+            let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+            let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+            return escapedKey + "=" + escapedValue
+        }
+        .joined(separator: "&")
+        .data(using: .utf8)
+    }
+}
+
+extension CharacterSet {
+    static let urlQueryValueAllowed: CharacterSet = {
+        let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
+        let subDelimitersToEncode = "!$&'()*+,;="
+
+        var allowed = CharacterSet.urlQueryAllowed
+        allowed.remove(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")
+        return allowed
+    }()
 }

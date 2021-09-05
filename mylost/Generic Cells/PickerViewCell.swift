@@ -38,6 +38,8 @@ public class PickerViewCell: ListRowCell {
         return b
     }()
     
+    private var onTap: (([String])-> ())?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.commonInit()
@@ -57,6 +59,7 @@ public class PickerViewCell: ListRowCell {
     public func configure(with model: Model) {
         label.text = model.title
         pickerData = model.pickerData
+        onTap = model.onTap
     }
     
     private func styleUI() {
@@ -90,23 +93,16 @@ extension PickerViewCell:  UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(pickerData[component][row])
+        let result = pickerData.enumerated().map({ pickerData[$0.offset][pickerView.selectedRow(inComponent: $0.offset)]})
+        self.onTap?(result)
     }
-    
-//    public func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-//        let label = (view as? UILabel) ?? UILabel()
-//
-//        label.text = pickerData[row]
-//        label.font = Resourcebook.Font.body1
-//        label.textColor = .white
-//        return label
-//    }
 }
     
 extension PickerViewCell {
     public struct ViewModel {
         let title: String
         let pickerData: [[String]]
+        let onTap: (([String])-> ())?
     }
 }
 
