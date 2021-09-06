@@ -70,7 +70,9 @@ public class SearchTextField: ListRowCell {
     }
     
     @objc func didTap() {
-        self.onTapSearch?(searchField.text ?? "")
+        let search = searchField.text ?? ""
+        searchField.text = ""
+        self.onTapSearch?(search)
     }
 }
 

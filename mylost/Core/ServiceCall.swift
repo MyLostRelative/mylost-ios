@@ -19,6 +19,7 @@ enum Status <T>{
 enum ErrorType {
     case internetConnection
     case notHaveData
+    case notauthorized
 }
 
 /**
@@ -41,7 +42,11 @@ extension ServiceMethods {
     func getURL() -> URL?{
         switch self {
         case .statementList(let statement ):
-            return URL(string: "https://mylost-api.herokuapp.com/ads?relationType=\(statement.relationType)&gender=\(statement.gender)&bloodType=\(statement.bloodType)&city=\(statement.city)&fromAge=\(statement.fromAge)&toAge=\(statement.toAge)&query=\(statement.query)")
+            var encodeString: String =  ""
+            if statement.query != "" {
+                encodeString = statement.query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+            }
+            return URL(string: "https://mylost-api.herokuapp.com/ads?relationType=\(statement.relationType)&gender=\(statement.gender)&bloodType=\(statement.bloodType)&city=\(statement.city)&fromAge=\(statement.fromAge)&toAge=\(statement.toAge)&query=\(encodeString)")
         case .blogList:
             return URL(string: "https://mylost-api.herokuapp.com/blogs")
         case .login:
@@ -103,7 +108,7 @@ class Service : NSObject{
                     completion(Result.success(wrapper))
                 }else{
                     guard let error = error else {
-                        return completion(Result.failure(LocalError()))
+                        return completion(Result.failure(LocalError(str: "დაფიქსირდა შეცდომა")))
                     }
                     completion(Result.failure(error))
                 }
@@ -118,12 +123,15 @@ class Service : NSObject{
             return
         }
         var request = URLRequest(url: url)
+        
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         request.httpBody = parameters.percentEncoded()
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
-         
+            if (response as? HTTPURLResponse )?.statusCode == 401 {
+                completion(Result.failure(LocalError(str: "ასეთი სახელით ავტორიზირებული ვერ მოიძებნა")))
+            }
             if error != nil || response == nil {
                 completion(Result.failure(error!))
                 return
@@ -139,7 +147,7 @@ class Service : NSObject{
                 completion(Result.success(wrapper))
             }else{
                 guard let error = error else {
-                    return completion(Result.failure(LocalError()))
+                    return completion(Result.failure(LocalError(str: "დაფიქსირდა შეცდომა")))
                 }
                 completion(Result.failure(error))
             }
@@ -148,8 +156,22 @@ class Service : NSObject{
     }
 }
 
-class LocalError: Error {
-    
+class LocalError:  NSObject, LocalizedError  {
+    var desc = ""
+        init(str: String) {
+            desc = str
+        }
+        override var description: String {
+            get {
+                return " \(desc)"
+            }
+        }
+        //You need to implement `errorDescription`, not `localizedDescription`.
+        var errorDescription: String? {
+            get {
+                return self.description
+            }
+        }
 }
 
 extension Error {
@@ -159,6 +181,8 @@ extension Error {
             return "Sorry you havent internet"
         case .notHaveData:
             return "No data"
+        case .notauthorized:
+            return "ასეთი სახელით ავტორიზირებული ვერ მოიძებნა"
         }
     }
 }

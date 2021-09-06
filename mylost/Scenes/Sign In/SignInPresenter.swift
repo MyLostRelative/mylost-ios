@@ -225,12 +225,13 @@ extension SignInPresenterImpl {
                                     email:emailField?.getText(),
                                     mobile: mobileField?.getText())
         }))
-        let textFieldModels: [ListSection.Row] = [textField(with: nameModel) ,
+        let textFieldModels: [ListSection.Row] = [textField(with: usernameModel),
+                                                  textField(with: passwordModel),
+            textField(with: nameModel) ,
                                                   textField(with: surnameModel),
                                                   textField(with: email),
                                                   textField(with: mobile),
-                                                  textField(with: usernameModel),
-                                                  textField(with: passwordModel)]
+                                                  ]
         let registrationClickableLabelModel = modelConfigurator.getClickableLabelModel(with: .registration(onTap: { _ in
             self.pageType = .signIn
             self.constructDataSource()
