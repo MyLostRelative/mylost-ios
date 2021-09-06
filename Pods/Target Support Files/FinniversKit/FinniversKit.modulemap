@@ -1,0 +1,6 @@
+framework module FinniversKit {
+  umbrella header "FinniversKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

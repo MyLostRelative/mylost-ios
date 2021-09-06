@@ -1,0 +1,64 @@
+PODS:
+  - Charcoal (9.3.1):
+    - Charcoal/Core (= 9.3.1)
+  - Charcoal/Core (9.3.1):
+    - FinniversKit
+  - Charcoal/FINN (9.3.1):
+    - Charcoal/Core
+  - FinniversKit (83.8.0):
+    - FinniversKit/DNA (= 83.8.0)
+  - FinniversKit/DNA (83.8.0)
+  - RxCocoa (6.2.0):
+    - RxRelay (= 6.2.0)
+    - RxSwift (= 6.2.0)
+  - RxRelay (6.2.0):
+    - RxSwift (= 6.2.0)
+  - RxSwift (6.2.0)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - Swinject (2.8.0)
+
+DEPENDENCIES:
+  - Charcoal (from `https://github.com/finn-no/charcoal-ios`)
+  - Charcoal/FINN (from `https://github.com/finn-no/charcoal-ios`)
+  - FinniversKit (from `https://github.com/finn-no/FinniversKit`)
+  - RxCocoa (= 6.2.0)
+  - RxSwift (= 6.2.0)
+  - SDWebImage
+  - Swinject
+
+SPEC REPOS:
+  trunk:
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SDWebImage
+    - Swinject
+
+EXTERNAL SOURCES:
+  Charcoal:
+    :git: https://github.com/finn-no/charcoal-ios
+  FinniversKit:
+    :git: https://github.com/finn-no/FinniversKit
+
+CHECKOUT OPTIONS:
+  Charcoal:
+    :commit: 6db73a996618613d90e7221e1117e870d585124c
+    :git: https://github.com/finn-no/charcoal-ios
+  FinniversKit:
+    :commit: 8f3505def1d46bdc6de78fdeabef17ac27e1354d
+    :git: https://github.com/finn-no/FinniversKit
+
+SPEC CHECKSUMS:
+  Charcoal: 497fd4c08fb2935799f1cdcacc302d0f3c2d054a
+  FinniversKit: da1efc53d86ad33097996787a22684918850141e
+  RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
+  RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
+  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  Swinject: db795b8d6d78559b25fbebb0170d2635be1176e2
+
+PODFILE CHECKSUM: f22e103bf50310f3b2b8ff4f556257b6b740c976
+
+COCOAPODS: 1.10.1

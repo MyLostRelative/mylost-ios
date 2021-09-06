@@ -1,0 +1,6 @@
+framework module Charcoal {
+  umbrella header "Charcoal-umbrella.h"
+
+  export *
+  module * { export * }
+}
