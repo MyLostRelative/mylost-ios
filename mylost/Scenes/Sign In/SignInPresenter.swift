@@ -52,10 +52,16 @@ class SignInPresenterImpl: SignInPresenter {
                 self?.tokenSuccesfullyFetched(token: token)
                 
             case .failure(let error):
-                self?.view?.displayBanner(type: .negative,
-                                          title: "მოხდა შეცდომა",
-                                          description: "დაფიქსირდა შეცდომა , სცადეთ მოგვიანებით.")
-                print(error)
+                if let error = error as? LocalError {
+                    self?.view?.displayBanner(type: .negative,
+                                              title: "მოხდა შეცდომა",
+                                              description: error.desc)
+                }else {
+                    self?.view?.displayBanner(type: .negative,
+                                              title: "მოხდა შეცდომა",
+                                              description: "სცადეთ მოგვიანებით")
+                }
+                
             }
         }
     }
