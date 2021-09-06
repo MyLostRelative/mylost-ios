@@ -28,6 +28,17 @@ enum Gender: String {
   case male = "male"
   case female = "female"
   case other = "other"
+    
+    var value: String{
+        switch self {
+        case .male:
+            return "მამრობითი"
+        case .female:
+            return "მდედრობითი"
+        case .other:
+            return "უცნობია"
+        }
+    }
 }
 
 enum BloodType: String {
@@ -38,12 +49,36 @@ enum BloodType: String {
 }
 
 enum RelationType: String {
-  case mother = "mother"
-  case father = "father"
-  case sister = "sister"
-  case brother = "brother"
-  case friend = "friend"
-  case other = "other"
+    case mother = "mother"
+    case father = "father"
+    case sister = "sister"
+    case brother = "brother"
+    case friend = "friend"
+    case daughter  = "daughter"
+    case son = "son"
+    case other = "other"
+    
+    var value: String{
+        switch self {
+        case .mother:
+            return "დედა"
+        case .father:
+            return "მამა"
+        case .sister:
+            return "და"
+        case .brother:
+            return "ძმა"
+        case .daughter:
+            return "ქალიშვილი"
+        case .son:
+            return "ვაჟიშვილი"
+            
+        case .other:
+           return "უცნობია"
+        case .friend:
+            return "მეგობარი"
+        }
+    }
 }
 
 struct Statement{

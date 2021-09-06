@@ -41,3 +41,31 @@ extension StatementPost {
         return params
     }
 }
+
+struct StatementSearchEntity{
+    let gender: String
+    let city: String
+    let relationType: String
+    let bloodType: String
+    let fromAge: String
+    let toAge: String
+    let query: String
+    
+    static var `default` = StatementSearchEntity(gender: "",
+                                                 city: "",
+                                                 relationType: "",
+                                                 bloodType: "",
+                                                 fromAge: "",
+                                                 toAge: "",
+                                                 query: "")
+    
+    static func getWithQuery(query: String) -> Self{
+        StatementSearchEntity(gender: "",
+                                                     city: "",
+                                                     relationType: "",
+                                                     bloodType: "",
+                                                     fromAge: "",
+                                                     toAge: "",
+                                                     query: query)
+    }
+}

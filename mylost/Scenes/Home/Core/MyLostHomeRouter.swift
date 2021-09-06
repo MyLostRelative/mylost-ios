@@ -9,6 +9,7 @@ import Foundation
 
 protocol MyLostHomeRouter {
     func move2UserDetails(guestUserID: Int)
+    func move2Filter(delegate: FilterDetailsPresenterDelegate)
 }
 
 class MyLostHomeRouterImpl: MyLostHomeRouter {
@@ -25,6 +26,15 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
             .resolver
                 .resolve(ContactDetailsViewController.self) else { return }
         
+        self.controller?.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    func move2Filter(delegate: FilterDetailsPresenterDelegate) {
+        guard let vc = DIAssembly(uiAssemblies: [FilterDetailsAssembly(delegate: delegate)],
+                                  networkAssemblies: [])
+            .resolver
+                .resolve(FilterDetailsViewController.self) else { return }
         self.controller?.navigationController?.pushViewController(vc, animated: true)
         
     }

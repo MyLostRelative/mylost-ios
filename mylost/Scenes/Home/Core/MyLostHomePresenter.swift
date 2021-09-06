@@ -52,8 +52,8 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
 
 //MARK: Services
 extension MyLostHomePresenterImpl {
-    private func fetchStatementList() {
-        self.statementsGateway.getStatementList { [weak self] (result) in
+    private func fetchStatementList(statement: StatementSearchEntity = .default) {
+        self.statementsGateway.getStatementList(statement: statement) { [weak self] (result) in
             guard let self = self else { return }
             self.isLoading = false
             switch result{
@@ -95,7 +95,8 @@ extension MyLostHomePresenterImpl {
                     PageDescriptionWithButtonTableCell.self,
                     PickerViewCell.self,
                     TiTleButtonTableCell.self,
-                    RoundButtonTableCell.self
+                    RoundButtonTableCell.self,
+                    SearchTextField.self
                 ],
                 reusableViews: [
                 ])
@@ -104,7 +105,6 @@ extension MyLostHomePresenterImpl {
     
     private func constructDataSource() {
         let stateDependent =  self.isLoading ? animationState() :
-            self.filterState ? filtersLoadedState() :
             self.statementsFetchFailed ? errorState() :
             self.statements.isEmpty ? emptyState() :
             cardLoadedState()
@@ -129,11 +129,7 @@ extension MyLostHomePresenterImpl {
     private func cardLoadedState() -> [ListSection]{
         [filterLabelSection(), cardSections() ]
     }
-    
-    private func filtersLoadedState() -> [ListSection] {
-        [filterSection()]
-    }
-    
+
     private func emptyState() -> [ListSection]{
         [emptyStatementsSection()]
     }
@@ -157,29 +153,10 @@ extension MyLostHomePresenterImpl {
             id: "",
             rows:  [clickableLabel(with: .init(title: "ფილტრის გამოყენება",
                                                onTap: { _ in
-                                                self.filterState = true
-                                                self.constructDataSource()
-                                               })),
+                                                self.router.move2Filter(delegate: self)
+                                               })), SearchTextFieldRow(),
                     ] )
     }
-    
-    private func filterSection() -> ListSection {
-        ListSection(
-            id: "",
-            rows:  [clickableLabel(with: .init(title: "უკან დაბრუნება",
-                                               onTap: { _ in
-                                                self.filterState = false
-                                                self.constructDataSource()
-                                               })),
-                    pickerRow(type: .relativeType),
-                    pickerRow(type: .sexType),
-                    pickerRow(type: .age),
-                    pickerRow(type: .bloodType),
-                    pickerRow(type: .city),
-                    buttonRow()])
-    }
-    
-
     
     private func emptyStatementsSection() -> ListSection {
         ListSection(
@@ -234,25 +211,6 @@ extension MyLostHomePresenterImpl {
             height: UITableView.automaticDimension)
     }
     
-    private func pickerRow(type: PickerDataManagerImpl.PickerType) -> ListRow <PickerViewCell> {
-        ListRow(
-            model: PickerViewCell.ViewModel(title: type.title,
-                                            pickerData: type.vectorData,
-                                            onTap:  {
-                                                pickers in
-                                                self.manager.addPickerTypeToDict(type: type, data: pickers)
-                                            }),
-            height: UITableView.automaticDimension)
-    }
-    
-    private func buttonRow( ) -> ListRow <RoundButtonTableCell> {
-        ListRow(
-            model: .init(title: "გაფილტვრა", onTap: { _ in
-                print("")
-            }),
-            height: UITableView.automaticDimension)
-    }
-    
     private func clickableLabel(with model: TiTleButtonTableCell.ViewModel) -> ListRow<TiTleButtonTableCell> {
         ListRow(model: model,
                 height: UITableView.automaticDimension)
@@ -266,8 +224,8 @@ extension MyLostHomePresenterImpl {
                             icon: .withURL(url: URL(string: statement.imageUrl ?? "")),
                             title: "განცხადება: " + statement.statementTitle,
                             info1: "სისხლის ჯგუფი: " + (statement.bloodType?.rawValue ?? "უცნობია"),
-                            info2: "სქესი: " + (statement.gender?.rawValue ?? "უცნობია"),
-                            info3: "ნათესაობის ტიპი: " + (statement.relationType?.rawValue ?? "უცნობია"),
+                            info2: "სქესი: " + (statement.gender?.value ?? "უცნობია"),
+                            info3: "ნათესაობის ტიპი: " + (statement.relationType?.value ?? "უცნობია"),
                             info4: "ქალაქი: " + (statement.city ?? "უცნობია"),
                             description: nil),
                        cardModel: .init(title: "",
@@ -278,5 +236,21 @@ extension MyLostHomePresenterImpl {
                 self.router.move2UserDetails(guestUserID: self.statements[row].userID)
                 print(self.statements[row].userID)
             })
+    }
+    
+    private func SearchTextFieldRow()-> ListRow <SearchTextField> {
+        return ListRow(model: .init(title: "ძიება", onTapSearch: { search in
+            self.fetchStatementList(statement: StatementSearchEntity.getWithQuery(query: search))
+            self.constructDataSource()
+        }) , height: UITableView.automaticDimension )
+    }
+}
+
+extension MyLostHomePresenterImpl: FilterDetailsPresenterDelegate {
+    func FilterDetailsPresenterDelegate(filter with: StatementSearchEntity) {
+        self.isLoading = true
+        self.filterState = false
+        self.constructDataSource()
+        self.fetchStatementList(statement: with)
     }
 }

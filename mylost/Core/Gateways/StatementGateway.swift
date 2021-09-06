@@ -12,15 +12,15 @@ typealias StatementCompletion =  (Result<[Statement], Error>) -> Void
 typealias StatementListResponseType = (Result<StatementsListResponse, Error>)
 
 protocol StatementGateway {
-    func getStatementList(completion:  @escaping StatementCompletion)
+    func getStatementList(statement: StatementSearchEntity,completion:  @escaping StatementCompletion)
     func getStatementListByUser(userID: Int, completion: @escaping StatementCompletion)
 }
 
 class StatementGatewayImpl: StatementGateway{
     private let service = Service()
     
-    func getStatementList(completion: @escaping StatementCompletion) {
-        service.get(serviceMethod: .statementList) {(result: StatementListResponseType) in
+    func getStatementList(statement: StatementSearchEntity, completion: @escaping StatementCompletion) {
+        service.get(serviceMethod: .statementList(statement: statement)) {(result: StatementListResponseType) in
             
             switch result {
             case .success(_):

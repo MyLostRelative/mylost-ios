@@ -26,7 +26,7 @@ enum ErrorType {
 .if i want another api call than i must add this case in ServiceMethods.
  */
 enum ServiceMethods {
-    case statementList
+    case statementList(statement: StatementSearchEntity)
     case blogList
     case login
     case loginToken
@@ -40,8 +40,8 @@ enum ServiceMethods {
 extension ServiceMethods {
     func getURL() -> URL?{
         switch self {
-        case .statementList:
-            return URL(string: "https://mylost-api.herokuapp.com/ads")
+        case .statementList(let statement ):
+            return URL(string: "https://mylost-api.herokuapp.com/ads?relationType=\(statement.relationType)&gender=\(statement.gender)&bloodType=\(statement.bloodType)&city=\(statement.city)&fromAge=\(statement.fromAge)&toAge=\(statement.toAge)&query=\(statement.query)")
         case .blogList:
             return URL(string: "https://mylost-api.herokuapp.com/blogs")
         case .login:
