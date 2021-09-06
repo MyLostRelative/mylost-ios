@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MyLostHomeRouter {
-    func move2UserDetails()
+    func move2UserDetails(guestUserID: Int)
 }
 
 class MyLostHomeRouterImpl: MyLostHomeRouter {
@@ -19,6 +19,13 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
         self.controller = controller
     }
     
-    func move2UserDetails() {
+    func move2UserDetails(guestUserID: Int) {
+        guard let vc = DIAssembly(uiAssemblies: [ContactDetailsAssembly(guestUserID: guestUserID)],
+                                  networkAssemblies: [UserInfoetworkAssembly()])
+            .resolver
+                .resolve(ContactDetailsViewController.self) else { return }
+        
+        self.controller?.navigationController?.pushViewController(vc, animated: true)
+        
     }
 }

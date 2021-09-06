@@ -9,6 +9,7 @@ import UIKit
 
 protocol MyProfileView: AnyObject {
     var tableView: UITableView {get}
+    func displayBanner(type: Bannertype, title: String, description: String)
 }
 
 class MyProfileViewController: UIViewController {
@@ -16,7 +17,7 @@ class MyProfileViewController: UIViewController {
     
     internal  var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
-        table.backgroundColor = .white
+        table.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
         table.translatesAutoresizingMaskIntoConstraints = false
         table.separatorStyle = .none
         return table
@@ -40,7 +41,11 @@ class MyProfileViewController: UIViewController {
 }
 
 extension MyProfileViewController: MyProfileView {
-    
+        func displayBanner(type: Bannertype, title: String, description: String) {
+            DispatchQueue.main.async {
+                self.displayBanner(banner: .init(type: type, title: title, description: description))
+            }
+        }
 }
 
 

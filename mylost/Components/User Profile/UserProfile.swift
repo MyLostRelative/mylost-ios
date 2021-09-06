@@ -39,6 +39,7 @@ public class SavedUserCard: UIView {
         imageView.layer.cornerRadius = 16
         imageView.width(equalTo: Constants.Avatar.size.width)
         imageView.height(equalTo: Constants.Avatar.size.height)
+        imageView.tintColor = Resourcebook.Color.Information.solid100.uiColor
         return imageView
     }()
     

@@ -36,6 +36,19 @@
 		527888D326E526ED00324041 /* PostCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D026E526ED00324041 /* PostCreateController.swift */; };
 		527888D426E526ED00324041 /* PostCreateAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D126E526ED00324041 /* PostCreateAssembly.swift */; };
 		527888D626E5273A00324041 /* PostCreatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D526E5273A00324041 /* PostCreatePresenter.swift */; };
+		527888D826E533A500324041 /* UserInfoEntify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D726E533A500324041 /* UserInfoEntify.swift */; };
+		527888DA26E535F400324041 /* UserInfoGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D926E535F400324041 /* UserInfoGateway.swift */; };
+		527888DD26E5385D00324041 /* StatementPostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888DC26E5385D00324041 /* StatementPostEntity.swift */; };
+		527888DF26E539EF00324041 /* StatementPostGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888DE26E539EF00324041 /* StatementPostGateway.swift */; };
+		527888E126E53A3900324041 /* GeneralPostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888E026E53A3900324041 /* GeneralPostEntity.swift */; };
+		527888E426E5441900324041 /* PickerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888E326E5441900324041 /* PickerData.swift */; };
+		527888E626E5754C00324041 /* UserInfoBearerGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888E526E5754C00324041 /* UserInfoBearerGateway.swift */; };
+		527888E826E597B900324041 /* GuestUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888E726E597B900324041 /* GuestUserInfo.swift */; };
+		527888EF26E59A7F00324041 /* ContactDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888EB26E59A7F00324041 /* ContactDetailsPresenter.swift */; };
+		527888F026E59A7F00324041 /* ContactDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888EC26E59A7F00324041 /* ContactDetailsRouter.swift */; };
+		527888F126E59A7F00324041 /* ContactDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888ED26E59A7F00324041 /* ContactDetailsController.swift */; };
+		527888F226E59A7F00324041 /* ContactDetailsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888EE26E59A7F00324041 /* ContactDetailsAssembly.swift */; };
+		527888F426E5AFCB00324041 /* RoundButtonTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888F326E5AFCB00324041 /* RoundButtonTableCell.swift */; };
 		528843882681A1760087A3E1 /* HeaderWithDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528843872681A1760087A3E1 /* HeaderWithDetails.swift */; };
 		5288438B2681A1840087A3E1 /* HeaderWithDetailsViewModel + Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288438A2681A1840087A3E1 /* HeaderWithDetailsViewModel + Constants.swift */; };
 		5288438E2681A9180087A3E1 /* HeaderWithDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5288438D2681A9180087A3E1 /* HeaderWithDetailsCell.swift */; };
@@ -184,6 +197,19 @@
 		527888D026E526ED00324041 /* PostCreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateController.swift; sourceTree = "<group>"; };
 		527888D126E526ED00324041 /* PostCreateAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateAssembly.swift; sourceTree = "<group>"; };
 		527888D526E5273A00324041 /* PostCreatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatePresenter.swift; sourceTree = "<group>"; };
+		527888D726E533A500324041 /* UserInfoEntify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoEntify.swift; sourceTree = "<group>"; };
+		527888D926E535F400324041 /* UserInfoGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoGateway.swift; sourceTree = "<group>"; };
+		527888DC26E5385D00324041 /* StatementPostEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementPostEntity.swift; sourceTree = "<group>"; };
+		527888DE26E539EF00324041 /* StatementPostGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementPostGateway.swift; sourceTree = "<group>"; };
+		527888E026E53A3900324041 /* GeneralPostEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPostEntity.swift; sourceTree = "<group>"; };
+		527888E326E5441900324041 /* PickerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerData.swift; sourceTree = "<group>"; };
+		527888E526E5754C00324041 /* UserInfoBearerGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoBearerGateway.swift; sourceTree = "<group>"; };
+		527888E726E597B900324041 /* GuestUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestUserInfo.swift; sourceTree = "<group>"; };
+		527888EB26E59A7F00324041 /* ContactDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsPresenter.swift; sourceTree = "<group>"; };
+		527888EC26E59A7F00324041 /* ContactDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsRouter.swift; sourceTree = "<group>"; };
+		527888ED26E59A7F00324041 /* ContactDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsController.swift; sourceTree = "<group>"; };
+		527888EE26E59A7F00324041 /* ContactDetailsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsAssembly.swift; sourceTree = "<group>"; };
+		527888F326E5AFCB00324041 /* RoundButtonTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonTableCell.swift; sourceTree = "<group>"; };
 		5288437626814DFD0087A3E1 /* BOG-Headline-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BOG-Headline-SemiBold.ttf"; sourceTree = "<group>"; };
 		5288437726814DFD0087A3E1 /* BOG-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BOG-Bold.ttf"; sourceTree = "<group>"; };
 		5288437826814DFD0087A3E1 /* BOG-Headline-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BOG-Headline-Light.ttf"; sourceTree = "<group>"; };
@@ -440,12 +466,48 @@
 		527888CE26E526BE00324041 /* PostCreate */ = {
 			isa = PBXGroup;
 			children = (
+				527888E226E5440900324041 /* helper */,
 				527888CF26E526ED00324041 /* PostCreateRouter.swift */,
 				527888D026E526ED00324041 /* PostCreateController.swift */,
 				527888D126E526ED00324041 /* PostCreateAssembly.swift */,
 				527888D526E5273A00324041 /* PostCreatePresenter.swift */,
 			);
 			path = PostCreate;
+			sourceTree = "<group>";
+		};
+		527888DB26E5383F00324041 /* Request Entities */ = {
+			isa = PBXGroup;
+			children = (
+				527888DC26E5385D00324041 /* StatementPostEntity.swift */,
+			);
+			path = "Request Entities";
+			sourceTree = "<group>";
+		};
+		527888E226E5440900324041 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				527888E326E5441900324041 /* PickerData.swift */,
+			);
+			path = helper;
+			sourceTree = "<group>";
+		};
+		527888E926E59A4E00324041 /* ContactDetails */ = {
+			isa = PBXGroup;
+			children = (
+				527888EA26E59A6100324041 /* Core */,
+			);
+			path = ContactDetails;
+			sourceTree = "<group>";
+		};
+		527888EA26E59A6100324041 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				527888EB26E59A7F00324041 /* ContactDetailsPresenter.swift */,
+				527888EC26E59A7F00324041 /* ContactDetailsRouter.swift */,
+				527888ED26E59A7F00324041 /* ContactDetailsController.swift */,
+				527888EE26E59A7F00324041 /* ContactDetailsAssembly.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		5288438526814ED00087A3E1 /* headerWithDetails */ = {
@@ -618,6 +680,7 @@
 		52D2808E2688759800E6260C /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				527888DB26E5383F00324041 /* Request Entities */,
 				52D280972688808C00E6260C /* Gateways */,
 				52D2809226887D2900E6260C /* Response Entities */,
 				52D2808F268875AA00E6260C /* ServiceCall.swift */,
@@ -632,6 +695,9 @@
 				52D2809326887D3A00E6260C /* StatementListEntity.swift */,
 				5297D9A226E40C9C0014F2FF /* LoginEntity.swift */,
 				527888CA26E516C100324041 /* RegistrationEntity.swift */,
+				527888D726E533A500324041 /* UserInfoEntify.swift */,
+				527888E026E53A3900324041 /* GeneralPostEntity.swift */,
+				527888E726E597B900324041 /* GuestUserInfo.swift */,
 			);
 			path = "Response Entities";
 			sourceTree = "<group>";
@@ -643,6 +709,9 @@
 				520E21AC26DFF81000A5EF70 /* BlogGateway.swift */,
 				5297D9A026E40C630014F2FF /* LoginGateway.swift */,
 				527888CC26E516E300324041 /* RegistrationGateway.swift */,
+				527888D926E535F400324041 /* UserInfoGateway.swift */,
+				527888DE26E539EF00324041 /* StatementPostGateway.swift */,
+				527888E526E5754C00324041 /* UserInfoBearerGateway.swift */,
 			);
 			path = Gateways;
 			sourceTree = "<group>";
@@ -881,6 +950,7 @@
 		52DC59CE2680D7EF00B35E35 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				527888E926E59A4E00324041 /* ContactDetails */,
 				527888CE26E526BE00324041 /* PostCreate */,
 				5297D9B826E4DCF90014F2FF /* BlogDetailsController */,
 				5297D97E26E382EF0014F2FF /* DetailsAndLogout */,
@@ -1007,6 +1077,7 @@
 				5202FBB426DE37E000D490E8 /* PickerViewCell.swift */,
 				5297D94B26E14EDD0014F2FF /* SavedUserTableCell.swift */,
 				5297D9A926E422740014F2FF /* RowItemTableCell.swift */,
+				527888F326E5AFCB00324041 /* RoundButtonTableCell.swift */,
 			);
 			path = "Generic Cells";
 			sourceTree = "<group>";
@@ -1231,14 +1302,17 @@
 				52DE19EC26C7CCDF00D83698 /* UserDetailsController.swift in Sources */,
 				5272FFC126DCE0DA00C24CC8 /* LoginTextFieldTableCell.swift in Sources */,
 				520E21AB26DFF6C100A5EF70 /* BlogListEntity.swift in Sources */,
+				527888E426E5441900324041 /* PickerData.swift in Sources */,
 				52F248BF2688B7A500A6CC6D /* PageDescriptionWithButtonTableCell.swift in Sources */,
 				52D2805C2685CDD500E6260C /* AnimationView.swift in Sources */,
 				52DC59E02680DDC800B35E35 /* StatementsPresenter.swift in Sources */,
 				52D80C61264EF64200ACBC16 /* ViewController.swift in Sources */,
 				52DC5937267E295300B35E35 /* ListViewDataSource.swift in Sources */,
 				527888D426E526ED00324041 /* PostCreateAssembly.swift in Sources */,
+				527888F226E59A7F00324041 /* ContactDetailsAssembly.swift in Sources */,
 				52DC59EA2680E48E00B35E35 /* RoundedTextField.swift in Sources */,
 				52DC59F82680EF8B00B35E35 /* LocalButton.swift in Sources */,
+				527888F126E59A7F00324041 /* ContactDetailsController.swift in Sources */,
 				52DC5924267E286400B35E35 /* DifCalculator.swift in Sources */,
 				520E21B426E005CE00A5EF70 /* MyProfileViewController.swift in Sources */,
 				52DC5A002680F87F00B35E35 /* RoundedTextFieldTableCell.swift in Sources */,
@@ -1256,7 +1330,9 @@
 				5297D94A26E14DC30014F2FF /* UserProfileModel.swift in Sources */,
 				5297D9A826E421B60014F2FF /* RowItemModel.swift in Sources */,
 				5297D98526E383500014F2FF /* DetailsAndLogOutRouter.swift in Sources */,
+				527888D826E533A500324041 /* UserInfoEntify.swift in Sources */,
 				5297D9BE26E4DD320014F2FF /* BlogDetailsPresenter.swift in Sources */,
+				527888DD26E5385D00324041 /* StatementPostEntity.swift in Sources */,
 				52DC5952267E2D6A00B35E35 /* PagerTabStripBehaviour.swift in Sources */,
 				52DC59B62680D33900B35E35 /* Image.swift in Sources */,
 				52DC5988267E305B00B35E35 /* UIView + Extensions.swift in Sources */,
@@ -1266,17 +1342,21 @@
 				5202FBB526DE37E000D490E8 /* PickerViewCell.swift in Sources */,
 				527888CB26E516C100324041 /* RegistrationEntity.swift in Sources */,
 				5272FFBA26DCD1C700C24CC8 /* DIManager.swift in Sources */,
+				527888E126E53A3900324041 /* GeneralPostEntity.swift in Sources */,
 				5272FFC826DD26C600C24CC8 /* SignInModelConfigurator.swift in Sources */,
 				52DC59FC2680F36800B35E35 /* ButtonWithLine View Model + COnstant.swift in Sources */,
+				527888DA26E535F400324041 /* UserInfoGateway.swift in Sources */,
 				527888D626E5273A00324041 /* PostCreatePresenter.swift in Sources */,
 				52DC59B82680D33900B35E35 /* FontWrapper.swift in Sources */,
 				5288438B2681A1840087A3E1 /* HeaderWithDetailsViewModel + Constants.swift in Sources */,
 				5226A5C326C6718B0087F8A8 /* UserController.swift in Sources */,
 				52D280802685F25E00E6260C /* RoundCard.swift in Sources */,
+				527888F426E5AFCB00324041 /* RoundButtonTableCell.swift in Sources */,
 				52DC5936267E295300B35E35 /* ListRow.swift in Sources */,
 				5297D9C026E4DD3C0014F2FF /* BlogDetailsRouter.swift in Sources */,
 				52F248B92688AE5E00A6CC6D /* PageDescription + ViewModel.swift in Sources */,
 				5297D9A326E40C9C0014F2FF /* LoginEntity.swift in Sources */,
+				527888DF26E539EF00324041 /* StatementPostGateway.swift in Sources */,
 				52F248BC2688B35900A6CC6D /* PageDescriptionTableCell.swift in Sources */,
 				52DE19F026C7CDAB00D83698 /* UserDetailCell.swift in Sources */,
 				528843922681ACAB0087A3E1 /* RoundedTitleAndDescription.swift in Sources */,
@@ -1292,7 +1372,9 @@
 				52DC5933267E295300B35E35 /* ListViewHeaderFooter.swift in Sources */,
 				5288438E2681A9180087A3E1 /* HeaderWithDetailsCell.swift in Sources */,
 				5297D9A126E40C630014F2FF /* LoginGateway.swift in Sources */,
+				527888E826E597B900324041 /* GuestUserInfo.swift in Sources */,
 				52DC595B267E2DE800B35E35 /* TabContainer.swift in Sources */,
+				527888F026E59A7F00324041 /* ContactDetailsRouter.swift in Sources */,
 				52F248B62688AE4F00A6CC6D /* PageDescription.swift in Sources */,
 				52D80C5F264EF64200ACBC16 /* SceneDelegate.swift in Sources */,
 				5297D9BB26E4DD210014F2FF /* BlogDetailsViewController.swift in Sources */,
@@ -1303,6 +1385,7 @@
 				52DC593C267E296F00B35E35 /* CollectionViewDataSource.swift in Sources */,
 				52DC5951267E2D6A00B35E35 /* SwipeDirection.swift in Sources */,
 				52DC59EF2680EC5B00B35E35 /* RoundedTextFieldViewModel + Constants.swift in Sources */,
+				527888E626E5754C00324041 /* UserInfoBearerGateway.swift in Sources */,
 				52D280992688809900E6260C /* StatementGateway.swift in Sources */,
 				52DC5954267E2D6A00B35E35 /* PagerTabStripError.swift in Sources */,
 				52884420268302540087A3E1 /* BannerDisplay.swift in Sources */,
@@ -1330,6 +1413,7 @@
 				527888CD26E516E300324041 /* RegistrationGateway.swift in Sources */,
 				520E21B826E005E300A5EF70 /* MyProfileRouter.swift in Sources */,
 				5297D94826E14D8D0014F2FF /* UserProfile.swift in Sources */,
+				527888EF26E59A7F00324041 /* ContactDetailsPresenter.swift in Sources */,
 				5297D9C626E4EE280014F2FF /* UserDefault.swift in Sources */,
 				5226A5C026C671410087F8A8 /* DataModel.swift in Sources */,
 				5288441D2682FF4C0087A3E1 /* BannerComponent + ViewModel + Constants.swift in Sources */,

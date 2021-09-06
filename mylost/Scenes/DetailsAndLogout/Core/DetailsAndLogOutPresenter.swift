@@ -18,9 +18,11 @@ class DetailsAndLogOutPresenterImpl: DetailsAndLogOutPresenter {
     private weak var view: DetailsAndLogOutView?
     private var tableViewDataSource: ListViewDataSource?
     private var router: DetailsAndLogOutRouter
+    private let userInfo: UserInfo
     
-    init(router: DetailsAndLogOutRouter) {
+    init(router: DetailsAndLogOutRouter, userInfo: UserInfo) {
         self.router = router
+        self.userInfo = userInfo
     }
     
     func attach(view: DetailsAndLogOutView) {
@@ -47,16 +49,16 @@ class DetailsAndLogOutPresenterImpl: DetailsAndLogOutPresenter {
     private func constructDataSource() {
         DispatchQueue.main.async {
             self.tableViewDataSource?.reload(
-                with: [self.cardsSection()]
+                with: self.normalState()
             )
         }
     }
     
     private func pageDescriptionRow() -> ListRow <PageDescriptionTableCell>  {
-        ListRow(model: PageDescriptionTableCell.Model(imageType: (image: Resourcebook.Image.Icons24.channelPaybox.template,
+        ListRow(model: PageDescriptionTableCell.Model(imageType: (image: Resourcebook.Image.Icons24.generalUserRetailFill.template,
                                                                   tint: Resourcebook.Color.Information.solid300.uiColor),
                                                       title: nil,
-                                                      description: "ნატო ეგნატაშვილი"),
+                                                      description: userInfo.firstName + " " + userInfo.lastName),
                 height: UITableView.automaticDimension)
     }
 
@@ -73,20 +75,37 @@ class DetailsAndLogOutPresenterImpl: DetailsAndLogOutPresenter {
 
 //MARK: Sign Up Section
 extension DetailsAndLogOutPresenterImpl {
-    private func cardsSection() -> ListSection{
-        return ListSection.init(
-            id: "",
-            rows: [clickableLabel(with: .init(title: "უკან დაბრუნება",   onTap: { _ in
-                self.router.backToProfile()
-               })), self.pageDescriptionRow(),
-                   self.rowItem(model: .init(title: "ასაკი", description: "22")),
-            self.rowItem(model: .init(title: "სქესი", description: "მდედრობითი")),
-            self.rowItem(model: .init(title: "მეილი", description: "negna16@freeuni.edu.ge")),
-            self.rowItem(model: .init(title: "ტელეფონი", description: "597726269")),
-                   clickableLabel(with: .init(title: "გასვლა", colorStyle: .negative,  onTap: { _ in
-                    UserDefaultManager().removeValue(key: "token")
-                    self.router.changeToLogOut()
-                   }))] )
+    private func normalState() -> [ListSection]{
+         [navigationAndPageDescriptionSection(), rowItemSection(), logOutSection() ]
     }
     
+    private func rowItemSection() -> ListSection {
+        var rowItems: [ListRow <RowItemTableCell> ] = [self.rowItem(model: .init(title: "username", description: userInfo.username))]
+        if let mobile = userInfo.mobileNumber {
+            rowItems.append(self.rowItem(model: .init(title: "ტელეფონი", description: mobile)))
+        }
+        if let email = userInfo.email {
+            rowItems.append(self.rowItem(model: .init(title: "მეილი", description: email)))
+        }
+        
+        return ListSection(id: "", rows: rowItems)
+    }
+    
+    private func navigationAndPageDescriptionSection() -> ListSection{
+        let clickableLabel = clickableLabel(with: .init(title: "უკან დაბრუნება",
+                                                   onTap: { _ in
+                                                    self.router.backToProfile()
+                                                   }))
+        return ListSection(id: "", rows: [clickableLabel , pageDescriptionRow()  ])
+    }
+    
+    private func logOutSection() -> ListSection {
+        let logOutLabel = clickableLabel(with: .init(title: "გასვლა",
+                                                     colorStyle: .negative,
+                                                     onTap: { _ in
+                                                        UserDefaultManager().removeValue(key: "token")
+                                                        self.router.changeToLogOut()
+                                                     }))
+        return ListSection(id: "", rows: [logOutLabel ])
+    }
 }

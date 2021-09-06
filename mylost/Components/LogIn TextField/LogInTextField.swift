@@ -45,6 +45,9 @@ public class LogInTextField: UIView , UITextFieldDelegate{
     public func configure(with model: ViewModel){
         titleLbl.text = model.title
         textField.isSecureTextEntry = model.textType == .secury
+        if model.textType == .secury {
+            textField.enablePasswordToggle()
+        }
     }
     
     public func getTextFieldText() -> String? {
@@ -88,4 +91,5 @@ extension LogInTextField {
     }
     
 }
+
 

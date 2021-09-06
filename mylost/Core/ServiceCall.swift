@@ -29,7 +29,12 @@ enum ServiceMethods {
     case statementList
     case blogList
     case login
+    case loginToken
     case registration
+    case addPost
+    case profile
+    case userInfo(userID: Int)
+    case userPosts(userID: Int)
 }
 
 extension ServiceMethods {
@@ -41,23 +46,47 @@ extension ServiceMethods {
             return URL(string: "https://mylost-api.herokuapp.com/blogs")
         case .login:
             return URL(string: "https://mylost-api.herokuapp.com/users/login")
+        case .loginToken:
+            return URL(string: "https://mylost-api.herokuapp.com/auth/login")
+        case .profile:
+            return URL(string: "https://mylost-api.herokuapp.com/profile")
         case .registration:
             return URL(string: "https://mylost-api.herokuapp.com/users/register")
+        case .addPost:
+            return URL(string: "https://mylost-api.herokuapp.com/ads")
+        case .userInfo(let userID):
+            return URL(string: "https://mylost-api.herokuapp.com/users/" + userID.description)
+        case .userPosts(let userID):
+            return URL(string: "https://mylost-api.herokuapp.com/ads/user/" + userID.description)
         }
     }
 }
 
 class Service : NSObject{
+    enum TokenType {
+        case normal
+        case bearer(token: String)
+    }
   
-    func get<T: Decodable>(serviceMethod: ServiceMethods , withCompletion completion: @escaping (Result<T, Error>) -> Void)  {
+    func get<T: Decodable>(tokenType: TokenType = .normal,
+                           serviceMethod: ServiceMethods , withCompletion completion: @escaping (Result<T, Error>) -> Void)  {
         guard let url = serviceMethod.getURL() else {
             completion(Result.failure(ErrorType.notHaveData as! Error))
             return
         }
+        var request = URLRequest(url: url)
+
+        switch tokenType {
+        case .bearer(let token):
+            request.httpMethod = "GET"
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        default:
+            break
+        }
         
         let session = URLSession(configuration: .default)
         
-            let task = session.dataTask(with: url, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
              
                 if error != nil || response == nil {
                     completion(Result.failure(error!))
@@ -73,7 +102,10 @@ class Service : NSObject{
                 if let wrapper = wrapper {
                     completion(Result.success(wrapper))
                 }else{
-                    completion(Result.failure(error!))
+                    guard let error = error else {
+                        return completion(Result.failure(LocalError()))
+                    }
+                    completion(Result.failure(error))
                 }
                 } )
             task.resume()

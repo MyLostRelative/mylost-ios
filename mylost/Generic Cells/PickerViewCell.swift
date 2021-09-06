@@ -16,7 +16,7 @@ public class PickerViewCell: ListRowCell {
         let stack = UIStackView()
         stack.alignment = .center
         stack.axis = .vertical
-        stack.roundCorners(with: .constant(radius: 20))
+        stack.roundCorners(with: .constant(radius: 10))
         stack.height(equalTo: 100)
         stack.backgroundColor = Resourcebook.Color.Information.solid50.uiColor
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -25,8 +25,8 @@ public class PickerViewCell: ListRowCell {
     
     private let label: UILabel = {
         let label = UILabel()
-        label.height(equalTo: 30)
-        label.font = Resourcebook.Font.headline2
+        label.height(equalTo: 20)
+        label.font = Resourcebook.Font.headline4
         label.textColor = Resourcebook.Color.Invert.Background.canvas.uiColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -88,14 +88,31 @@ extension PickerViewCell:  UIPickerViewDelegate, UIPickerViewDataSource {
         pickerData[component].count
     }
     
-    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int)-> String? {
-        pickerData[component][row]
-    }
+//    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int)-> String? {
+//        pickerData[component][row]
+//    }
     
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let result = pickerData.enumerated().map({ pickerData[$0.offset][pickerView.selectedRow(inComponent: $0.offset)]})
         self.onTap?(result)
     }
+    
+    public func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
+        {
+            var pickerLabel: UILabel? = (view as? UILabel)
+                let text = pickerData[component][row]
+
+                if pickerLabel == nil
+                {
+                    pickerLabel = UILabel()
+                    pickerLabel?.textColor = UIColor.black
+                    pickerLabel?.textAlignment = NSTextAlignment.center
+                    pickerLabel?.font = Resourcebook.Font.body1
+                }
+                pickerLabel?.text = text
+          
+            return pickerLabel!
+        }
 }
     
 extension PickerViewCell {

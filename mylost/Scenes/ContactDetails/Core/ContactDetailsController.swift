@@ -1,15 +1,15 @@
 //  
-//  PostCreateController.swift
+//  ContactDetailsController.swift
 //  mylost
 //
-//  Created by Nato Egnatashvili on 05.09.21.
+//  Created by Nato Egnatashvili on 06.09.21.
 //
 
 import UIKit
 
-class PostCreateViewController: UIViewController {
+class ContactDetailsViewController: UIViewController {
 
-    var presenter: PostCreatePresenter?
+    var presenter: ContactDetailsPresenter?
     
     var tableView: UITableView = {
         let table = UITableView()
@@ -34,10 +34,11 @@ class PostCreateViewController: UIViewController {
     }
 }
 
-extension PostCreateViewController: PostCreateView {
+extension ContactDetailsViewController: ContactDetailsView {
     func displayBanner(type: Bannertype, title: String, description: String) {
         DispatchQueue.main.async {
             self.displayBanner(banner: .init(type: type, title: title, description: description))
         }
     }
 }
+

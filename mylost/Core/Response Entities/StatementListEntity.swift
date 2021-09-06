@@ -13,6 +13,7 @@ struct StatementsListResponse: Codable{
 
 struct StatementResponse: Codable{
     let id: Int?
+    let userID: Int?
     let title: String?
     let description: String?
     let imageUrl: String?
@@ -47,6 +48,7 @@ enum RelationType: String {
 
 struct Statement{
     let id: Int
+    let userID: Int
     let statementTitle: String
     let statementDescription: String
     let imageUrl: String?
@@ -62,9 +64,11 @@ extension StatementsListResponse {
         guard let result = result else {return []}
         return result.compactMap { (response) -> Statement? in
             guard let id = response.id,
+                  let userID = response.userID,
                   let statementTitle = response.title,
                   let statementDescription = response.description else {return nil}
             return Statement(id: id,
+                             userID: userID,
                              statementTitle: statementTitle,
                              statementDescription: statementDescription,
                              imageUrl: response.imageUrl,

@@ -9,8 +9,8 @@ import Foundation
 
 protocol MyProfileRouter {
     func attach(controller: MyProfileViewController)
-    func move2ProfileDetails()
-    func move2CreatePost()
+    func move2ProfileDetails(userInfo: UserInfo)
+    func move2CreatePost(userID: Int, myProfileDelegate: MyProfilePresenterDelegate?)
 }
 
 class MyProfileRouterImpl: MyProfileRouter {
@@ -20,13 +20,18 @@ class MyProfileRouterImpl: MyProfileRouter {
         self.controller = controller
     }
     
-    func move2ProfileDetails() {
-        guard let vc = DIAssembly(uiAssemblies: [DetailsAndLogOutAssembly()], networkAssemblies: []).resolver.resolve(DetailsAndLogOutController.self) else { return }
+    func move2ProfileDetails(userInfo: UserInfo) {
+        guard let vc = DIAssembly(uiAssemblies: [DetailsAndLogOutAssembly(userInfo: userInfo)],
+                                  networkAssemblies: [])
+                .resolver
+                .resolve(DetailsAndLogOutController.self) else { return }
         controller?.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func move2CreatePost() {
-        guard let vc = DIAssembly(uiAssemblies: [PostCreateAssembly()], networkAssemblies: [])
+    func move2CreatePost(userID: Int, myProfileDelegate: MyProfilePresenterDelegate?) {
+        guard let vc = DIAssembly(uiAssemblies: [PostCreateAssembly(userID: userID,
+                                                                    myProfileDelegate: myProfileDelegate)],
+                                  networkAssemblies: [StatementPostAssembly()])
                 .resolver
                 .resolve(PostCreateViewController.self) else { return }
         controller?.navigationController?.pushViewController(vc, animated: true)

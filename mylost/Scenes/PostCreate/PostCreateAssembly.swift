@@ -8,6 +8,14 @@
 import Swinject
 
 class PostCreateAssembly: UIAssembly {
+    private let userID: Int
+    private let myProfileDelegate: MyProfilePresenterDelegate?
+    init(userID: Int,
+         myProfileDelegate: MyProfilePresenterDelegate?) {
+        self.userID = userID
+        self.myProfileDelegate = myProfileDelegate
+    }
+    
     func assemble(container: Container) {
         container.register(PostCreateViewController.self) {resolver in
             let controller  = PostCreateViewController()
@@ -20,7 +28,10 @@ class PostCreateAssembly: UIAssembly {
         }
         
         container.register(PostCreatePresenterImpl.self) {resolver in
-            let presenter = PostCreatePresenterImpl(router: resolver.resolve(PostCreateRouterImpl.self)!)
+            let presenter = PostCreatePresenterImpl(router: resolver.resolve(PostCreateRouterImpl.self)!,
+                                                    statementPostGateway: resolver.resolve(StatementPostGatewayImpl.self)!,
+                                                    userID: self.userID,
+                                                    myProfileDelegate: self.myProfileDelegate)
             return presenter
         }
         

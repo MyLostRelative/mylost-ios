@@ -28,6 +28,7 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
     private var isLoading = true
     private var statementsFetchFailed = false
     private var filterState = false
+    private let manager: PickerDataManager = PickerDataManagerImpl()
     
     init(view: MyLostHomeView, statementsGateway: StatementGateway, router: MyLostHomeRouter) {
         self.view = view
@@ -93,7 +94,8 @@ extension MyLostHomePresenterImpl {
                     PageDescriptionTableCell.self,
                     PageDescriptionWithButtonTableCell.self,
                     PickerViewCell.self,
-                    TiTleButtonTableCell.self
+                    TiTleButtonTableCell.self,
+                    RoundButtonTableCell.self
                 ],
                 reusableViews: [
                 ])
@@ -150,12 +152,6 @@ extension MyLostHomePresenterImpl {
             rows: cardRows)
     }
     
-    private func textFieldSections() -> ListSection {
-        ListSection(
-            id: "",
-            rows:  [pickerRow(), pickerRowCity(), pickerRowAge()])
-    }
-    
     private func filterLabelSection() -> ListSection {
         ListSection(
             id: "",
@@ -175,8 +171,15 @@ extension MyLostHomePresenterImpl {
                                                 self.filterState = false
                                                 self.constructDataSource()
                                                })),
-                    pickerRow(), pickerRowCity(), pickerRowAge()])
+                    pickerRow(type: .relativeType),
+                    pickerRow(type: .sexType),
+                    pickerRow(type: .age),
+                    pickerRow(type: .bloodType),
+                    pickerRow(type: .city),
+                    buttonRow()])
     }
+    
+
     
     private func emptyStatementsSection() -> ListSection {
         ListSection(
@@ -193,15 +196,6 @@ extension MyLostHomePresenterImpl {
 
 //MARK: Rows
 extension MyLostHomePresenterImpl {
-    private func textfield() -> ListRow <RoundedTextFieldTableCell>{
-        ListRow(model: modelBuilder.getPostModel(tap: { (_) in
-            print("Post this")
-        }),
-                height: UITableView.automaticDimension,
-                tapClosure: {_,_ in
-            self.router.move2UserDetails()
-        })
-    }
     
     private func roudCards() -> ListSection{
         let rows = self.statements.map({roundCard(model: .init(title: $0.statementTitle,
@@ -240,31 +234,22 @@ extension MyLostHomePresenterImpl {
             height: UITableView.automaticDimension)
     }
     
-    private func pickerRow() -> ListRow <PickerViewCell>{
+    private func pickerRow(type: PickerDataManagerImpl.PickerType) -> ListRow <PickerViewCell> {
         ListRow(
-            model: PickerViewCell.ViewModel(title: "სქესი", pickerData: [["მდედრობითი", "მამრობითი"]], onTap:  {
-                pickers in
-                print(pickers)
-            }),
+            model: PickerViewCell.ViewModel(title: type.title,
+                                            pickerData: type.vectorData,
+                                            onTap:  {
+                                                pickers in
+                                                self.manager.addPickerTypeToDict(type: type, data: pickers)
+                                            }),
             height: UITableView.automaticDimension)
     }
     
-    private func pickerRowCity() -> ListRow <PickerViewCell>{
+    private func buttonRow( ) -> ListRow <RoundButtonTableCell> {
         ListRow(
-            model: PickerViewCell.ViewModel(title: "ქალაქი", pickerData: [["თბილისი", "ბათუმი", "ქუთაისი"]],  onTap:  {
-                pickers in
-                print(pickers)
+            model: .init(title: "გაფილტვრა", onTap: { _ in
+                print("")
             }),
-            height: UITableView.automaticDimension)
-    }
-    
-    private func pickerRowAge() -> ListRow <PickerViewCell>{
-        ListRow(
-            model: PickerViewCell.ViewModel(title: "ასაკი", pickerData: [["20 - დან", "21 - დან", "22 -დან"],
-                                                                                   ["20 - მდე", "21 - მდე", "22 -მდე"]],  onTap:  {
-                                                                                    pickers in
-                                                                                    print(pickers)
-                                                                                }),
             height: UITableView.automaticDimension)
     }
     
@@ -289,8 +274,9 @@ extension MyLostHomePresenterImpl {
                                         description: statement.statementDescription)),
             
             height: UITableView.automaticDimension,
-            tapClosure: {_,_ in
-                print("dw")
+            tapClosure: {row,_ in
+                self.router.move2UserDetails(guestUserID: self.statements[row].userID)
+                print(self.statements[row].userID)
             })
     }
 }

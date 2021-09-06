@@ -34,13 +34,13 @@ extension SavedUserCard{
         }
         
         struct Title {
-            static var textColor: UIColor? { Resourcebook.Color.Invert.Component.tr200.uiColor }
-            static let font = Resourcebook.Font.overline2
+            static var textColor: UIColor? { Resourcebook.Color.Information.tr200.uiColor }
+            static let font = Resourcebook.Font.body1
         }
         
         struct Username {
             static var textColor: UIColor? { Resourcebook.Color.Invert.Component.tr400.uiColor }
-            static let font = Resourcebook.Font.body1
+            static let font = Resourcebook.Font.body2
         }
         
     }

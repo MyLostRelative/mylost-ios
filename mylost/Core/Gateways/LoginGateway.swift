@@ -19,7 +19,27 @@ class LoginGatewayImpl: LoginGateway{
     
     func postLogin(params: [String: Any], completion: @escaping LoginGatewayCompletion) {
         
-        service.post(serviceMethod: .login, parameters: params) { (result: Result<LoginResponse, Error>)  in
+        service.post(serviceMethod: .loginToken, parameters: params) { (result: Result<LoginResponse, Error>)  in
+            
+            switch result {
+            case .success(_):
+                let newRes = result.flatMap { (resp) -> Result<LoginResponse, Error> in
+                  .success(resp)
+                }
+                completion(newRes)
+                
+            case .failure(let error):
+                let newRes = result.flatMap { _ -> Result<LoginResponse, Error> in
+                    .failure(error)
+                }
+                completion(newRes)
+            }
+        }
+    }
+    
+    func postLoginToken(params: [String: Any], completion: @escaping LoginGatewayCompletion) {
+        
+        service.post(serviceMethod: .loginToken, parameters: params) { (result: Result<LoginResponse, Error>)  in
             
             switch result {
             case .success(_):

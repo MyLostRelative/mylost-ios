@@ -249,16 +249,18 @@ extension SignInPresenterImpl {
                                      lastName: String? ,
                                      email: String? ,
                                      mobile: String?) {
-        if let username = username,
-           let password = password,
-           let firstName = firstName,
-           let lastName = lastName,
-           let email = email{
-            let params = ["username": username,
-                                        "password": password,
-                                        "firstName": firstName,
-                                        "lastName": lastName,
-                                        "email": email]
+        if let usernamew = username,
+           let passwordw = password,
+           let firstNamew = firstName,
+           let lastNamew = lastName,
+           let emailw = email,
+           let mobilew = mobile {
+            let params = ["username": usernamew,
+                                        "password": passwordw,
+                                        "firstName": firstNamew,
+                                        "lastName": lastNamew,
+                                        "email": emailw,
+                                        "mobileNumber": mobilew]
             callRegister(params: params)
         }else {
             self.view?.displayBanner(type: .negative,

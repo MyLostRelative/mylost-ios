@@ -16,7 +16,7 @@ class ProductContainer: PagerTabStripViewController {
     @IBOutlet weak var segments: ScrollableTabView!
     var lastSelectedIndex = 0
     var moduleVisitDate: Date = Date()
-    var userType: UserType = .guest {
+    var userType: UserType = UserDefaultManager().getValue(key: "token") == nil ? .guest : .user{
         didSet {
             self.items = getDatasourceModels()
             self.segments.collectionView.reloadData()
@@ -67,12 +67,15 @@ extension ProductContainer: PagerTabStripDataSource {
                     fatalError("errores")
                 }
         
-        guard let userVc = DIAssembly(uiAssemblies: [MyProfileAssembly()], networkAssemblies: [])
-                .resolver.resolve(MyProfileViewController.self) else {
-                    fatalError("errores")
-                }
-        var firstVc = self.userType == .guest ? signVC : userVc
-        if let _ = UserDefaultManager().getValue(key: "token") {
+        var firstVc: UIViewController = signVC
+        if let token = UserDefaultManager().getValue(key: "token") as? String {
+            
+            guard let userVc = DIAssembly(uiAssemblies: [MyProfileAssembly(userID: 1,
+                                                                           bearerToken: token)],
+                                          networkAssemblies: [UserInfoetworkAssembly(), UserInfoBearerNetworkAssembly(),   StatementNetworkAssembly()])
+                    .resolver.resolve(MyProfileViewController.self) else {
+                        fatalError("errores")
+                    }
             firstVc = userVc
         }
         

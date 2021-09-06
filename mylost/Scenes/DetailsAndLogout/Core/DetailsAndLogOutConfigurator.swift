@@ -8,6 +8,11 @@
 import Swinject
 
 class DetailsAndLogOutAssembly: UIAssembly {
+    private let userInfo: UserInfo
+    init(userInfo: UserInfo) {
+        self.userInfo = userInfo
+    }
+    
     func assemble(container: Container) {
         container.register(DetailsAndLogOutController.self) {resolver in
             let controller  = DetailsAndLogOutController()
@@ -20,7 +25,8 @@ class DetailsAndLogOutAssembly: UIAssembly {
         }
         
         container.register(DetailsAndLogOutPresenterImpl.self) {resolver in
-            let presenter = DetailsAndLogOutPresenterImpl(router: resolver.resolve(DetailsAndLogOutRouterImpl.self)!)
+            let presenter = DetailsAndLogOutPresenterImpl(router: resolver.resolve(DetailsAndLogOutRouterImpl.self)!,
+                                                          userInfo: self.userInfo)
             return presenter
         }
         

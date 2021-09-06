@@ -9,6 +9,14 @@
 import Swinject
 
 class MyProfileAssembly: UIAssembly {
+    private let userID: Int
+    private let bearerToken: String
+    init(userID: Int,
+         bearerToken: String) {
+        self.userID = userID
+        self.bearerToken = bearerToken
+    }
+    
     func assemble(container: Container) {
         container.register(MyProfileViewController.self) {resolver in
             let controller  = MyProfileViewController()
@@ -21,7 +29,12 @@ class MyProfileAssembly: UIAssembly {
         }
         
         container.register(MyProfilePresenterImpl.self) {resolver in
-            let presenter = MyProfilePresenterImpl(router: resolver.resolve(MyProfileRouterImpl.self)!)
+            let presenter = MyProfilePresenterImpl(router: resolver.resolve(MyProfileRouterImpl.self)!,
+                                                   userID: self.userID,
+                                                   bearerToken: self.bearerToken, 
+                                                   userInfoGateway: resolver.resolve(UserInfoGatewayImpl.self)!,
+                                                   userInfoBearerGateway: resolver.resolve(UserInfoBearerGatewayImpl.self)!,
+                                                   statementGateway: resolver.resolve(StatementGatewayImpl.self)!)
             return presenter
         }
         

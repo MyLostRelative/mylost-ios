@@ -216,3 +216,24 @@ extension String {
         return nil
     }
 }
+
+let button = UIButton(type: .detailDisclosure)
+
+extension UITextField {
+    
+    func enablePasswordToggle(){
+        
+        button.setImage(Resourcebook.Image.Icons24.systemEyeOn.template, for: .normal)
+        button.setImage(Resourcebook.Image.Icons24.systemEyeOn.image, for: .selected)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -12, bottom: 0, right: 0)
+        button.addTarget(self, action: #selector(togglePasswordView), for: .touchUpInside)
+        rightView = button
+        rightViewMode = .always
+        button.alpha = 0.4
+    }
+    
+    @objc func togglePasswordView(_ sender: Any) {
+        isSecureTextEntry.toggle()
+        button.isSelected.toggle()
+    }
+}
