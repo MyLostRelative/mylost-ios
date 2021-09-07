@@ -1,6 +1,6 @@
 {
   "name": "FinniversKit",
-  "version": "83.8.0",
+  "version": "84.0.0",
   "summary": "FINN's iOS Components",
   "authors": "FINN.no",
   "homepage": "https://schibsted.frontify.com/d/oCLrx0cypXJM/design-system",
@@ -16,7 +16,7 @@
   "swift_versions": "5.0",
   "source": {
     "git": "https://github.com/finn-no/FinniversKit.git",
-    "tag": "83.8.0"
+    "tag": "84.0.0"
   },
   "requires_arc": true,
   "source_files": [

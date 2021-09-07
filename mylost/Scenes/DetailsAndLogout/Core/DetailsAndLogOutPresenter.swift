@@ -92,11 +92,11 @@ extension DetailsAndLogOutPresenterImpl {
     }
     
     private func navigationAndPageDescriptionSection() -> ListSection{
-        let clickableLabel = clickableLabel(with: .init(title: "უკან დაბრუნება",
+        let clickableLabel1 = clickableLabel(with: .init(title: "უკან დაბრუნება",
                                                    onTap: { _ in
                                                     self.router.backToProfile()
                                                    }))
-        return ListSection(id: "", rows: [clickableLabel , pageDescriptionRow()  ])
+        return ListSection(id: "", rows: [clickableLabel1 , pageDescriptionRow()  ])
     }
     
     private func logOutSection() -> ListSection {

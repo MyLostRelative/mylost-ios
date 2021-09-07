@@ -5,9 +5,9 @@ PODS:
     - FinniversKit
   - Charcoal/FINN (9.3.1):
     - Charcoal/Core
-  - FinniversKit (83.8.0):
-    - FinniversKit/DNA (= 83.8.0)
-  - FinniversKit/DNA (83.8.0)
+  - FinniversKit (84.0.0):
+    - FinniversKit/DNA (= 84.0.0)
+  - FinniversKit/DNA (84.0.0)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
@@ -47,18 +47,18 @@ CHECKOUT OPTIONS:
     :commit: 6db73a996618613d90e7221e1117e870d585124c
     :git: https://github.com/finn-no/charcoal-ios
   FinniversKit:
-    :commit: 8f3505def1d46bdc6de78fdeabef17ac27e1354d
+    :commit: 924853d273fcb78748e108edc5a29aca75dc3e4d
     :git: https://github.com/finn-no/FinniversKit
 
 SPEC CHECKSUMS:
   Charcoal: 497fd4c08fb2935799f1cdcacc302d0f3c2d054a
-  FinniversKit: da1efc53d86ad33097996787a22684918850141e
+  FinniversKit: 1f629c5c674edd20926a4620086c57f162c1cdb9
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   Swinject: db795b8d6d78559b25fbebb0170d2635be1176e2
 
-PODFILE CHECKSUM: f22e103bf50310f3b2b8ff4f556257b6b740c976
+PODFILE CHECKSUM: 646c4f19399e6cf60abd4afbe3965740430a5526
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2
