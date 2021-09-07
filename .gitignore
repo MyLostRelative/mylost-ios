@@ -1,7 +1,4 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/xcode,cocoapods,macos,windows,linux
-# Edit at https://www.toptal.com/developers/gitignore?templates=xcode,cocoapods,macos,windows,linux
-
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
 
@@ -22,7 +19,6 @@ Pods/
 
 # Icon must end with two \r
 Icon
-
 
 # Thumbnails
 ._*
@@ -51,16 +47,6 @@ Temporary Items
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
 
 ### Xcode ###
 # Xcode
@@ -96,5 +82,3 @@ DerivedData/
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
-
-# End of https://www.toptal.com/developers/gitignore/api/xcode,cocoapods,macos,windows,linux
