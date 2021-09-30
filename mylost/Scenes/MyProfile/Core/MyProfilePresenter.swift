@@ -237,7 +237,7 @@ extension MyProfilePresenterImpl {
                                         description: statement.statementDescription)),
             
             height: UITableView.automaticDimension,
-            tapClosure: {_,_ in
+            tapClosure: {_,_,_  in
                 print("dw")
             })
     }

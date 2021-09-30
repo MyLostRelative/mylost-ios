@@ -7,10 +7,13 @@
 
 import UIKit
 import SDWebImage
+import RxSwift
+import RxCocoa
 
 protocol MyLostHomeView: AnyObject {
     var tableView: UITableView {get}
     func displayBanner(type: Bannertype, title: String, description: String)
+    var currentCell: UITableViewCell? {get set}
 }
 
 protocol MyLostHomePresenter {
@@ -28,6 +31,12 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
     private var isLoading = true
     private var statementsFetchFailed = false
     private var filterState = false
+    private var currentCell: UITableViewCell? {
+        didSet {
+            self.view?.currentCell = currentCell
+        }
+    }
+    let favouriteStatements: BehaviorRelay<[Statement]> = BehaviorRelay(value: [])
     private let manager: PickerDataManager = PickerDataManagerImpl()
     
     init(view: MyLostHomeView, statementsGateway: StatementGateway, router: MyLostHomeRouter) {
@@ -100,6 +109,7 @@ extension MyLostHomePresenterImpl {
                 ],
                 reusableViews: [
                 ])
+            tableViewDataSource?.needAnimation = true
         }
     }
     
@@ -227,14 +237,24 @@ extension MyLostHomePresenterImpl {
                             info2: "სქესი: " + (statement.gender?.value ?? "უცნობია"),
                             info3: "ნათესაობის ტიპი: " + (statement.relationType?.value ?? "უცნობია"),
                             info4: "ქალაქი: " + (statement.city ?? "უცნობია"),
-                            description: nil),
+                            description: nil,
+                            onTap: { isFav in
+                                if isFav {
+                                    self.favouriteStatements.accept(self.favouriteStatements.value + [statement])
+                                }else {
+                                    let arr = self.favouriteStatements.value.filter({ $0.statementDescription != statement.statementDescription})
+                                    self.favouriteStatements.accept(arr)
+                                }
+                                
+                            }),
                        cardModel: .init(title: "",
                                         description: statement.statementDescription)),
             
             height: UITableView.automaticDimension,
-            tapClosure: {row,_ in
-                self.router.move2UserDetails(guestUserID: self.statements[row].userID)
+            tapClosure: {row,_ ,cell in
+                self.router.move2UserDetails(guestUserID: self.statements[row].userID, guestImgUrl: self.statements[row].imageUrl)
                 print(self.statements[row].userID)
+                self.currentCell = cell
             })
     }
     

@@ -158,7 +158,7 @@ extension StatementsPresenterImpl {
                                         description: nil)),
             
             height: UITableView.automaticDimension,
-            tapClosure: {row,_ in
+            tapClosure: {row,_,_  in
                 self.router.move2BlogDetails(blog: self.blogs[row])
             })
     }

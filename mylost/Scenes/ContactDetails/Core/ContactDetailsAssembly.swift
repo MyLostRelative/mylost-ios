@@ -9,8 +9,10 @@ import Swinject
 
 class ContactDetailsAssembly: UIAssembly {
     private let guestUserID: Int
-    init(guestUserID: Int) {
+    private let guestImgUrl: String?
+    init(guestUserID: Int, guestImgUrl: String?) {
         self.guestUserID = guestUserID
+        self.guestImgUrl = guestImgUrl
     }
 
     func assemble(container: Container) {
@@ -27,6 +29,7 @@ class ContactDetailsAssembly: UIAssembly {
         container.register(ContactDetailsPresenterImpl.self) {resolver in
             let presenter = ContactDetailsPresenterImpl(router: resolver.resolve(ContactDetailsRouterImpl.self)!,
                                                         guestUserID: self.guestUserID,
+                                                        guestImgUrl: self.guestImgUrl,
                                                         userInfoGateway: resolver.resolve(UserInfoGatewayImpl.self)!)
             return presenter
         }

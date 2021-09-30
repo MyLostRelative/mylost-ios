@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Hero
 
 public protocol NibLoadableView: class {
     static var nibName: String { get }
@@ -118,3 +119,5 @@ extension UICollectionView {
         return cell
     }
 }
+
+

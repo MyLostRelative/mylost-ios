@@ -47,3 +47,25 @@ public class RoundCard: ListRowCell {
     }
 }
 
+
+extension RoundCard: ConfigurableTableCell {
+    public func configure(with model: TableCellModel) {
+        if let model = model as? CellModel {
+            cardBottom.configure(with: model.roundModel)
+        }
+    }
+    
+    
+}
+
+extension RoundCard {
+    struct CellModel: TableCellModel{
+        var nibIdentifier: String = "RoundCard"
+        var height: Double = Double(UITableView.automaticDimension)
+        var roundModel: RoundedTitleAndDescription.ViewModel
+        
+        public init(roundModel: RoundedTitleAndDescription.ViewModel) {
+            self.roundModel = roundModel
+        }
+    }
+}

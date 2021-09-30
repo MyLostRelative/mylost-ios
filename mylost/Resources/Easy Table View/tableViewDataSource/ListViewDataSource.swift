@@ -8,6 +8,8 @@ open class ListViewDataSource: NSObject  {
     
     public var scrollHandler: ((UIScrollView) -> ())?
     public var scrollEndHandler: (() -> ())?
+    public var needAnimation: Bool = false
+    public var animationCells: [String] = []
     
     public init(tableView: UITableView,
                 withTypes types: [Reusable.Type],
@@ -86,6 +88,10 @@ extension ListViewDataSource: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = sections[indexPath.section].tableView(tableView, cellForRowAt: indexPath)
         return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        sections[indexPath.section].tableView(tableView, willDisplay: cell, forRowAt: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

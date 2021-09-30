@@ -78,9 +78,137 @@
             filePath = "mylost/Tab Container/TabContainer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "itemSelected(at:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "43E9DBC1-AD6C-46C0-8B07-9F43F35DB3D8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "mylost/Scenes/Home/Helpers/RevealAnimator.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "animateTransition(using:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "767818DE-0E94-4DD3-9B6C-799FC01DE7B7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "mylost/Scenes/Home/Helpers/TransitionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "init(duration:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2EC2C5AA-9548-4057-9F46-3A05DBAD1734"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "mylost/Scenes/Home/Helpers/TransitionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "TransitionManager"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E3C08B25-2D0E-46CF-AFE6-2606DB749977"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "mylost/Scenes/Home/Core/MyLostHomePresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "statementRow(statement:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "63888150-E123-46D7-B87C-8EBE9B12D7A4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "mylost/Scenes/Home/Core/MyLostHomePresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "statementRow(statement:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "63888150-E123-46D7-B87C-8EBE9B12D7A4 - 187a1246716c784a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in mylost.MyLostHomePresenterImpl.statementRow(statement: mylost.Statement) -&gt; mylost.ListRow&lt;mylost.TitleAndDescriptionCardTableCell&gt;"
+                  moduleName = "mylost"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/natoegnatashvili/Documents/My%20Bac/mylost-ios/mylost/Scenes/Home/Core/MyLostHomePresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
+                  offsetFromSymbolStart = "838">
+               </Location>
+               <Location
+                  uuid = "63888150-E123-46D7-B87C-8EBE9B12D7A4 - 190922cb8f8fb790"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (mylost.Statement) -&gt; Swift.Bool in closure #1 (Swift.Bool) -&gt; () in mylost.MyLostHomePresenterImpl.statementRow(statement: mylost.Statement) -&gt; mylost.ListRow&lt;mylost.TitleAndDescriptionCardTableCell&gt;"
+                  moduleName = "mylost"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/natoegnatashvili/Documents/My%20Bac/mylost-ios/mylost/Scenes/Home/Core/MyLostHomePresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AA66D42E-54E2-490D-B9D2-CAEFFEC22202"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "mylost/Components/headerWithDetails/HeaderWithDetails.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "didTapFavourite()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

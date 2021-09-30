@@ -46,3 +46,25 @@ public class PageDescriptionTableCell: ListRowCell {
         pageDescription.stretchLayout(with: 8, to: self.contentView)
     }
 }
+
+extension PageDescriptionTableCell: ConfigurableTableCell {
+    public func configure(with model: TableCellModel) {
+        if let model = model as? CellModel {
+            pageDescription.configure(with: model.pageDescModel)
+        }
+    }
+    
+    
+}
+
+extension PageDescriptionTableCell {
+    struct CellModel: TableCellModel{
+        var nibIdentifier: String = "PageDescriptionTableCell"
+        var height: Double = Double(UITableView.automaticDimension)
+        var pageDescModel: PageDescription.ViewModel
+        
+        public init(pageDescModel: PageDescription.ViewModel) {
+            self.pageDescModel = pageDescModel
+        }
+    }
+}

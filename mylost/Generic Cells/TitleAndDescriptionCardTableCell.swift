@@ -57,6 +57,10 @@ public class TitleAndDescriptionCardTableCell: ListRowCell {
         cardBottom.configure(with: model.cardModel)
     }
     
+    public func getIcon() -> UIImageView{
+        header.getIcon()
+    }
+    
     private func styleUI() {
         self.selectionStyle = .none
         self.backgroundColor = .clear

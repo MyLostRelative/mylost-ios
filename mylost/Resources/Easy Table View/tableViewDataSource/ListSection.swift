@@ -86,6 +86,10 @@ extension ListSection {
         rows[indexPath.row].tableView(tableView, cellForRowAt: indexPath)
     }
     
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        rows[indexPath.row].tableView(tableView, willDisplay: cell, forRowAt: indexPath)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return rows[indexPath.row].height
     }

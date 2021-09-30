@@ -16,14 +16,15 @@ extension HeaderWithDetails {
         let info3: String?
         let info4: String?
         let description: String?
-        
+        let onTap: ((_ isFavourite: Bool) -> ())?
          init(icon: ImageType?,
               title: String?,
               info1: String? = nil,
               info2: String? = nil,
               info3: String? = nil,
               info4: String? = nil,
-              description: String?) {
+              description: String?,
+              onTap: ((_ isFavourite: Bool) -> ())? = nil) {
             self.icon = icon
             self.title = title
             self.info1 = info1
@@ -31,6 +32,7 @@ extension HeaderWithDetails {
             self.info3 = info3
             self.info4 = info4
             self.description = description
+            self.onTap = onTap
         }
     }
     

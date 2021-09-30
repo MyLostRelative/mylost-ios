@@ -9,6 +9,7 @@ import UIKit
 protocol ContactDetailsView: AnyObject {
     var tableView: UITableView {get}
     func displayBanner(type: Bannertype, title: String, description: String)
+    func setImg(with url: String)
 }
 
 protocol ContactDetailsPresenter {
@@ -20,21 +21,26 @@ class ContactDetailsPresenterImpl: ContactDetailsPresenter {
     
     private weak var view: ContactDetailsView?
     private var router: ContactDetailsRouter
+    private let guestImgUrl: String?
     private var tableViewDataSource: ListViewDataSource?
     private let guestUserID: Int
     private var guestUserInfo: GuestUserInfo?
     private let userInfoGateway: UserInfoGateway
     private var isLoading: Bool = true
+    
     init(router: ContactDetailsRouter,
          guestUserID: Int,
+         guestImgUrl: String?,
          userInfoGateway: UserInfoGateway) {
         self.router = router
         self.guestUserID = guestUserID
         self.userInfoGateway = userInfoGateway
+        self.guestImgUrl = guestImgUrl
     }
     
     func viewDidLoad() {
         fetchGuestUserInfo()
+        setImg()
         configureDataSource()
         constructDataSource()
     }
@@ -80,6 +86,11 @@ class ContactDetailsPresenterImpl: ContactDetailsPresenter {
                                          description: "თქვენ ვერ დაამატეთ პოსტი , სცადეთ მოგვიანებით")
             }
         }
+    }
+    
+    private func setImg() {
+        guard let guestImg = self.guestImgUrl else { return }
+        self.view?.setImg(with: guestImg)
     }
 }
 

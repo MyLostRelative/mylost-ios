@@ -80,6 +80,16 @@ public class HeaderWithDetails: UIView {
         return lbl
     }()
     
+    private var favouriteBtn: UIButton = {
+        let btn = UIButton.init(type: .custom)
+        btn.setImage(Resourcebook.Image.Icons24.systemStarOutline.template, for: .normal)
+        btn.setImage(Resourcebook.Image.Icons24.systemStarFill.template, for: .selected)
+        btn.imageView?.tintColor = .yellow
+        return btn
+    }()
+    
+    private var onTap: ((_ isFavourite: Bool) ->())?
+    
     public init(with model: ViewModel? = nil ) {
         super.init(frame: .zero)
         setUp()
@@ -104,6 +114,18 @@ public class HeaderWithDetails: UIView {
         infoLabel3.text = model.info3
         infoLabel4.text = model.info4
         descriptionLbl.text = model.description
+        onTap = model.onTap
+        favouriteBtn.addTarget(nil,
+                               action: #selector(didTapFavourite),
+                               for: .touchUpInside)
+    }
+    
+    @objc func didTapFavourite() {
+        self.onTap?(favouriteBtn.state == .selected)
+    }
+    
+    public func getIcon() -> UIImageView {
+        return icon
     }
     
     required init?(coder: NSCoder) {
@@ -132,6 +154,7 @@ extension HeaderWithDetails {
         self.mainStackView.addArrangedSubview(verticalStack)
         verticalStack.top(toView: self, constant: 16)
         verticalStack.bottom(toView: self, constant: 16)
+        self.mainStackView.addArrangedSubview(favouriteBtn)
     }
     
     private func setUpTitleAndDescription() {
