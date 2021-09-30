@@ -37,7 +37,6 @@ open class ListRow<Cell>: CellProvider & Tappable where Cell: ListRowCell  {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: Cell = tableView.dequeueCell(at: indexPath)
-        cell.hero.id = heroID
         cell.configure(with: model)
         self.cell = cell
         return cell

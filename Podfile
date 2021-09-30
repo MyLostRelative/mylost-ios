@@ -11,9 +11,5 @@ target 'mylost' do
     pod 'RxDataSources'
 	pod 'Swinject'
   	pod 'SDWebImage'
-pod 'Hero'
-pod "Charcoal", git: "https://github.com/finn-no/charcoal-ios"
-pod "FinniversKit", git: "https://github.com/finn-no/FinniversKit"
-pod 'Charcoal/FINN', git: "https://github.com/finn-no/charcoal-ios"
 
 end

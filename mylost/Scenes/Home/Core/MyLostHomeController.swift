@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Hero
 
 class MyLostHomeController: UIViewController {
 
