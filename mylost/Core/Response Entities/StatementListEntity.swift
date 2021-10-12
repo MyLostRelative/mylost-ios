@@ -92,6 +92,7 @@ struct Statement{
     let relationType: RelationType?
     let bloodType: BloodType?
     let createDate: String?
+    let isFavourite: Bool?
 }
 
 extension StatementsListResponse {
@@ -111,8 +112,17 @@ extension StatementsListResponse {
                              city: response.city,
                              relationType: RelationType(rawValue: response.relationType ?? ""),
                              bloodType: BloodType(rawValue: response.bloodType ?? ""),
-                             createDate: response.createDate)
+                             createDate: response.createDate,
+                             isFavourite: false)
         } 
     }
 }
 
+extension Statement: Equatable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id &&
+            lhs.statementDescription == rhs.statementDescription &&
+            lhs.userID == rhs.userID &&
+            lhs.statementTitle == rhs.statementTitle
+    }
+}

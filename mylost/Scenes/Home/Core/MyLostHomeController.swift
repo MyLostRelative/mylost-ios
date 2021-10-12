@@ -25,6 +25,10 @@ class MyLostHomeController: UIViewController {
         navigationController?.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        mypresenter?.viewWillAppear()
+    }
+    
     private func addTableView() {
         self.view.addSubview(tableView)
         

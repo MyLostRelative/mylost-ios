@@ -18,6 +18,7 @@ protocol MyLostHomeView: AnyObject {
 
 protocol MyLostHomePresenter {
     func viewDidLoad()
+    func viewWillAppear()
 }
 
 class MyLostHomePresenterImpl: MyLostHomePresenter {
@@ -31,6 +32,7 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
     private var isLoading = true
     private var statementsFetchFailed = false
     private var filterState = false
+    private let isAuthorized = UserDefaultManager().getValue(key: "token") != nil
     private var currentCell: UITableViewCell? {
         didSet {
             self.view?.currentCell = currentCell
@@ -48,6 +50,9 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
     func viewDidLoad() {
         fetchStatementList()
         configureDataSource()
+    }
+    
+    func viewWillAppear() {
         constructDataSource()
     }
     
@@ -56,6 +61,10 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
         self.statementsFetchFailed = false
         self.constructDataSource()
         self.fetchStatementList()
+    }
+    
+    private func fetchFavourites() {
+        favouriteStatements.accept(statements.filter({$0.isFavourite ?? false}))
     }
 }
 
@@ -77,13 +86,14 @@ extension MyLostHomePresenterImpl {
     private func statementsFetchSuccess(_ statements: [Statement]) {
         self.statementsFetchFailed = false
         self.statements = statements
+        fetchFavourites()
         self.constructDataSource()
     }
     
     private func statementsFetchFailed(_ error: Error) {
         self.statementsFetchFailed = true
         self.view?.displayBanner(type: .negative, title: "ოპერაცია წარმატებით შესრულდა",
-                                  description: error.localizedDescription)
+                                 description: error.localizedDescription)
         self.constructDataSource()
     }
 }
@@ -118,14 +128,14 @@ extension MyLostHomePresenterImpl {
             self.statementsFetchFailed ? errorState() :
             self.statements.isEmpty ? emptyState() :
             cardLoadedState()
-            
+        
         DispatchQueue.main.async {
             self.tableViewDataSource?.reload(
                 with: stateDependent
             )
         }
     }
-  
+    
 }
 
 //MARK: States
@@ -139,7 +149,7 @@ extension MyLostHomePresenterImpl {
     private func cardLoadedState() -> [ListSection]{
         [filterLabelSection(), cardSections() ]
     }
-
+    
     private func emptyState() -> [ListSection]{
         [emptyStatementsSection()]
     }
@@ -163,9 +173,10 @@ extension MyLostHomePresenterImpl {
             id: "",
             rows:  [clickableLabel(with: .init(title: "ფილტრის გამოყენება",
                                                onTap: { _ in
+                                                self.router.move2Fav(favouriteStatements: self.favouriteStatements)
                                                 self.router.move2Filter(delegate: self)
                                                })), SearchTextFieldRow(),
-                    ] )
+            ] )
     }
     
     private func emptyStatementsSection() -> ListSection {
@@ -173,7 +184,7 @@ extension MyLostHomePresenterImpl {
             id: "",
             rows:  [emptyPageDescriptionRow()])
     }
-
+    
     private func errorStatementsSection() -> ListSection {
         ListSection(
             id: "",
@@ -186,7 +197,7 @@ extension MyLostHomePresenterImpl {
     
     private func roudCards() -> ListSection{
         let rows = self.statements.map({roundCard(model: .init(title: $0.statementTitle,
-                                                    description: $0.statementDescription))})
+                                                               description: $0.statementDescription))})
         return ListSection(
             id: "",
             rows:  rows)
@@ -226,7 +237,32 @@ extension MyLostHomePresenterImpl {
                 height: UITableView.automaticDimension)
     }
     
+    //FAKE SERVICE
+    private func setFavourtie(success: Bool = true,
+                              becomeFavourite: Bool,
+                              statement: Statement) {
+        if success  {
+            if becomeFavourite {
+                self.favouriteStatements.accept(self.favouriteStatements.value + [statement])
+            }else {
+                let removedFav = self.favouriteStatements.value.filter( { $0 != statement})
+                self.favouriteStatements.accept(removedFav)
+            }
+            constructDataSource()
+        }else {
+            
+            //print()
+        }
+    }
+    
+    private func notAuthorizedState() {
+        self.view?.displayBanner(type: .informative,
+                                 title: "თქვენ არ ხართ დალოგინებული",
+                                 description: "დალოგინდით ა გაიარეთ რეგისტრაცია , რათა შეძლოთ გგანცხადების გაფავორიტება")
+    }
+    
     private func statementRow(statement: Statement) -> ListRow <TitleAndDescriptionCardTableCell>{
+        let isFav = self.favouriteStatements.value.filter({ $0 == statement }).first != nil
         return ListRow(
             model: TitleAndDescriptionCardTableCell
                 .Model(headerModel:
@@ -238,13 +274,11 @@ extension MyLostHomePresenterImpl {
                             info3: "ნათესაობის ტიპი: " + (statement.relationType?.value ?? "უცნობია"),
                             info4: "ქალაქი: " + (statement.city ?? "უცნობია"),
                             description: nil,
-                            onTap: { isFav in
-                                if isFav {
-                                    self.favouriteStatements.accept(self.favouriteStatements.value + [statement])
-                                }else {
-                                    let arr = self.favouriteStatements.value.filter({ $0.statementDescription != statement.statementDescription})
-                                    self.favouriteStatements.accept(arr)
-                                }
+                            isFavourite: isFav,
+                            onTap: { headerWithDetails in
+                                self.isAuthorized ? self.setFavourtie(becomeFavourite: !isFav,
+                                                                      statement: statement) :
+                                    self.notAuthorizedState()
                                 
                             }),
                        cardModel: .init(title: "",

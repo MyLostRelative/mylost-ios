@@ -21,14 +21,13 @@ class FavouriteStatementsController: UIViewController , RXTableConfigurable{
     }()
     
     private let bag = DisposeBag()
-    private let viewModel = FavouriteViewModel()
+    var viewModel = FavouriteViewModel()
     
     
     override func viewDidLoad() {
         addTableView()
         registerCells()
         setTableDataSource()
-        viewModel.getInformation()
         presenter?.viewDidLoad()
     }
     private func addTableView() {
@@ -47,6 +46,7 @@ class FavouriteStatementsController: UIViewController , RXTableConfigurable{
     private func registerCells() {
         tableView.registerCell(reusable: PageDescriptionTableCell.self)
         tableView.registerCell(reusable: RoundCard.self)
+        tableView.registerCell(reusable: TitleAndDescriptionCardTableCell.self)
         
     }
 }

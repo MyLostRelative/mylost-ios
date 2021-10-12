@@ -6,8 +6,14 @@
 //
 
 import Swinject
+import RxRelay
 
 class FavouriteStatementsAssembly: UIAssembly {
+    let favouriteStatements: BehaviorRelay<[Statement]>
+    init(favouriteStatements: BehaviorRelay<[Statement]>) {
+        self.favouriteStatements = favouriteStatements
+    }
+    
     func assemble(container: Container) {
         container.register(FavouriteStatementsController.self) {resolver in
             let controller  = FavouriteStatementsController()
@@ -20,7 +26,9 @@ class FavouriteStatementsAssembly: UIAssembly {
         }
         
         container.register(FavouriteStatementsPresenterImpl.self) {resolver in
-            let presenter = FavouriteStatementsPresenterImpl(router: resolver.resolve(FavouriteStatementsRouterImpl.self)!)
+            let presenter = FavouriteStatementsPresenterImpl(
+                router: resolver.resolve(FavouriteStatementsRouterImpl.self)!,
+                favouriteStatements: self.favouriteStatements)
             return presenter
         }
         

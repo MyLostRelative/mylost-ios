@@ -5,12 +5,13 @@
 //  Created by Nato Egnatashvili on 6/21/21.
 //
 
-import UIKit
+import RxRelay
 
 protocol MyLostHomeRouter {
     func move2UserDetails(guestUserID: Int, guestImgUrl: String?)
     func move2Filter(delegate: FilterDetailsPresenterDelegate)
     func move2H()
+    func move2Fav(favouriteStatements: BehaviorRelay<[Statement]>)
 }
 
 class MyLostHomeRouterImpl: MyLostHomeRouter {
@@ -32,7 +33,6 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
     }
     
     func move2Filter(delegate: FilterDetailsPresenterDelegate) {
-        move2Fav()
 //        guard let vc = DIAssembly(uiAssemblies: [FilterDetailsAssembly(delegate: delegate)],
 //                                  networkAssemblies: [])
 //            .resolver
@@ -41,8 +41,9 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
         
     }
     
-    func move2Fav() {
-        guard let vc = DIAssembly(uiAssemblies: [FavouriteStatementsAssembly()],
+    func move2Fav(favouriteStatements: BehaviorRelay<[Statement]>) {
+        guard let vc = DIAssembly(
+                uiAssemblies: [FavouriteStatementsAssembly(favouriteStatements: favouriteStatements)],
                                   networkAssemblies: [])
             .resolver
                 .resolve(FavouriteStatementsController.self) else { return }

@@ -16,7 +16,9 @@ extension HeaderWithDetails {
         let info3: String?
         let info4: String?
         let description: String?
-        let onTap: ((_ isFavourite: Bool) -> ())?
+        let isFavourite: Bool
+        let hideFavouriteImage: Bool
+        let onTap: ((HeaderWithDetails) -> ())?
          init(icon: ImageType?,
               title: String?,
               info1: String? = nil,
@@ -24,7 +26,9 @@ extension HeaderWithDetails {
               info3: String? = nil,
               info4: String? = nil,
               description: String?,
-              onTap: ((_ isFavourite: Bool) -> ())? = nil) {
+              isFavourite: Bool = false,
+              hideFavouriteImage: Bool = false,
+              onTap: ((HeaderWithDetails) -> ())? = nil) {
             self.icon = icon
             self.title = title
             self.info1 = info1
@@ -32,6 +36,8 @@ extension HeaderWithDetails {
             self.info3 = info3
             self.info4 = info4
             self.description = description
+            self.isFavourite = isFavourite
+            self.hideFavouriteImage = hideFavouriteImage
             self.onTap = onTap
         }
     }

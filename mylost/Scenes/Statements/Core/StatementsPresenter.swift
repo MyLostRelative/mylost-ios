@@ -153,7 +153,8 @@ extension StatementsPresenterImpl {
                             icon: .withURL(url: URL(string: blog.imageUrl ?? "")),
                             title:  blog.statementTitle,
                             info1: (blog.createDate ?? "").convertedDate, 
-                            description: nil),
+                            description: nil,
+                            hideFavouriteImage: true),
                        cardModel: .init(title: blog.statementDescription.suffix(15).base + "...",
                                         description: nil)),
             

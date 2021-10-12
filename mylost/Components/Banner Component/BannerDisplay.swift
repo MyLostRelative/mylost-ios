@@ -17,7 +17,7 @@ extension UIViewController {
         bannerComp.left(toView: self.view, constant: 16)
         bannerComp.right(toView: self.view, constant: 16)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             bannerComp.removeFromSuperview()
         }
 

@@ -18,19 +18,7 @@ enum TableViewSection {
 class FavouriteViewModel {
     let items = PublishSubject<[SectionOfFavourites]>()
     
-    func getInformation() {
-        var subItems = [TableCellModel]()
-        
-        //server call
-        //database query
-        subItems = ([ PageDescriptionTableCell.CellModel(pageDescModel: .init(imageType: (image: Resourcebook.Image.Icons24.accountsAccounts.image, tint: .red),
-                                                                              title: "fef", description: "evewfe")) ,
-                     PageDescriptionTableCell.CellModel(pageDescModel: .init(imageType: (image: Resourcebook.Image.Icons24.accountsAccounts.image, tint: .red),
-                                                        title: "fef", description: "evewfe")),
-                     RoundCard.CellModel(roundModel: .init(title: "dmkw", description: "wjsnek")),
-                     RoundCard.CellModel(roundModel: .init(title: "dmkw", description: "wjsnek"))
-        ])
-        
+    func subscribeWithItems(subItems: [TableCellModel] ) {
         items.onNext([SectionOfFavourites(model: .main, items: subItems)])
     }
 }

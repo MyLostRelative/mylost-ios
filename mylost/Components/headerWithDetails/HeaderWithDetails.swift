@@ -82,13 +82,13 @@ public class HeaderWithDetails: UIView {
     
     private var favouriteBtn: UIButton = {
         let btn = UIButton.init(type: .custom)
+        btn.imageView?.tintColor = .black
         btn.setImage(Resourcebook.Image.Icons24.systemStarOutline.template, for: .normal)
-        btn.setImage(Resourcebook.Image.Icons24.systemStarFill.template, for: .selected)
-        btn.imageView?.tintColor = .yellow
         return btn
     }()
     
-    private var onTap: ((_ isFavourite: Bool) ->())?
+    private var isSelected: Bool = false
+    private var onTap: ((HeaderWithDetails) ->())?
     
     public init(with model: ViewModel? = nil ) {
         super.init(frame: .zero)
@@ -98,7 +98,24 @@ public class HeaderWithDetails: UIView {
     }
     
     public func configure(with model: ViewModel){
-        switch model.icon {
+        setImage(with: model.icon)
+        titleLbl.text = model.title
+        infoLabel1.text = model.info1
+        infoLabel2.text = model.info2
+        infoLabel3.text = model.info3
+        infoLabel4.text = model.info4
+        descriptionLbl.text = model.description
+        onTap = model.onTap
+        self.isSelected = model.isFavourite
+        favouriteBtn.addTarget(nil,
+                               action: #selector(didTapFavourite),
+                               for: .touchUpInside)
+        favouriteBtn.isHidden = model.hideFavouriteImage
+        setState()
+    }
+    
+    private func setImage(with type: HeaderWithDetails.ImageType?) {
+        switch type {
         case .withIcon(let img):
             icon.image = img
         case .withURL(let url):
@@ -108,20 +125,26 @@ public class HeaderWithDetails: UIView {
         case .none:
             break
         }
-        titleLbl.text = model.title
-        infoLabel1.text = model.info1
-        infoLabel2.text = model.info2
-        infoLabel3.text = model.info3
-        infoLabel4.text = model.info4
-        descriptionLbl.text = model.description
-        onTap = model.onTap
-        favouriteBtn.addTarget(nil,
-                               action: #selector(didTapFavourite),
-                               for: .touchUpInside)
+    }
+    
+    private func setState() {
+        if isSelected{
+            favouriteBtn.setImage(Resourcebook.Image.Icons24.systemStarFill.template, for: .normal)
+            favouriteBtn.imageView?.tintColor = .yellow
+        }else {
+            favouriteBtn.setImage(Resourcebook.Image.Icons24.systemStarOutline.template, for: .normal)
+            favouriteBtn.imageView?.tintColor = .black
+        }
     }
     
     @objc func didTapFavourite() {
-        self.onTap?(favouriteBtn.state == .selected)
+        setState()
+        self.onTap?(self)
+    }
+    
+    public func changeState(with isFavourite: Bool) {
+        isSelected = isFavourite
+        setState()
     }
     
     public func getIcon() -> UIImageView {
