@@ -278,7 +278,8 @@ extension MyLostHomePresenterImpl {
                             onTap: { headerWithDetails in
                                 self.isAuthorized ? self.setFavourtie(becomeFavourite: !isFav,
                                                                       statement: statement) :
-                                    self.notAuthorizedState()
+                                self.setFavourtie(becomeFavourite: !isFav,
+                                                                      statement: statement)
                                 
                             }),
                        cardModel: .init(title: "",

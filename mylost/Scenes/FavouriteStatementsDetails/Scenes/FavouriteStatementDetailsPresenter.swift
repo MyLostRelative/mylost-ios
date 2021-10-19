@@ -1,29 +1,29 @@
 //  
-//  FavouriteStatementsPresenter.swift
+//  FavouriteStatementDetailsPresenter.swift
 //  mylost
 //
-//  Created by Nato Egnatashvili on 27.09.21.
+//  Created by Nato Egnatashvili on 19.10.21.
 //
 
 import RxSwift
 import RxRelay
 
-protocol FavouriteStatementsView: AnyObject {
+protocol FavouriteStatementDetailsView: AnyObject {
     var viewModel: FavouriteViewModel { get }
 }
 
-protocol FavouriteStatementsPresenter {
-    func attach(view: FavouriteStatementsView)
+protocol FavouriteStatementDetailsPresenter {
+    func attach(view: FavouriteStatementDetailsView)
     func viewDidLoad()
 }
 
-class FavouriteStatementsPresenterImpl: FavouriteStatementsPresenter {
+class FavouriteStatementDetailsPresenterImpl: FavouriteStatementDetailsPresenter {
     
-    private weak var view: FavouriteStatementsView?
-    private let router: FavouriteStatementsRouter
+    private weak var view: FavouriteStatementDetailsView?
+    private let router: FavouriteStatementDetailsRouter
     let favouriteStatements: BehaviorRelay<[Statement]>
     
-    init(router: FavouriteStatementsRouter,
+    init(router: FavouriteStatementDetailsRouter,
          favouriteStatements: BehaviorRelay<[Statement]>) {
         self.router = router
         self.favouriteStatements = favouriteStatements
@@ -69,7 +69,8 @@ class FavouriteStatementsPresenterImpl: FavouriteStatementsPresenter {
                         description: statement.statementDescription))
     }
     
-    func attach(view: FavouriteStatementsView) {
+    func attach(view: FavouriteStatementDetailsView) {
         self.view = view
     }
+    
 }

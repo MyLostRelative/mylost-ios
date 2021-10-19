@@ -98,7 +98,7 @@ class ContactDetailsPresenterImpl: ContactDetailsPresenter {
 //MARK: Table Section
 extension ContactDetailsPresenterImpl {
     private func mainSection()-> ListSection {
-        return ListSection(id: "", rows: [backNavigateLabelRow(), pageDescriptionRow() ])
+        return ListSection(id: "", rows: [ pageDescriptionRow() ])
     }
 }
 

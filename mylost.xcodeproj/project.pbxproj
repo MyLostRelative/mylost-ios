@@ -106,6 +106,10 @@
 		52D437F426EE0FA90067BC98 /* CustomavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D437F326EE0FA90067BC98 /* CustomavController.swift */; };
 		52D437FC26EE199B0067BC98 /* CustomNavigatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D437FB26EE199B0067BC98 /* CustomNavigatable.swift */; };
 		52D4380426EE19F00067BC98 /* NavBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D4380326EE19F00067BC98 /* NavBarTitle.swift */; };
+		52D779D4271EC44D003BED58 /* FavouriteStatementDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D779D0271EC44D003BED58 /* FavouriteStatementDetailsPresenter.swift */; };
+		52D779D5271EC44D003BED58 /* FavouriteStatementDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D779D1271EC44D003BED58 /* FavouriteStatementDetailsRouter.swift */; };
+		52D779D6271EC44D003BED58 /* FavouriteStatementDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D779D2271EC44D003BED58 /* FavouriteStatementDetailsController.swift */; };
+		52D779D7271EC44D003BED58 /* FavouriteStatementDetailsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D779D3271EC44D003BED58 /* FavouriteStatementDetailsConfigurator.swift */; };
 		52D80C5D264EF64200ACBC16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D80C5C264EF64200ACBC16 /* AppDelegate.swift */; };
 		52D80C5F264EF64200ACBC16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D80C5E264EF64200ACBC16 /* SceneDelegate.swift */; };
 		52D80C61264EF64200ACBC16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D80C60264EF64200ACBC16 /* ViewController.swift */; };
@@ -298,6 +302,10 @@
 		52D437F326EE0FA90067BC98 /* CustomavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomavController.swift; sourceTree = "<group>"; };
 		52D437FB26EE199B0067BC98 /* CustomNavigatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigatable.swift; sourceTree = "<group>"; };
 		52D4380326EE19F00067BC98 /* NavBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarTitle.swift; sourceTree = "<group>"; };
+		52D779D0271EC44D003BED58 /* FavouriteStatementDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStatementDetailsPresenter.swift; sourceTree = "<group>"; };
+		52D779D1271EC44D003BED58 /* FavouriteStatementDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStatementDetailsRouter.swift; sourceTree = "<group>"; };
+		52D779D2271EC44D003BED58 /* FavouriteStatementDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStatementDetailsController.swift; sourceTree = "<group>"; };
+		52D779D3271EC44D003BED58 /* FavouriteStatementDetailsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStatementDetailsConfigurator.swift; sourceTree = "<group>"; };
 		52D80C59264EF64200ACBC16 /* mylost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mylost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D80C5C264EF64200ACBC16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D80C5E264EF64200ACBC16 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -803,6 +811,25 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		52D779CE271EC2C0003BED58 /* FavouriteStatementsDetails */ = {
+			isa = PBXGroup;
+			children = (
+				52D779CF271EC2CF003BED58 /* Scenes */,
+			);
+			path = FavouriteStatementsDetails;
+			sourceTree = "<group>";
+		};
+		52D779CF271EC2CF003BED58 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				52D779D0271EC44D003BED58 /* FavouriteStatementDetailsPresenter.swift */,
+				52D779D1271EC44D003BED58 /* FavouriteStatementDetailsRouter.swift */,
+				52D779D2271EC44D003BED58 /* FavouriteStatementDetailsController.swift */,
+				52D779D3271EC44D003BED58 /* FavouriteStatementDetailsConfigurator.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
 		52D80C50264EF64200ACBC16 = {
 			isa = PBXGroup;
 			children = (
@@ -1039,6 +1066,7 @@
 		52DC59CE2680D7EF00B35E35 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				52D779CE271EC2C0003BED58 /* FavouriteStatementsDetails */,
 				528FC85B2701BD1A00ABAAF0 /* FavouriteStatements */,
 				527888F526E5ED6F00324041 /* FilterDetails */,
 				527888E926E59A4E00324041 /* ContactDetails */,
@@ -1467,6 +1495,7 @@
 				528843882681A1760087A3E1 /* HeaderWithDetails.swift in Sources */,
 				52DC59E22680DDC800B35E35 /* StatementsController.swift in Sources */,
 				52D437FC26EE199B0067BC98 /* CustomNavigatable.swift in Sources */,
+				52D779D6271EC44D003BED58 /* FavouriteStatementDetailsController.swift in Sources */,
 				52DC59B32680D33900B35E35 /* Color.swift in Sources */,
 				52DC59B52680D33900B35E35 /* ImageWrapper.swift in Sources */,
 				520E21BA26E005EE00A5EF70 /* MyProfileAssembly.swift in Sources */,
@@ -1481,6 +1510,7 @@
 				52D80C5F264EF64200ACBC16 /* SceneDelegate.swift in Sources */,
 				527888FD26E5ED8D00324041 /* FilterDetailsController.swift in Sources */,
 				5297D9BB26E4DD210014F2FF /* BlogDetailsViewController.swift in Sources */,
+				52D779D5271EC44D003BED58 /* FavouriteStatementDetailsRouter.swift in Sources */,
 				5297D98426E383500014F2FF /* DetailsAndLogOutPresenter.swift in Sources */,
 				528844102682FC880087A3E1 /* BannerComponent.swift in Sources */,
 				52D280622685D07200E6260C /* CardAnimation.swift in Sources */,
@@ -1491,6 +1521,7 @@
 				52DC59EF2680EC5B00B35E35 /* RoundedTextFieldViewModel + Constants.swift in Sources */,
 				527888E626E5754C00324041 /* UserInfoBearerGateway.swift in Sources */,
 				52D280992688809900E6260C /* StatementGateway.swift in Sources */,
+				52D779D4271EC44D003BED58 /* FavouriteStatementDetailsPresenter.swift in Sources */,
 				52DC5954267E2D6A00B35E35 /* PagerTabStripError.swift in Sources */,
 				52884420268302540087A3E1 /* BannerDisplay.swift in Sources */,
 				528843992681AD770087A3E1 /* TitleAndDescriptionCardTableCell.swift in Sources */,
@@ -1500,6 +1531,7 @@
 				52DC5938267E295300B35E35 /* Reusable.swift in Sources */,
 				520E21B026E0020A00A5EF70 /* ModelBuilder.swift in Sources */,
 				52DC593D267E296F00B35E35 /* CollectionViewRow.swift in Sources */,
+				52D779D7271EC44D003BED58 /* FavouriteStatementDetailsConfigurator.swift in Sources */,
 				52DC5935267E295300B35E35 /* Configurable.swift in Sources */,
 				52DC59D52680D82A00B35E35 /* MyLostHomePresenter.swift in Sources */,
 				52F248B22688931D00A6CC6D /* RowCallsWithModels.swift in Sources */,
