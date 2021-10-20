@@ -1,6 +1,6 @@
-osx_image: xcode13.0 
+osx_image: xcode12.0 
 language: swift
 os: osx
 xcode_project: mylost.xcodeproj
 xcode_scheme: mylost
-xcode_destination: platform=iOS Simulator,OS=14.5,name=iPhone 8
+xcode_destination: platform=iOS Simulator,OS=10.15.7,name=iPhone 8
