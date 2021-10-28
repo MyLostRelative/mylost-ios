@@ -5,7 +5,6 @@
 //  Created by Nato Egnatashvili on 01.09.21.
 //
 
-
 import Swinject
 
 class MyProfileAssembly: UIAssembly {
@@ -38,10 +37,8 @@ class MyProfileAssembly: UIAssembly {
             return presenter
         }
         
-        container.register(MyProfileRouterImpl.self) {resolver in
+        container.register(MyProfileRouterImpl.self) {_ in
             return MyProfileRouterImpl()
         }
     }
 }
-
-

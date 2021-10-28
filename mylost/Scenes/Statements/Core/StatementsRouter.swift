@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import RxRelay
 
 protocol StatementsRouter {
     func move2BlogDetails(blog: Blog)
+    func move2ReadedBlogs(readedBlogs: BehaviorRelay<[Blog]>)
 }
 
 class StatementsRouterImpl: StatementsRouter {
@@ -24,6 +26,14 @@ class StatementsRouterImpl: StatementsRouter {
                         networkAssemblies: [])
             .resolver
                 .resolve(BlogDetailsViewController.self) else { return }
+        self.controller?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func move2ReadedBlogs(readedBlogs: BehaviorRelay<[Blog]>) {
+        guard let vc = DIAssembly.init(uiAssemblies: [ReadedBlogsAssembly(readedBlogs: readedBlogs)],
+                        networkAssemblies: [])
+            .resolver
+                .resolve(ReadedBlogsController.self) else { return }
         self.controller?.navigationController?.pushViewController(vc, animated: true)
     }
     

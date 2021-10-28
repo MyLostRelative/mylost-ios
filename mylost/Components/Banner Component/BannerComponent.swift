@@ -9,7 +9,6 @@ import UIKit
 
 public class BannerComponent: UIView  {
     
-    
     private var stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +32,6 @@ public class BannerComponent: UIView  {
         lbl.numberOfLines = 0
         return lbl
     }()
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -79,7 +77,3 @@ extension BannerComponent {
         descriptionLbl.left(toView: stackView, constant: 2)
     }
 }
-
-
-
-

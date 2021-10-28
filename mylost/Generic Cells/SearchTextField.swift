@@ -79,6 +79,6 @@ public class SearchTextField: ListRowCell {
 extension SearchTextField {
     public struct ViewModel {
         let title: String
-        let onTapSearch: ((String) -> ())?
+        let onTapSearch: ((String) -> Void)?
     }
 }

@@ -10,17 +10,17 @@ import Foundation
 extension LogInTextField {
     public struct ViewModel {
         let title: String?
-        let textType: textFieldType
+        let textType: TextFieldType
         let onTap: ((LoginTextFieldTableCell) -> ())?
         
-        public init(title: String?, textType: textFieldType = .normal, onTap:  ((LoginTextFieldTableCell) -> ())?) {
+        public init(title: String?, textType: TextFieldType = .normal, onTap:  ((LoginTextFieldTableCell) -> Void)?) {
             self.title = title
             self.textType = textType
             self.onTap = onTap
         }
     }
     
-    public enum textFieldType {
+    public enum TextFieldType {
         case normal
         case secury
     }

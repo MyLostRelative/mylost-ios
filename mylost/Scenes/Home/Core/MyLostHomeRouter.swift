@@ -33,11 +33,11 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
     }
     
     func move2Filter(delegate: FilterDetailsPresenterDelegate) {
-//        guard let vc = DIAssembly(uiAssemblies: [FilterDetailsAssembly(delegate: delegate)],
-//                                  networkAssemblies: [])
-//            .resolver
-//                .resolve(FilterDetailsViewController.self) else { return }
-//        self.controller?.navigationController?.pushViewController(vc, animated: true)
+        guard let vc = DIAssembly(uiAssemblies: [FilterDetailsAssembly(delegate: delegate)],
+                                  networkAssemblies: [])
+            .resolver
+                .resolve(FilterDetailsViewController.self) else { return }
+        self.controller?.navigationController?.pushViewController(vc, animated: true)
         
     }
     

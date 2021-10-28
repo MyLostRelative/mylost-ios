@@ -41,3 +41,8 @@ extension FilterDetailsViewController: FilterDetailsView {
     }
 }
 
+extension FilterDetailsViewController: customNavigatable {
+    var navTiTle: String {
+        "ფილტრები"
+    }
+}

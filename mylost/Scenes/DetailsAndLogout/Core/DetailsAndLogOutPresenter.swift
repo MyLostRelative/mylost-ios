@@ -103,7 +103,7 @@ extension DetailsAndLogOutPresenterImpl {
         let logOutLabel = clickableLabel(with: .init(title: "გასვლა",
                                                      colorStyle: .negative,
                                                      onTap: { _ in
-                                                        UserDefaultManager().removeValue(key: "token")
+                                                        UserDefaultManagerImpl().removeValue(key: "token")
                                                         self.router.changeToLogOut()
                                                      }))
         return ListSection(id: "", rows: [logOutLabel ])

@@ -15,7 +15,7 @@ public struct ChangeItem: Equatable {
     }
 }
 
-public protocol Reusable: class {
+public protocol Reusable: AnyObject {
     static var reuseID: String { get }
 }
 

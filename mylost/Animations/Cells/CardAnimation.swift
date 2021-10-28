@@ -82,7 +82,6 @@ public class CardAnimationTableCell: ListRowCell {
         setUpConstraints()
     }
 
-    
     private func styleUI() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
@@ -114,7 +113,7 @@ public class CardAnimationTableCell: ListRowCell {
         
         let view1 = getLineAnimation(width: 100, height: 8, radius: 3)
          bodyStack.addArrangedSubview(view1)
-        for _ in 0...2{
+        for _ in 0...2 {
             let view = getLineAnimation(width: UIScreen.main.bounds.width - 50, height: 10, radius: 5)
             bodyStack.addArrangedSubview(view)
         }
@@ -123,7 +122,7 @@ public class CardAnimationTableCell: ListRowCell {
     
     private func getLineAnimation(width: CGFloat,
                                   height: CGFloat,
-                                  radius: CGFloat)-> AnimatorView{
+                                  radius: CGFloat) -> AnimatorView {
         let view = AnimatorView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = Resourcebook.Color.Invert.Background.additional.uiColor
@@ -137,4 +136,3 @@ public class CardAnimationTableCell: ListRowCell {
         return view
     }
 }
-

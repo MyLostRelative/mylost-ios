@@ -14,7 +14,7 @@ extension SavedUserCard{
         let username: String
         let age: String?
         let buttonTitle: String
-        let onTap: ((SavedUserCard) -> ())?
+        let onTap: ((SavedUserCard) -> Void)?
         
         public init(avatar: UIImage, username: String, age: String? = nil, buttonTitle: String, onTap: ((SavedUserCard) -> ())?) {
             self.avatar = avatar
@@ -25,10 +25,8 @@ extension SavedUserCard{
         }
         
     }
-
     
     struct Constants {
-        
         struct Avatar {
             static let size: CGSize = .init(width: 36, height: 36)
         }

@@ -6,7 +6,7 @@ struct ScrollableTabViewModel {
     var titleColor: String
 }
 
-protocol ScrollableTabViewDelegate: class {
+protocol ScrollableTabViewDelegate: AnyObject {
     var numberOfItems: Int { get }
     func itemSelected(at index:Int)
     func model(at index: Int) -> TabCollectionCellModel?

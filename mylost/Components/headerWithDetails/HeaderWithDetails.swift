@@ -80,15 +80,16 @@ public class HeaderWithDetails: UIView {
         return lbl
     }()
     
-    private var favouriteBtn: UIButton = {
-        let btn = UIButton.init(type: .custom)
-        btn.imageView?.tintColor = .black
-        btn.setImage(Resourcebook.Image.Icons24.systemStarOutline.template, for: .normal)
+    private lazy var rightButton: UIButton = {
+        let btn = UIButton(primaryAction: .init(handler: { _ in
+            self.didTapFavourite()
+        }))
+        btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
     
     private var isSelected: Bool = false
-    private var onTap: ((HeaderWithDetails) ->())?
+    private var onTap: ((HeaderWithDetails) -> Void)?
     
     public init(with model: ViewModel? = nil ) {
         super.init(frame: .zero)
@@ -97,21 +98,38 @@ public class HeaderWithDetails: UIView {
         configure(with: model)
     }
     
-    public func configure(with model: ViewModel){
+    public func configure(with model: ViewModel) {
         setImage(with: model.icon)
+        setTextes(with: model)
+        onTap = model.rightIcon?.onTap
+        self.rightButton.isSelected = model.rightIcon?.rightIconIsActive ?? false
+        rightButton.isHidden = model.rightIcon?.rightIconHide ?? true
+        setState(rightIcon: model.rightIcon)
+    }
+    
+    func didTapFavourite() {
+        self.onTap?(self)
+        self.rightButton.isSelected = !self.rightButton.isSelected
+    }
+    
+    public func getIcon() -> UIImageView {
+        return icon
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Private Set  for configure
+extension HeaderWithDetails {
+    private func setTextes(with model: ViewModel) {
         titleLbl.text = model.title
         infoLabel1.text = model.info1
         infoLabel2.text = model.info2
         infoLabel3.text = model.info3
         infoLabel4.text = model.info4
         descriptionLbl.text = model.description
-        onTap = model.onTap
-        self.isSelected = model.isFavourite
-        favouriteBtn.addTarget(nil,
-                               action: #selector(didTapFavourite),
-                               for: .touchUpInside)
-        favouriteBtn.isHidden = model.hideFavouriteImage
-        setState()
     }
     
     private func setImage(with type: HeaderWithDetails.ImageType?) {
@@ -127,35 +145,26 @@ public class HeaderWithDetails: UIView {
         }
     }
     
-    private func setState() {
-        if isSelected{
-            favouriteBtn.setImage(Resourcebook.Image.Icons24.systemStarFill.template, for: .normal)
-            favouriteBtn.imageView?.tintColor = .yellow
-        }else {
-            favouriteBtn.setImage(Resourcebook.Image.Icons24.systemStarOutline.template, for: .normal)
-            favouriteBtn.imageView?.tintColor = .black
+    private func setState(rightIcon: HeaderWithDetails.RightIcon?) {
+        guard let rightIcon = rightIcon else { return }
+        if #available(iOS 15.0, *) {
+            let handler: UIButton.ConfigurationUpdateHandler = { button in
+                switch button.state {
+                case .selected:
+                    button.configuration?.image = rightIcon.rightIconActive
+                default:
+                    button.configuration?.image = rightIcon.rightIconDissable
+                }
+            }
+            rightButton.configuration = .borderless()
+            rightButton.configurationUpdateHandler = handler
+            
+        } else {
+            rightButton.setImage(rightIcon.rightIconActive, for: .selected)
+            rightButton.setImage(rightIcon.rightIconDissable, for: .normal)
         }
     }
-    
-    @objc func didTapFavourite() {
-        setState()
-        self.onTap?(self)
-    }
-    
-    public func changeState(with isFavourite: Bool) {
-        isSelected = isFavourite
-        setState()
-    }
-    
-    public func getIcon() -> UIImageView {
-        return icon
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
-
 
 extension HeaderWithDetails {
     private func setUp() {
@@ -177,7 +186,7 @@ extension HeaderWithDetails {
         self.mainStackView.addArrangedSubview(verticalStack)
         verticalStack.top(toView: self, constant: 16)
         verticalStack.bottom(toView: self, constant: 16)
-        self.mainStackView.addArrangedSubview(favouriteBtn)
+        self.mainStackView.addArrangedSubview(rightButton)
     }
     
     private func setUpTitleAndDescription() {

@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import LifetimeTracker
 
-class BlogDetailsViewController: UIViewController , BlogDetailsView{
-
+class BlogDetailsViewController: UIViewController , BlogDetailsView , LifetimeTrackable{
+    class var lifetimeConfiguration: LifetimeConfiguration {
+            return LifetimeConfiguration(maxCount: 1, groupName: "VC")
+        }
+    
     var presenter: BlogDetailsPresenter?
     
     var tableView: UITableView = {
@@ -20,6 +24,7 @@ class BlogDetailsViewController: UIViewController , BlogDetailsView{
     }()
     
     override func viewDidLoad() {
+        trackLifetime()
         addTableView()
         presenter?.viewDidLoad()
     }

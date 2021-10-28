@@ -1,5 +1,3 @@
-
-
 import UIKit
 
 public typealias ListRowCell = UITableViewCell & Configurable
@@ -10,7 +8,7 @@ public protocol CellProvider {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
 }
 
-open class ListRow<Cell>: CellProvider & Tappable where Cell: ListRowCell  {
+open class ListRow<Cell>: CellProvider & Tappable where Cell: ListRowCell {
     
     private var model: Cell.Model
     private var tapClosure: ((Int, Cell.Model, Cell?) -> Void)?

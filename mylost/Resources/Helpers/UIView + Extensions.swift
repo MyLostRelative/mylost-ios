@@ -221,7 +221,7 @@ let button = UIButton(type: .detailDisclosure)
 
 extension UITextField {
     
-    func enablePasswordToggle(){
+    func enablePasswordToggle() {
         
         button.setImage(Resourcebook.Image.Icons24.systemEyeOn.template, for: .normal)
         button.setImage(Resourcebook.Image.Icons24.systemEyeOn.image, for: .selected)

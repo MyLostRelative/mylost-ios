@@ -29,16 +29,16 @@ protocol RXTableConfigurable {
     
 }
 
-extension RXTableConfigurable where Self: UIViewController{
-    var dataSource: RxTableViewSectionedReloadDataSource<SectionOfFavourites>  { RxTableViewSectionedReloadDataSource<SectionOfFavourites>(configureCell: configureCell)
+extension RXTableConfigurable where Self: UIViewController {
+    var dataSource: RxTableViewSectionedReloadDataSource<SectionOfFavourites> { RxTableViewSectionedReloadDataSource<SectionOfFavourites>(configureCell: configureCell)
     }
     
-    var configureCell: RxTableViewSectionedReloadDataSource<SectionOfFavourites >.ConfigureCell { { (dataSource, tableView, indexPath, item) in
+    var configureCell: RxTableViewSectionedReloadDataSource<SectionOfFavourites >.ConfigureCell { { (_, tableView, indexPath, item) in
         
         let cell = tableView.dequeueReusableCell(
             withIdentifier: item.nibIdentifier,
             for: indexPath)
-        if let cell = cell as? ConfigurableTableCell  {
+        if let cell = cell as? ConfigurableTableCell {
             cell.configure(with: item)
         }
         return cell

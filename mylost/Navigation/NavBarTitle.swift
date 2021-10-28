@@ -20,8 +20,8 @@ public class NavBarTitle: UILabel {
     public convenience init(with text: String) {
         self.init()
         self.text = text
-        textColor = .black
-        font = Resourcebook.Font.headline4
+        textColor = .gray
+        font = Resourcebook.Font.headline3
     }
     
     public convenience init(mutableString: NSMutableAttributedString) {

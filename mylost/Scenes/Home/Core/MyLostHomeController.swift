@@ -41,7 +41,6 @@ class MyLostHomeController: UIViewController {
 
 extension MyLostHomeController: MyLostHomeView {
     
-    
     func displayBanner(type: Bannertype, title: String, description: String) {
         self.displayBanner(banner: .init(type: type, title: title, description: description))
     }

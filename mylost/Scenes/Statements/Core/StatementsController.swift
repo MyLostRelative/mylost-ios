@@ -23,6 +23,10 @@ class StatementsController: UIViewController {
         statementPresenter?.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        statementPresenter?.viewWillAppear()
+    }
+    
     private func addTableView() {
         self.view.addSubview(tableView)
         

@@ -39,7 +39,7 @@ enum ServiceMethods {
 }
 
 extension ServiceMethods {
-    func getURL() -> URL?{
+    func getURL() -> URL? {
         switch self {
         case .statementList(let statement ):
             var encodeString: String =  ""
@@ -67,7 +67,7 @@ extension ServiceMethods {
     }
 }
 
-class Service : NSObject{
+class Service : NSObject {
     enum TokenType {
         case normal
         case bearer(token: String)
@@ -106,13 +106,13 @@ class Service : NSObject{
                                                         , from: data)
                 if let wrapper = wrapper {
                     completion(Result.success(wrapper))
-                }else{
+                } else {
                     guard let error = error else {
                         return completion(Result.failure(LocalError(str: "დაფიქსირდა შეცდომა")))
                     }
                     completion(Result.failure(error))
                 }
-                } )
+                })
             task.resume()
     }
     
@@ -145,13 +145,13 @@ class Service : NSObject{
                                                     , from: data)
             if let wrapper = wrapper {
                 completion(Result.success(wrapper))
-            }else{
+            } else {
                 guard let error = error else {
                     return completion(Result.failure(LocalError(str: "დაფიქსირდა შეცდომა")))
                 }
                 completion(Result.failure(error))
             }
-            } )
+            })
         task.resume()
     }
 }

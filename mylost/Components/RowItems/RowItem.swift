@@ -44,7 +44,7 @@ public class RowItem: UIView {
         configure(with: model)
     }
     
-    public func configure(with model: ViewModel){
+    public func configure(with model: ViewModel) {
         if let title = model.title {
             titleLbl.text = title + ": "
         }

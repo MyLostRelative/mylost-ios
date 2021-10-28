@@ -16,9 +16,7 @@ extension HeaderWithDetails {
         let info3: String?
         let info4: String?
         let description: String?
-        let isFavourite: Bool
-        let hideFavouriteImage: Bool
-        let onTap: ((HeaderWithDetails) -> ())?
+        let rightIcon: RightIcon?
          init(icon: ImageType?,
               title: String?,
               info1: String? = nil,
@@ -26,9 +24,7 @@ extension HeaderWithDetails {
               info3: String? = nil,
               info4: String? = nil,
               description: String?,
-              isFavourite: Bool = false,
-              hideFavouriteImage: Bool = false,
-              onTap: ((HeaderWithDetails) -> ())? = nil) {
+              rightIcon: RightIcon?) {
             self.icon = icon
             self.title = title
             self.info1 = info1
@@ -36,10 +32,16 @@ extension HeaderWithDetails {
             self.info3 = info3
             self.info4 = info4
             self.description = description
-            self.isFavourite = isFavourite
-            self.hideFavouriteImage = hideFavouriteImage
-            self.onTap = onTap
+            self.rightIcon = rightIcon
         }
+    }
+    
+    struct RightIcon {
+        let rightIconIsActive: Bool
+        let rightIconActive: UIImage?
+        let rightIconDissable: UIImage?
+        let rightIconHide: Bool
+        let onTap: ((HeaderWithDetails) -> ())?
     }
     
     enum ImageType {

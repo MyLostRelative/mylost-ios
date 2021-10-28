@@ -5,7 +5,6 @@
 //  Created by Nato Egnatashvili on 31.08.21.
 //
 
-
 import UIKit
 
 public class PickerViewCell: ListRowCell {
@@ -38,7 +37,7 @@ public class PickerViewCell: ListRowCell {
         return b
     }()
     
-    private var onTap: (([String])-> ())?
+    private var onTap: (([String]) -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -97,13 +96,11 @@ extension PickerViewCell:  UIPickerViewDelegate, UIPickerViewDataSource {
         self.onTap?(result)
     }
     
-    public func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-        {
+    public func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
             var pickerLabel: UILabel? = (view as? UILabel)
                 let text = pickerData[component][row]
 
-                if pickerLabel == nil
-                {
+                if pickerLabel == nil {
                     pickerLabel = UILabel()
                     pickerLabel?.textColor = UIColor.black
                     pickerLabel?.textAlignment = NSTextAlignment.center
@@ -119,7 +116,7 @@ extension PickerViewCell {
     public struct ViewModel {
         let title: String
         let pickerData: [[String]]
-        let onTap: (([String])-> ())?
+        let onTap: (([String])-> Void)?
     }
 }
 

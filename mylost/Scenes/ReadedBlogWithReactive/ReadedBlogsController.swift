@@ -1,18 +1,20 @@
 //  
-//  FavouriteStatementDetailsController.swift
+//  BlogDetailsReactiveController.swift
 //  mylost
 //
-//  Created by Nato Egnatashvili on 19.10.21.
+//  Created by Nato Egnatashvili on 26.10.21.
 //
 
 import RxSwift
 import RxCocoa
 import RxDataSources
+import LifetimeTracker
 
-class FavouriteStatementDetailsController: UIViewController, RXTableConfigurable {
-
-    
-    var presenter: FavouriteStatementDetailsPresenter?
+class ReadedBlogsController: UIViewController, LifetimeTrackable, RXTableConfigurable {
+class var lifetimeConfiguration: LifetimeConfiguration {
+            return LifetimeConfiguration(maxCount: 1, groupName: "VC")
+        }
+    var presenter_: ReadedBlogsPresenter!
     var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -24,12 +26,11 @@ class FavouriteStatementDetailsController: UIViewController, RXTableConfigurable
     private let bag = DisposeBag()
     var viewModel = FavouriteViewModel()
     
-    
     override func viewDidLoad() {
         addTableView()
         registerCells()
         setTableDataSource()
-        presenter?.viewDidLoad()
+        presenter_.viewDidLoad()
     }
     private func addTableView() {
         self.view.addSubview(tableView)
@@ -52,13 +53,21 @@ class FavouriteStatementDetailsController: UIViewController, RXTableConfigurable
     }
 }
 
-extension FavouriteStatementDetailsController: FavouriteStatementDetailsView {
-    
+extension ReadedBlogsController: ReadedBlogsView {
+    func displayBanner(type: Bannertype, title: String, description: String) {
+        DispatchQueue.main.async {
+            self.displayBanner(banner: .init(type: type, title: title, description: description))
+        }
+    }
 }
 
-extension FavouriteStatementDetailsController: UITableViewDelegate {
+extension ReadedBlogsController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
 }
+
+
+
+

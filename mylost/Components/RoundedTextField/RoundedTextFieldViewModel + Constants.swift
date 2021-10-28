@@ -11,7 +11,7 @@ extension RoundedTextField {
     public struct ViewModel {
         let placeHolderText: String
         let title: String
-        let onTap: ((RoundedTextField) -> ())?
+        let onTap: ((RoundedTextField) -> Void)?
         public init( placeHolderText: String,
                      title: String,
                      onTap: ((RoundedTextField) -> ())?) {

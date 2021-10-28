@@ -64,9 +64,9 @@ class PickerDataManagerImpl: PickerDataManager {
         var data: [String] {
             switch self {
             case .bloodType:
-                return ["არცერთი", "a", "b", "ab"]
+                return ["არცერთი", "  A  ", "  B  ", " AB "]
             case .relativeType:
-                return ["არცერთი", "დედა", "მამა", "ძმა", "და", "ქალიშვილი", "ვაჟიშვილი", "მეგობარი"]
+                return ["არცერთი", "დედა", "მამა", "ძმა", " და ", "ქალიშვილი", "ვაჟიშვილი", "მეგობარი"]
             case .sexType:
                 return ["არცერთი", "მდედრობითი", "მამრობითი"]
             case .city:
@@ -124,7 +124,7 @@ class PickerDataManagerImpl: PickerDataManager {
         func getAgeArray() -> [String] {
             var arr: [String] = ["არცერთი"]
             for i in 0...100 {
-                arr.append(i.description)
+                arr.append("   " + i.description + "   " )
             }
             return arr
         }

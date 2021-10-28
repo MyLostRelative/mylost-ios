@@ -7,7 +7,13 @@
 
 import Foundation
 
-class UserDefaultManager {
+protocol UserDefaultManager {
+    func saveKeyName(key: String, value: Any)
+    func getValue(key: String) -> Any?
+    func removeValue(key: String)
+}
+
+class UserDefaultManagerImpl: UserDefaultManager {
     
     private let defaults = UserDefaults.standard
     

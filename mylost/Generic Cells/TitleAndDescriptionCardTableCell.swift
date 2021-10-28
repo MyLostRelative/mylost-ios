@@ -46,18 +46,18 @@ public class TitleAndDescriptionCardTableCell: ListRowCell {
         super.init(coder: coder)
         self.commonInit()
     }
-
+    
     private func commonInit() {
         styleUI()
         setUpConstraints()
     }
-
+    
     public func configure(with model: Model) {
         header.configure(with: model.headerModel)
         cardBottom.configure(with: model.cardModel)
     }
     
-    public func getIcon() -> UIImageView{
+    public func getIcon() -> UIImageView {
         header.getIcon()
     }
     
@@ -81,7 +81,7 @@ public class TitleAndDescriptionCardTableCell: ListRowCell {
         self.stack.addArrangedSubview(separatorLine)
         self.stack.addArrangedSubview(cardBottom)
     }
-
+    
 }
 
 extension TitleAndDescriptionCardTableCell {
@@ -102,14 +102,14 @@ extension TitleAndDescriptionCardTableCell: ConfigurableTableCell {
 }
 
 extension TitleAndDescriptionCardTableCell {
-    struct CellModel: TableCellModel{
+    struct CellModel: TableCellModel {
         var nibIdentifier: String = "TitleAndDescriptionCardTableCell"
         var height: Double = Double(UITableView.automaticDimension)
         let headerModel: HeaderWithDetails.ViewModel
         let cardModel: RoundedTitleAndDescription.ViewModel
         
         public init(headerModel: HeaderWithDetails.ViewModel,
-         cardModel: RoundedTitleAndDescription.ViewModel) {
+                    cardModel: RoundedTitleAndDescription.ViewModel) {
             self.headerModel = headerModel
             self.cardModel = cardModel
         }

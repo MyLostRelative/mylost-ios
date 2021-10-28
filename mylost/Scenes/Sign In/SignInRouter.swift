@@ -9,7 +9,8 @@ import Foundation
 
 protocol SignInRouter {
     func attach(controller: SignInViewController)
-    func changeToUser() 
+    func changeToUser()
+    func move2Registration()
 }
 
 class SignInRouterImpl: SignInRouter {
@@ -25,6 +26,16 @@ class SignInRouterImpl: SignInRouter {
                 vc.userType = .user
             }
         }
+    }
+    
+    func move2Registration() {
+        guard let vc = DIAssembly(uiAssemblies: [RegistrationAssembly()],
+                                  networkAssemblies: [RegistrationNetworkAssembly()])
+                .resolver.resolve(RegistrationController.self) else {
+                    fatalError("errores")
+                }
+        controller?.navigationController?.pushViewController(vc,
+                                                             animated: true)
     }
     
 }

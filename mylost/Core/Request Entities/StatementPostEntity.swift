@@ -42,7 +42,7 @@ extension StatementPost {
     }
 }
 
-struct StatementSearchEntity{
+struct StatementSearchEntity {
     let gender: String
     let city: String
     let relationType: String
@@ -59,13 +59,13 @@ struct StatementSearchEntity{
                                                  toAge: "",
                                                  query: "")
     
-    static func getWithQuery(query: String) -> Self{
+    static func getWithQuery(query: String) -> Self {
         StatementSearchEntity(gender: "",
-                                                     city: "",
-                                                     relationType: "",
-                                                     bloodType: "",
-                                                     fromAge: "",
-                                                     toAge: "",
-                                                     query: query)
+                              city: "",
+                              relationType: "",
+                              bloodType: "",
+                              fromAge: "",
+                              toAge: "",
+                              query: query)
     }
 }

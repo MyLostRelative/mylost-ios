@@ -14,7 +14,7 @@ protocol RegistrationGateway {
     func postRegistration(params: [String: Any], completion:  @escaping RegistrationGatewayCompletion)
 }
 
-class RegistrationGatewayImpl: RegistrationGateway{
+class RegistrationGatewayImpl: RegistrationGateway {
     private let service = Service()
     
     func postRegistration(params: [String: Any], completion: @escaping RegistrationGatewayCompletion) {
@@ -39,10 +39,9 @@ class RegistrationGatewayImpl: RegistrationGateway{
     
 }
 
-
 class RegistrationNetworkAssembly: NetworkAssembly {
     func assemble(container: Container) {
-        container.register(RegistrationGatewayImpl.self) { resolver in
+        container.register(RegistrationGatewayImpl.self) { _ in
             RegistrationGatewayImpl()
         }
     }

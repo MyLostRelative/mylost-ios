@@ -33,7 +33,6 @@ public class LogInTextField: UIView , UITextFieldDelegate{
         return textField
     }()
     
-    
     public init(with model: ViewModel? = nil ) {
         super.init(frame: .zero)
         styleUI()
@@ -42,7 +41,7 @@ public class LogInTextField: UIView , UITextFieldDelegate{
         configure(with: model)
     }
     
-    public func configure(with model: ViewModel){
+    public func configure(with model: ViewModel) {
         titleLbl.text = model.title
         textField.isSecureTextEntry = model.textType == .secury
         if model.textType == .secury {
@@ -91,5 +90,3 @@ extension LogInTextField {
     }
     
 }
-
-

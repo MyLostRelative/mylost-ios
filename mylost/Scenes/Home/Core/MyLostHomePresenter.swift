@@ -32,7 +32,7 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
     private var isLoading = true
     private var statementsFetchFailed = false
     private var filterState = false
-    private let isAuthorized = UserDefaultManager().getValue(key: "token") != nil
+    private let isAuthorized = UserDefaultManagerImpl().getValue(key: "token") != nil
     private var currentCell: UITableViewCell? {
         didSet {
             self.view?.currentCell = currentCell
@@ -68,13 +68,13 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
     }
 }
 
-//MARK: Services
+// MARK: Services
 extension MyLostHomePresenterImpl {
     private func fetchStatementList(statement: StatementSearchEntity = .default) {
         self.statementsGateway.getStatementList(statement: statement) { [weak self] (result) in
             guard let self = self else { return }
             self.isLoading = false
-            switch result{
+            switch result {
             case .success(let statements):
                 self.statementsFetchSuccess(statements)
             case .failure(let err):
@@ -98,7 +98,7 @@ extension MyLostHomePresenterImpl {
     }
 }
 
-//MARK: Configure and Construct
+// MARK: Configure and Construct
 extension MyLostHomePresenterImpl {
     private func configureDataSource() {
         self.view.unwrap { v in
@@ -138,28 +138,28 @@ extension MyLostHomePresenterImpl {
     
 }
 
-//MARK: States
+// MARK: States
 extension MyLostHomePresenterImpl {
-    private func animationState()-> [ListSection] {
+    private func animationState() -> [ListSection] {
         [ListSection(
             id: "",
             rows: [self.cardAnimation(), self.cardAnimation(),  self.cardAnimation()] )]
     }
     
-    private func cardLoadedState() -> [ListSection]{
-        [filterLabelSection(), cardSections() ]
+    private func cardLoadedState() -> [ListSection] {
+        [ favouriteLabelSection(), filterLabelSection(), cardSections() ]
     }
     
-    private func emptyState() -> [ListSection]{
+    private func emptyState() -> [ListSection] {
         [emptyStatementsSection()]
     }
     
-    private func errorState() -> [ListSection]{
+    private func errorState() -> [ListSection] {
         [errorStatementsSection()]
     }
 }
 
-//MARK: Sections
+// MARK: Sections
 extension MyLostHomePresenterImpl {
     private func cardSections() -> ListSection {
         let cardRows = self.statements.map({statementRow(statement: $0)})
@@ -173,9 +173,17 @@ extension MyLostHomePresenterImpl {
             id: "",
             rows:  [clickableLabel(with: .init(title: "ფილტრის გამოყენება",
                                                onTap: { _ in
-                                                self.router.move2Fav(favouriteStatements: self.favouriteStatements)
                                                 self.router.move2Filter(delegate: self)
-                                               })), SearchTextFieldRow(),
+                                               })), SearchTextFieldRow()] )
+    }
+    
+    private func favouriteLabelSection() -> ListSection {
+        ListSection(
+            id: "",
+            rows:  [clickableLabel(with: .init(title: "ფავორიტების სია",
+                                               onTap: { _ in
+                                                self.router.move2Fav(favouriteStatements: self.favouriteStatements)
+                                               }))
             ] )
     }
     
@@ -192,10 +200,10 @@ extension MyLostHomePresenterImpl {
     }
 }
 
-//MARK: Rows
+// MARK: Rows
 extension MyLostHomePresenterImpl {
     
-    private func roudCards() -> ListSection{
+    private func roudCards() -> ListSection {
         let rows = self.statements.map({roundCard(model: .init(title: $0.statementTitle,
                                                                description: $0.statementDescription))})
         return ListSection(
@@ -203,28 +211,25 @@ extension MyLostHomePresenterImpl {
             rows:  rows)
     }
     
-    
-    private func roundCard(model: RoundedTitleAndDescription.ViewModel) -> ListRow <RoundCard>{
+    private func roundCard(model: RoundedTitleAndDescription.ViewModel) -> ListRow <RoundCard> {
         ListRow(
             model: model,
             height: UITableView.automaticDimension)
     }
     
-    private func cardAnimation() -> ListRow <CardAnimationTableCell>{
+    private func cardAnimation() -> ListRow <CardAnimationTableCell> {
         ListRow(
             model: "",
             height: UITableView.automaticDimension)
     }
     
-    
-    private func emptyPageDescriptionRow() -> ListRow <PageDescriptionTableCell>{
+    private func emptyPageDescriptionRow() -> ListRow <PageDescriptionTableCell> {
         ListRow(
             model: modelBuilder.getEmptyPageDescription,
             height: UITableView.automaticDimension)
     }
-    
-    
-    private func errorPageDescriptionRow() -> ListRow <PageDescriptionWithButtonTableCell>{
+        
+    private func errorPageDescriptionRow() -> ListRow <PageDescriptionWithButtonTableCell> {
         ListRow(
             model: modelBuilder.getErrorPgaeDescription(tap: { (_) in
                 self.retry()
@@ -237,21 +242,20 @@ extension MyLostHomePresenterImpl {
                 height: UITableView.automaticDimension)
     }
     
-    //FAKE SERVICE
+    // FAKE SERVICE
     private func setFavourtie(success: Bool = true,
                               becomeFavourite: Bool,
                               statement: Statement) {
-        if success  {
+        if success {
             if becomeFavourite {
                 self.favouriteStatements.accept(self.favouriteStatements.value + [statement])
-            }else {
-                let removedFav = self.favouriteStatements.value.filter( { $0 != statement})
+            } else {
+                let removedFav = self.favouriteStatements.value.filter({$0 != statement})
                 self.favouriteStatements.accept(removedFav)
             }
             constructDataSource()
-        }else {
+        } else {
             
-            //print()
         }
     }
     
@@ -261,7 +265,7 @@ extension MyLostHomePresenterImpl {
                                  description: "დალოგინდით ა გაიარეთ რეგისტრაცია , რათა შეძლოთ გგანცხადების გაფავორიტება")
     }
     
-    private func statementRow(statement: Statement) -> ListRow <TitleAndDescriptionCardTableCell>{
+    private func statementRow(statement: Statement) -> ListRow <TitleAndDescriptionCardTableCell> {
         let isFav = self.favouriteStatements.value.filter({ $0 == statement }).first != nil
         return ListRow(
             model: TitleAndDescriptionCardTableCell
@@ -274,14 +278,16 @@ extension MyLostHomePresenterImpl {
                             info3: "ნათესაობის ტიპი: " + (statement.relationType?.value ?? "უცნობია"),
                             info4: "ქალაქი: " + (statement.city ?? "უცნობია"),
                             description: nil,
-                            isFavourite: isFav,
-                            onTap: { headerWithDetails in
-                                self.isAuthorized ? self.setFavourtie(becomeFavourite: !isFav,
-                                                                      statement: statement) :
-                                self.setFavourtie(becomeFavourite: !isFav,
-                                                                      statement: statement)
-                                
-                            }),
+                            rightIcon: .init(rightIconIsActive: isFav,
+                                             rightIconActive: Resourcebook.Image.Icons24.systemStarFill.image,
+                                             rightIconDissable: Resourcebook.Image.Icons24.systemStarOutline.image,
+                                             rightIconHide: false,
+                                             onTap: { _ in
+                                                 self.isAuthorized ? self.setFavourtie(becomeFavourite: !isFav,
+                                                                                       statement: statement) :
+                                                 self.setFavourtie(becomeFavourite: !isFav,
+                                                                                       statement: statement)
+                                             })),
                        cardModel: .init(title: "",
                                         description: statement.statementDescription)),
             
@@ -293,7 +299,7 @@ extension MyLostHomePresenterImpl {
             })
     }
     
-    private func SearchTextFieldRow()-> ListRow <SearchTextField> {
+    private func SearchTextFieldRow() -> ListRow <SearchTextField> {
         return ListRow(model: .init(title: "ძიება", onTapSearch: { search in
             self.fetchStatementList(statement: StatementSearchEntity.getWithQuery(query: search))
             self.constructDataSource()

@@ -53,12 +53,10 @@ extension PageDescriptionTableCell: ConfigurableTableCell {
             pageDescription.configure(with: model.pageDescModel)
         }
     }
-    
-    
 }
 
 extension PageDescriptionTableCell {
-    struct CellModel: TableCellModel{
+    struct CellModel: TableCellModel {
         var nibIdentifier: String = "PageDescriptionTableCell"
         var height: Double = Double(UITableView.automaticDimension)
         var pageDescModel: PageDescription.ViewModel

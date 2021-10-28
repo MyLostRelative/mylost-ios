@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol SavedUserCardDelegate: class {
+public protocol SavedUserCardDelegate: AnyObject {
     func savedUserCardDidTapButton(_ sender: SavedUserCard)
 }
 

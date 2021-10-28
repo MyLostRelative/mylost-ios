@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxRelay
 
 protocol StatementsView: AnyObject {
     var tableView: UITableView {get}
@@ -14,6 +15,7 @@ protocol StatementsView: AnyObject {
 
 protocol StatementsPresenter {
     func viewDidLoad()
+    func viewWillAppear()
 }
 
 class StatementsPresenterImpl: StatementsPresenter {
@@ -26,6 +28,7 @@ class StatementsPresenterImpl: StatementsPresenter {
     private var isLoading: Bool = true
     private var blogs: [Blog] = []
     private let modelBuilder = ModelBuilder()
+    private var readedBlogs: BehaviorRelay<[Blog]> = BehaviorRelay(value: [])
     
     init(view: StatementsView, router: StatementsRouter, blogGateway: BlogGateway) {
         self.view = view
@@ -39,6 +42,10 @@ class StatementsPresenterImpl: StatementsPresenter {
         constructDataSource()
     }
     
+    func viewWillAppear() {
+        constructDataSource()
+    }
+    
     private func configureDataSource() {
         self.view.unwrap { v in
             tableViewDataSource = ListViewDataSource.init(
@@ -48,8 +55,9 @@ class StatementsPresenterImpl: StatementsPresenter {
                     TitleAndDescriptionCardTableCell.self,
                     TiTleButtonTableCell.self,
                     CardAnimationTableCell.self,
-                    PageDescriptionTableCell.self
-                ])
+                    PageDescriptionTableCell.self,
+                    MaterialChipsTableCell.self
+                ], reusableViews: [TitleHeaderCell.self])
         }
     }
     
@@ -64,7 +72,7 @@ class StatementsPresenterImpl: StatementsPresenter {
         let stateDependent =  self.isLoading ? animationState() :
             self.blogFetchFailed ? errorState() :
             self.blogs.isEmpty ? emptyState() :
-            [self.cardsSection()]
+        [self.cardsSection()]
             
         DispatchQueue.main.async {
             self.tableViewDataSource?.reload(
@@ -73,33 +81,32 @@ class StatementsPresenterImpl: StatementsPresenter {
         }
     }
     
-    private func animationState()-> [ListSection] {
+    private func animationState() -> [ListSection] {
         [ListSection(
             id: "",
             rows: [self.cardAnimation(), self.cardAnimation(),  self.cardAnimation()] )]
     }
     
-    private func emptyState() -> [ListSection]{
+    private func emptyState() -> [ListSection] {
         [ListSection(
             id: "",
             rows:  [emptyPageDescriptionRow()])]
     }
     
-    private func errorState() -> [ListSection]{
+    private func errorState() -> [ListSection] {
         [ListSection(
             id: "",
             rows:  [errorPageDescriptionRow()])]
     }
 }
 
-
-//MARK: Services
+// MARK: Services
 extension StatementsPresenterImpl {
     private func fetchBlogsList() {
         self.blogGateway.getBlogList { [weak self] (result) in
             guard let self = self else { return }
             self.isLoading = false
-            switch result{
+            switch result {
             case .success(let statements):
                 self.blogsFetchSuccess(statements)
             case .failure(let err):
@@ -122,10 +129,10 @@ extension StatementsPresenterImpl {
     }
 }
 
-//MARK: Table Rows
+// MARK: - Table Rows
 extension StatementsPresenterImpl {
     
-    private func cardAnimation() -> ListRow <CardAnimationTableCell>{
+    private func cardAnimation() -> ListRow <CardAnimationTableCell> {
         ListRow(
             model: "",
             height: UITableView.automaticDimension)
@@ -138,15 +145,15 @@ extension StatementsPresenterImpl {
     
     private func cardsSection() -> ListSection {
         let blogRows = blogs.map({blogRow(blog: $0)})
-        
         return ListSection.init(
             id: "",
-            rows: blogRows
+            rows: [self.readedBlogsLabel()] + blogRows
         )
     }
     
-    private func blogRow(blog: Blog) -> ListRow <TitleAndDescriptionCardTableCell>{
-        ListRow(
+    private func blogRow(blog: Blog) -> ListRow <TitleAndDescriptionCardTableCell> {
+        let isReaded = self.readedBlogs.value.contains(where: { $0 == blog })
+        return ListRow(
             model: TitleAndDescriptionCardTableCell
                 .Model(headerModel:
                         HeaderWithDetailsCell.Model(
@@ -154,32 +161,58 @@ extension StatementsPresenterImpl {
                             title:  blog.statementTitle,
                             info1: (blog.createDate ?? "").convertedDate, 
                             description: nil,
-                            hideFavouriteImage: true),
+                            rightIcon: .init(
+                                rightIconIsActive: isReaded,
+                                rightIconActive: Resourcebook.Image.Icons24.contactsEmailCloseFill.image,
+                                rightIconDissable: Resourcebook.Image.Icons24.contactsEmailCloseOutline.image,
+                                rightIconHide: false,
+                                onTap: { _ in
+                                    self.setReaded(becomeReaded: !isReaded,
+                                              blog: blog)
+                                })),
                        cardModel: .init(title: blog.statementDescription.suffix(15).base + "...",
                                         description: nil)),
             
             height: UITableView.automaticDimension,
             tapClosure: {row,_,_  in
-                self.router.move2BlogDetails(blog: self.blogs[row])
+                self.setReaded(becomeReaded: true, blog: self.blogs[row - 1])
+                self.router.move2BlogDetails(blog: self.blogs[row - 1])
             })
     }
     
-    private func backNavigateLabelRow() -> ListRow<TiTleButtonTableCell>  {
+    // FAKE SERVICE
+    private func setReaded(
+        success: Bool = true,
+        becomeReaded: Bool,
+        blog: Blog) {
+            if success {
+                if becomeReaded {
+                    self.readedBlogs.accept(self.readedBlogs.value + [blog])
+                } else {
+                    let removedFav = self.readedBlogs.value.filter( {$0 != blog})
+                    self.readedBlogs.accept(removedFav)
+                }
+                constructDataSource()
+            } else {
+                
+            }
+        }
+    
+    private func readedBlogsLabel() -> ListRow<TiTleButtonTableCell> {
         self.clickableLabelRow(with: .init(
-            title: "უკან დაბრუნება",
+            title: "წაკითხული ბლოგების ნახვა",
             onTap: { _ in
-                self.constructDataSource()
+                self.router.move2ReadedBlogs(readedBlogs: self.readedBlogs)
             }))
     }
     
-    private func emptyPageDescriptionRow() -> ListRow <PageDescriptionTableCell>{
+    private func emptyPageDescriptionRow() -> ListRow <PageDescriptionTableCell> {
         ListRow(
             model: modelBuilder.getEmptyPageDescription,
             height: UITableView.automaticDimension)
     }
     
-    
-    private func errorPageDescriptionRow() -> ListRow <PageDescriptionWithButtonTableCell>{
+    private func errorPageDescriptionRow() -> ListRow <PageDescriptionWithButtonTableCell> {
         ListRow(
             model: modelBuilder.getErrorPgaeDescription(tap: { (_) in
                 self.retry()
@@ -187,4 +220,3 @@ extension StatementsPresenterImpl {
             height: UITableView.automaticDimension)
     }
 }
-

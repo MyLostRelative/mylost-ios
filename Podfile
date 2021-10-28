@@ -11,5 +11,13 @@ target 'mylost' do
     pod 'RxDataSources'
 	pod 'Swinject'
   	pod 'SDWebImage'
-
+	pod 'SwiftLint'
+	pod 'LifetimeTracker'
+	pod 'MaterialComponents/TextControls+FilledTextAreas'
+	pod 'MaterialComponents/TextControls+FilledTextFields'
+	pod 'MaterialComponents/TextControls+OutlinedTextAreas'
+	pod 'MaterialComponents/TextControls+OutlinedTextFields'
+	pod 'MaterialComponents/ActivityIndicator'
+	pod 'MaterialComponents/Chips'
+	pod 'IQKeyboardManagerSwift'
 end

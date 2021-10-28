@@ -35,7 +35,7 @@ public class ButtonWithLine: UIView {
         return view
     }()
     
-    private var onTap: ((ButtonWithLine) -> ())?
+    private var onTap: ((ButtonWithLine) -> Void)?
     
     
     public init(with model: ViewModel? = nil) {
@@ -57,7 +57,6 @@ public class ButtonWithLine: UIView {
         }), for: .touchUpInside)
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -77,7 +76,5 @@ extension ButtonWithLine {
     
     private func setUpSubviews() {
         self.stackView.addArrangedSubview(self.button)
-        //self.stackView.addArrangedSubview(separatorLine)
-        
     }
 }

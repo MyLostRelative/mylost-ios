@@ -25,7 +25,6 @@ public class RoundedTextField: UIView  {
     }()
     let messageTextViewMaxHeight: CGFloat = 80
     
-    
     private var stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -92,7 +91,7 @@ extension RoundedTextField {
 
 extension RoundedTextField: UITextViewDelegate {
     public func textViewDidChange(_ textView: UITextView) {
-        if textView.contentSize.height >= self.messageTextViewMaxHeight{
+        if textView.contentSize.height >= self.messageTextViewMaxHeight {
             textView.isScrollEnabled = true
         } else {
             textView.frame.size.height = textView.contentSize.height

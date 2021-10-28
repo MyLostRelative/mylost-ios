@@ -5,7 +5,6 @@
 //  Created by Nato Egnatashvili on 05.09.21.
 //
 
-
 import Swinject
 
 class BlogDetailsAssembly: UIAssembly {
@@ -32,7 +31,7 @@ class BlogDetailsAssembly: UIAssembly {
             return presenter
         }
         
-        container.register(BlogDetailsRouterImpl.self) {resolver in
+        container.register(BlogDetailsRouterImpl.self) { _ in
             return BlogDetailsRouterImpl()
         }
     }

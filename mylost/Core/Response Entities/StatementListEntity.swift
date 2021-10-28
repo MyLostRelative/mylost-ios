@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct StatementsListResponse: Codable{
+struct StatementsListResponse: Codable {
     let result: [StatementResponse]?
 }
 
-struct StatementResponse: Codable{
+struct StatementResponse: Codable {
     let id: Int?
     let userID: Int?
     let title: String?
@@ -25,11 +25,11 @@ struct StatementResponse: Codable{
 }
 
 enum Gender: String {
-  case male = "male"
-  case female = "female"
-  case other = "other"
+  case male
+  case female
+  case other
     
-    var value: String{
+    var value: String {
         switch self {
         case .male:
             return "მამრობითი"
@@ -42,23 +42,23 @@ enum Gender: String {
 }
 
 enum BloodType: String {
-  case a = "a"
-  case b = "b"
-  case ab = "ab"
-  case o = "o"
+  case a
+  case b
+  case ab
+  case o
 }
 
 enum RelationType: String {
-    case mother = "mother"
-    case father = "father"
-    case sister = "sister"
-    case brother = "brother"
-    case friend = "friend"
-    case daughter  = "daughter"
-    case son = "son"
-    case other = "other"
+    case mother
+    case father
+    case sister
+    case brother
+    case friend
+    case daughter
+    case son
+    case other
     
-    var value: String{
+    var value: String {
         switch self {
         case .mother:
             return "დედა"
@@ -81,7 +81,7 @@ enum RelationType: String {
     }
 }
 
-struct Statement{
+struct Statement {
     let id: Int
     let userID: Int
     let statementTitle: String
@@ -96,7 +96,7 @@ struct Statement{
 }
 
 extension StatementsListResponse {
-    func getStatement() -> [Statement]{
+    func getStatement() -> [Statement] {
         guard let result = result else {return []}
         return result.compactMap { (response) -> Statement? in
             guard let id = response.id,

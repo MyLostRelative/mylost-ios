@@ -51,31 +51,39 @@ class FilterDetailsPresenterImpl: FilterDetailsPresenter {
                 withClasses: [
                     TiTleButtonTableCell.self,
                     PickerViewCell.self,
-                    RoundButtonTableCell.self
-                ])
+                    RoundButtonTableCell.self,
+                    MaterialChipsTableCell.self,
+                    TwoInputTableCell.self
+                ], reusableViews: [TitleHeaderCell.self])
         }
     }
-    
     
     private func constructDataSource() {
         DispatchQueue.main.async {
             self.tableViewDataSource?.reload(
-                with: [self.filterSection()]
+                with: [self.chipsSection(type: .relativeType),
+                       self.chipsSection(type: .bloodType),
+                       self.chipsSection(type: .city),
+                       self.chipsSection(type: .sexType),
+                       self.chipAgeSection(),
+                       self.filterButtonSection()
+                ]
             )
         }
     }
     
+    
+    
 }
 
-
-//MARK: Table Rows
+// MARK: Table Rows
 extension FilterDetailsPresenterImpl {
     private func clickableLabelRow(with model: TiTleButtonTableCell.ViewModel) -> ListRow<TiTleButtonTableCell> {
         ListRow(model: model,
                 height: UITableView.automaticDimension)
     }
     
-    private func backNavigateLabelRow() -> ListRow<TiTleButtonTableCell>  {
+    private func backNavigateLabelRow() -> ListRow<TiTleButtonTableCell> {
         self.clickableLabelRow(with: .init(
             title: "უკან დაბრუნება",
             onTap: { _ in
@@ -96,8 +104,7 @@ extension FilterDetailsPresenterImpl {
         ListRow(
             model: PickerViewCell.ViewModel(title: type.title,
                                             pickerData: type.vectorData,
-                                            onTap:  {
-                                                pickers in
+                                            onTap: {pickers in
                                                 self.manager.addPickerTypeToDict(type: type, data: pickers)
                                             }),
             height: UITableView.automaticDimension)
@@ -115,4 +122,53 @@ extension FilterDetailsPresenterImpl {
                     buttonRow()])
     }
     
+}
+
+// MARK: - New Filter Section and Rows
+extension FilterDetailsPresenterImpl {
+    private func chipsSection(type: PickerDataManagerImpl.PickerType) -> ListSection {
+        ListSection(id: "chips",
+                    header: customHeader(title: type.title),
+                    rows: [chipsRow(type: type, data: type.vectorData[0])])
+    }
+    
+    private func chipAgeSection() -> ListSection {
+        let type = PickerDataManagerImpl.PickerType.age
+        return ListSection(id: "age inputs",
+                    header: customHeader(title: type.title),
+                    rows: [ageInputField()])
+    }
+    
+    private func filterButtonSection() -> ListSection {
+        ListSection(id: "Filter",
+                    rows: [buttonRow()])
+        
+    }
+    
+    private func customHeader(title: String) -> ListViewHeaderFooter <TitleHeaderCell> {
+        return ListViewHeaderFooter(model: TitleHeaderCell.ViewModel(title: title),
+                                    height: UITableView.automaticDimension)
+    }
+    
+    private func chipsRow(type: PickerDataManagerImpl.PickerType, data: [String]) -> ListRow <MaterialChipsTableCell> {
+        return ListRow(
+            model: .init(chipTitles: data, onTap: { [weak self] chip in
+                self?.manager.addPickerTypeToDict(type: type,
+                                                  data: [chip])
+            }),
+                       height: 90)
+    }
+    
+    private func ageInputField() -> ListRow <TwoInputTableCell> {
+        ListRow(model: .init(firstInputPlaceHolder: "From",
+                             secondInputPlaceHolder: "To",
+                             delegate: self),
+                height: UITableView.automaticDimension)
+    }
+}
+
+extension FilterDetailsPresenterImpl: TwoInputTableCellDelegate {
+    func TwoInputTableCellDelegate(_ cell: TwoInputTableCell, firstText: String, secondText: String) {
+        self.manager.addPickerTypeToDict(type: .age, data: [firstText, secondText])
+    }
 }
