@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Core
+import Components
 
 protocol ReadedBlogsFactory {
     func getTitleAndDescription( blog: Blog,

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Components
 
 protocol RegistrationModelsFactory {
     func getRoundedTextSection(delegate: MaterialInputFieldTableCellDelegate?) -> ListSection

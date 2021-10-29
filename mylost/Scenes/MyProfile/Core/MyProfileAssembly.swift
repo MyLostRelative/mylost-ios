@@ -6,6 +6,7 @@
 //
 
 import Swinject
+import Core
 
 class MyProfileAssembly: UIAssembly {
     private let userID: Int

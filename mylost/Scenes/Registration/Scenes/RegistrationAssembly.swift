@@ -1,4 +1,6 @@
 import Swinject
+import Core
+import Components
 
 class RegistrationAssembly: UIAssembly {
     

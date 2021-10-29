@@ -5,6 +5,8 @@
 //  Created by Nato Egnatashvili on 06.09.21.
 //
 import UIKit
+import Core
+import Components
 
 protocol ContactDetailsView: AnyObject {
     var tableView: UITableView {get}

@@ -9,6 +9,7 @@ import UIKit
 import LifetimeTracker
 import MaterialComponents.MaterialActivityIndicator
 import RxDataSources
+import Components
 
 protocol RegistrationView: AnyObject {
     var tableView: UITableView {get}

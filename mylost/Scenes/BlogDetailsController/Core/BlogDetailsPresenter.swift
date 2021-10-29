@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Core
+import Components
 
 protocol BlogDetailsView: AnyObject {
     var tableView: UITableView {get}
@@ -56,8 +58,7 @@ class BlogDetailsPresenterImpl: BlogDetailsPresenter {
                 with: [
                  ListSection.init(
                     id: "",
-                    rows: [self.backNavigateLabelRow(),
-                           self.blogDetailRow(blog: self.blog)]
+                    rows: [ self.blogDetailRow(blog: self.blog)]
                 )
                 ]
             )
@@ -86,13 +87,5 @@ extension BlogDetailsPresenterImpl {
                                         description: blog.statementDescription)),
             
             height: UITableView.automaticDimension)
-    }
-    
-    private func backNavigateLabelRow() -> ListRow<TiTleButtonTableCell> {
-        self.clickableLabelRow(with: .init(
-            title: "უკან დაბრუნება",
-            onTap: { _ in
-                self.router.backToBlogs()
-            }))
     }
 }

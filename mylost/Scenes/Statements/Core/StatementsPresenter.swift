@@ -7,6 +7,8 @@
 
 import UIKit
 import RxRelay
+import Core
+import Components
 
 protocol StatementsView: AnyObject {
     var tableView: UITableView {get}

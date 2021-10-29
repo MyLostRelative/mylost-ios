@@ -7,6 +7,7 @@
 
 import Swinject
 import RxRelay
+import Core
 
 class FavouriteStatementsAssembly: UIAssembly {
     let favouriteStatements: BehaviorRelay<[Statement]>

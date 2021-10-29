@@ -7,6 +7,7 @@
 
 import Foundation
 import RxRelay
+import Core
 
 protocol StatementsRouter {
     func move2BlogDetails(blog: Blog)

@@ -8,6 +8,7 @@
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Components
 
 class FavouriteStatementsController: UIViewController , RXTableConfigurable{
     

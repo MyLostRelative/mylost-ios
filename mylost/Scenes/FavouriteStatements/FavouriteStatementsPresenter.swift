@@ -7,6 +7,8 @@
 
 import RxSwift
 import RxRelay
+import Core
+import Components
 
 protocol FavouriteStatementsView: AnyObject {
     var viewModel: FavouriteViewModel { get }

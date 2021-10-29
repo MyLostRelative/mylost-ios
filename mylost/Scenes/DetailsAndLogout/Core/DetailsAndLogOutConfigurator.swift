@@ -6,6 +6,7 @@
 //
 
 import Swinject
+import Core
 
 class DetailsAndLogOutAssembly: UIAssembly {
     private let userInfo: UserInfo

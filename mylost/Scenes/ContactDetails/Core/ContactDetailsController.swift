@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Components
 
 class ContactDetailsViewController: UIViewController {
 
@@ -20,7 +21,6 @@ class ContactDetailsViewController: UIViewController {
         view.layer.cornerRadius = 18
         return view
     }()
-    
     
     var tableView: UITableView = {
         let table = UITableView()

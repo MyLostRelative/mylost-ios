@@ -7,6 +7,7 @@
 
 import UIKit
 import LifetimeTracker
+import Components
 
 class BlogDetailsViewController: UIViewController , BlogDetailsView , LifetimeTrackable{
     class var lifetimeConfiguration: LifetimeConfiguration {
@@ -36,5 +37,11 @@ class BlogDetailsViewController: UIViewController , BlogDetailsView , LifetimeTr
         tableView.left(toView: self.view)
         tableView.right(toView: self.view)
         tableView.bottom(toView: self.view)
+    }
+}
+
+extension BlogDetailsViewController: customNavigatable {
+    var navTiTle: String {
+        return "ბლოგის დეტალები"
     }
 }

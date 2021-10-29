@@ -9,6 +9,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import LifetimeTracker
+import Components
 
 class ReadedBlogsController: UIViewController, LifetimeTrackable, RXTableConfigurable {
 class var lifetimeConfiguration: LifetimeConfiguration {
@@ -68,6 +69,8 @@ extension ReadedBlogsController: UITableViewDelegate {
     }
 }
 
-
-
-
+extension ReadedBlogsController: customNavigatable {
+    var navTiTle: String {
+        "წაკითხული/მონიშნული ბლოგები"
+    }
+}

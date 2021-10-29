@@ -7,6 +7,8 @@
 
 
 import UIKit
+import Core
+import Components
 
 protocol DetailsAndLogOutPresenter {
     func viewDidLoad()

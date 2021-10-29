@@ -6,6 +6,7 @@
 //
 
 import Swinject
+import Core
 
 class PostCreateAssembly: UIAssembly {
     private let userID: Int
@@ -35,7 +36,7 @@ class PostCreateAssembly: UIAssembly {
             return presenter
         }
         
-        container.register(PostCreateRouterImpl.self) {resolver in
+        container.register(PostCreateRouterImpl.self) {_ in
             return PostCreateRouterImpl()
         }
     }

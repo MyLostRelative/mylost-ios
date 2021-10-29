@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 protocol StatementsConfigurator {
     func configure(_ controller: StatementsController)

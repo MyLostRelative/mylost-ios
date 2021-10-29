@@ -8,6 +8,7 @@
 import UIKit
 import LifetimeTracker
 import MaterialComponents.MaterialActivityIndicator
+import Components
 
 protocol SignInView: AnyObject {
     var tableView: UITableView {get}

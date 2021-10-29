@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Components
 
 extension StatementsPresenterImpl {
     struct ModelBuilder {

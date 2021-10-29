@@ -6,7 +6,7 @@
 //
 
 import Swinject
-
+import Core
 class ContactDetailsAssembly: UIAssembly {
     private let guestUserID: Int
     private let guestImgUrl: String?

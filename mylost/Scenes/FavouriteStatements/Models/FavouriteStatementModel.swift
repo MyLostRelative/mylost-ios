@@ -8,6 +8,7 @@
 import RxSwift
 import RxDataSources
 import  UIKit
+import Components
 
 typealias SectionOfFavourites = SectionModel<TableViewSection,TableCellModel>
 

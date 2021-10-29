@@ -1,6 +1,7 @@
 import Swinject
 import RxSwift
 import RxRelay
+import Core
 
 class ReadedBlogsAssembly: UIAssembly {
     private var readedBlogs: BehaviorRelay<[Blog]>

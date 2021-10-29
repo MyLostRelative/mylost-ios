@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Core
+import Components
 
 protocol MyProfilePresenterDelegate: AnyObject {
     func MyProfilePresenterUpdate(_ presenter: PostCreatePresenterImpl)

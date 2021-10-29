@@ -6,6 +6,7 @@
 //
 
 import Swinject
+import Core
 
 class SignInAssembly: UIAssembly {
     func assemble(container: Container) {

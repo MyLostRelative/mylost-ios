@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Core
+import Components
 
 protocol FilterDetailsPresenterDelegate: AnyObject {
     func FilterDetailsPresenterDelegate(filter with: StatementSearchEntity)

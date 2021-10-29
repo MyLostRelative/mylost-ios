@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Core
+import Components
 
 protocol RegistrationPresenter {
     func viewDidLoad()

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Core
+import Components
 
 class ProductContainer: PagerTabStripViewController {
     enum UserType {
@@ -16,7 +18,7 @@ class ProductContainer: PagerTabStripViewController {
     @IBOutlet weak var segments: ScrollableTabView!
     var lastSelectedIndex = 0
     var moduleVisitDate: Date = Date()
-    var userType: UserType = UserDefaultManagerImpl().getValue(key: "token") == nil ? .guest : .user{
+    var userType: UserType = UserDefaultManagerImpl().getValue(key: "token") == nil ? .guest : .user {
         didSet {
             self.items = getDatasourceModels()
             self.segments.collectionView.reloadData()
@@ -48,7 +50,7 @@ class ProductContainer: PagerTabStripViewController {
     private func configureSegmentsCollectionView() {
         self.containerView.isScrollEnabled = false
         self.segments.delegate = self
-        self.segments.collectionView.backgroundColor = .clear
+        self.segments.collectionView.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
     }
 }
 

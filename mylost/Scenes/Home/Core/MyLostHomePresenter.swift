@@ -9,6 +9,8 @@ import UIKit
 import SDWebImage
 import RxSwift
 import RxCocoa
+import Core
+import Components
 
 protocol MyLostHomeView: AnyObject {
     var tableView: UITableView {get}

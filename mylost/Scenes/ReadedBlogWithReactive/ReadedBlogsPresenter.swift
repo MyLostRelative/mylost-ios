@@ -7,6 +7,8 @@
 
 import RxSwift
 import RxRelay
+import Core
+import Components
 
 protocol ReadedBlogsView: AnyObject {
     var viewModel: FavouriteViewModel { get }

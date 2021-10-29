@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Components
 
 class StatementsController: UIViewController {
 

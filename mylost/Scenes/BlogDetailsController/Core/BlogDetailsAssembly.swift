@@ -6,6 +6,7 @@
 //
 
 import Swinject
+import Core
 
 class BlogDetailsAssembly: UIAssembly {
     private let blog: Blog

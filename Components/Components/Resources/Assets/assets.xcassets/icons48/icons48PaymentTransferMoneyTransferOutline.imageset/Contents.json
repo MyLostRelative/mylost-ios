@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "icons48PaymentTransferMoneyTransferOutline.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}

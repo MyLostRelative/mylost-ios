@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Core
+import Components
 
 protocol PostCreateView: AnyObject {
     var tableView: UITableView {get}

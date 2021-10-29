@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 protocol PickerDataManager {
     func getIntType(with type: PickerDataManagerImpl.PickerType, chooseValue: String) -> Int?
