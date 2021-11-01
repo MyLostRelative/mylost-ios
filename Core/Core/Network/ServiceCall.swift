@@ -50,7 +50,9 @@ extension ServiceMethods {
             if statement.query != "" {
                 encodeString = statement.query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
             }
-            return URL(string: "https://mylost-api.herokuapp.com/ads?relationType=\(statement.relationType)&gender=\(statement.gender)&bloodType=\(statement.bloodType)&city=\(statement.city)&fromAge=\(statement.fromAge)&toAge=\(statement.toAge)&query=\(encodeString)")
+            let originalString = "https://mylost-api.herokuapp.com/ads?relationType=\(statement.relationType)&gender=\(statement.gender)&bloodType=\(statement.bloodType)&city=\(statement.city)&fromAge=\(statement.fromAge)&toAge=\(statement.toAge)&query=\(encodeString)"
+            let urlString = originalString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            return URL(string: urlString ?? "")
         case .blogList:
             return URL(string: "https://mylost-api.herokuapp.com/blogs")
         case .login:

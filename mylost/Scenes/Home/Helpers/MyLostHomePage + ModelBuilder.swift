@@ -30,7 +30,7 @@ extension MyLostHomePresenterImpl {
                   description: "თქვენი განცხადებების გვერდი ცარიელია. დაპოსტეთ განცხადება რათა განახლდეს გვერდი.")
         }
         
-        func getErrorPgaeDescription(tap: ((ButtonWithLine) -> ())? )-> PageDescriptionWithButtonTableCell.ViewModel {
+        func getErrorPgaeDescription(tap: ((ButtonWithLine) -> Void)? )-> PageDescriptionWithButtonTableCell.ViewModel {
             PageDescriptionWithButtonTableCell.ViewModel(pageDescriptionModel: .init(
                 imageType: (image: Resourcebook.Image.Icons24.systemErrorOutline.template,
                             tint: .red),

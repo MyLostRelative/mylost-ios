@@ -10,7 +10,7 @@ import Core
 import Components
 
 protocol FilterDetailsPresenterDelegate: AnyObject {
-    func FilterDetailsPresenterDelegate(filter with: StatementSearchEntity)
+    func FilterDetailsPresenterDelegate(with filter: StatementSearchEntity)
 }
 
 protocol FilterDetailsView: AnyObject {
@@ -96,7 +96,7 @@ extension FilterDetailsPresenterImpl {
     private func buttonRow( ) -> ListRow <RoundButtonTableCell> {
         ListRow(
             model: .init(title: "გაფილტვრა", onTap: { _ in
-                self.delegate?.FilterDetailsPresenterDelegate(filter: self.manager.statementSearchEntity)
+                self.delegate?.FilterDetailsPresenterDelegate(with: self.manager.statementSearchEntity)
                 self.router.moveToback()
             }),
             height: UITableView.automaticDimension)

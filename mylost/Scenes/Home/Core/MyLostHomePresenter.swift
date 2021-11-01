@@ -128,6 +128,7 @@ extension MyLostHomePresenterImpl {
     private func constructDataSource() {
         let stateDependent =  self.isLoading ? animationState() :
             self.statementsFetchFailed ? errorState() :
+            self.filterState ? filterNotFoundState() :
             self.statements.isEmpty ? emptyState() :
             cardLoadedState()
         
@@ -159,6 +160,10 @@ extension MyLostHomePresenterImpl {
     private func errorState() -> [ListSection] {
         [errorStatementsSection()]
     }
+    
+    private func filterNotFoundState() -> [ListSection] {
+        [removeFilterLabelSection(), emptyStatementsSection()]
+    }
 }
 
 // MARK: Sections
@@ -185,6 +190,17 @@ extension MyLostHomePresenterImpl {
             rows:  [clickableLabel(with: .init(title: "ფავორიტების სია",
                                                onTap: { _ in
                                                 self.router.move2Fav(favouriteStatements: self.favouriteStatements)
+                                               }))
+            ] )
+    }
+    
+    private func removeFilterLabelSection() -> ListSection {
+        ListSection(
+            id: "",
+            rows:  [clickableLabel(with: .init(title: "ფიტლრების წაშლა",
+                                               onTap: { _ in
+                                                   self.filterState = false
+                                                   self.fetchStatementList()
                                                }))
             ] )
     }
@@ -310,9 +326,9 @@ extension MyLostHomePresenterImpl {
 }
 
 extension MyLostHomePresenterImpl: FilterDetailsPresenterDelegate {
-    func FilterDetailsPresenterDelegate(filter with: StatementSearchEntity) {
+    func FilterDetailsPresenterDelegate(with: StatementSearchEntity) {
         self.isLoading = true
-        self.filterState = false
+        self.filterState = true
         self.constructDataSource()
         self.fetchStatementList(statement: with)
     }
