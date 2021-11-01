@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Core
+import Components
 
 protocol SignInPresenter {
     func viewDidLoad()
@@ -21,11 +23,10 @@ class SignInPresenterImpl: SignInPresenter {
     private weak var view: SignInView?
     private var tableViewDataSource: ListViewDataSource?
     private let modelConfigurator: SignInModelConfigurator = SignInModelConfiguratorImpl()
-    private var pageType: PageType = .signIn
     private let router: SignInRouter
     private let loginGateway: LoginGateway
     private let registrationGateway: RegistrationGateway
-    private let userDefaultManager = UserDefaultManager()
+    private let userDefaultManager = UserDefaultManagerImpl()
     
     init(router: SignInRouter,
          loginGateway: LoginGateway,
@@ -45,6 +46,7 @@ class SignInPresenterImpl: SignInPresenter {
     }
     
     private func callLogin(params: [String: Any]) {
+        self.view?.startLoading()
         loginGateway.postLogin(params: params) {[weak self] result in
             switch result {
             case .success(let response):
@@ -52,11 +54,12 @@ class SignInPresenterImpl: SignInPresenter {
                 self?.tokenSuccesfullyFetched(token: token)
                 
             case .failure(let error):
+                self?.view?.stopLoading()
                 if let error = error as? LocalError {
                     self?.view?.displayBanner(type: .negative,
                                               title: "მოხდა შეცდომა",
                                               description: error.desc)
-                }else {
+                } else {
                     self?.view?.displayBanner(type: .negative,
                                               title: "მოხდა შეცდომა",
                                               description: "სცადეთ მოგვიანებით")
@@ -85,6 +88,7 @@ class SignInPresenterImpl: SignInPresenter {
     private func tokenSuccesfullyFetched(token: String) {
         DispatchQueue.main.async {
             self.userDefaultManager.saveKeyName(key: "token", value: token)
+            self.view?.stopLoading()
             self.router.changeToUser()
         }
     }
@@ -103,35 +107,18 @@ class SignInPresenterImpl: SignInPresenter {
     }
     
     private func constructDataSource() {
-        switch pageType {
-        case .signIn:
             DispatchQueue.main.async {
                 self.tableViewDataSource?.reload(
                     with: [self.signInCaseSections()]
                 )
             }
-        case .registration:
-            DispatchQueue.main.async {
-                self.tableViewDataSource?.reload(
-                    with: [self.registrationCaseSections()]
-                )
-            }
-        }
     }
     
-    private func pageDescriptionRow() -> ListRow <PageDescriptionTableCell>  {
+    private func pageDescriptionRow() -> ListRow <PageDescriptionTableCell> {
         ListRow(model: PageDescriptionTableCell.Model(imageType: (image: Resourcebook.Image.Icons24.systemSearch.template,
                                                                   tint: Resourcebook.Color.Positive.solid300.uiColor),
                                                       title: "My Lost",
                                                       description: "გაიარეთ რეგისტრაცია ან დალოგინდით"),
-                height: UITableView.automaticDimension)
-    }
-    
-    private func pageDescriptionRowRegistration() -> ListRow <PageDescriptionTableCell>  {
-        ListRow(model: PageDescriptionTableCell.Model(imageType: (image: Resourcebook.Image.Icons24.generalLoginHistory.template,
-                                                                  tint: Resourcebook.Color.Positive.solid300.uiColor),
-                                                      title: "Registration",
-                                                      description: nil),
                 height: UITableView.automaticDimension)
     }
     
@@ -150,9 +137,9 @@ class SignInPresenterImpl: SignInPresenter {
     }
 }
 
-//MARK: Sign Up Section
+// MARK: Sign Up Section
 extension SignInPresenterImpl {
-    private func signInCaseSections() -> ListSection{
+    private func signInCaseSections() -> ListSection {
         var nameField: LoginTextFieldTableCell?
         var passwordField: LoginTextFieldTableCell?
         let usernameModel = modelConfigurator.getTextFieldModel(with: .usernameTextField(ontap: { newNameField in
@@ -168,10 +155,7 @@ extension SignInPresenterImpl {
         }))
         
         let loginClickableLabelModel = modelConfigurator.getClickableLabelModel(with: .login(onTap: { _ in
-            self.pageType = .registration
-            nameField = nil
-            passwordField = nil
-            self.constructDataSource()
+            self.router.move2Registration()
         }))
         return ListSection.init(
             id: "",
@@ -181,98 +165,5 @@ extension SignInPresenterImpl {
                 self.textField(with: passwordModel),
                 self.button(with: loginButton),
                 self.clickableLabel(with: loginClickableLabelModel)] )
-    }
-}
-
-
-//MARK: Registration Section
-extension SignInPresenterImpl {
-    private func registrationCaseSections() -> ListSection{
-        var nameField: LoginTextFieldTableCell?
-        var surnameField: LoginTextFieldTableCell?
-        var emailField: LoginTextFieldTableCell?
-        var mobileField: LoginTextFieldTableCell?
-        var usernameField: LoginTextFieldTableCell?
-        var passwordField: LoginTextFieldTableCell?
-        
-        let nameModel = modelConfigurator.getTextFieldModel(with: .name(ontap: { field in
-            field.emptyTextField()
-            nameField = field
-        }))
-        let surnameModel = modelConfigurator.getTextFieldModel(with: .surname(ontap: { field in
-            field.emptyTextField()
-            surnameField = field
-        }))
-        
-        let email = modelConfigurator.getTextFieldModel(with: .mailTextField(ontap: { field in
-            field.emptyTextField()
-            emailField = field
-        }))
-        
-        let mobile = modelConfigurator.getTextFieldModel(with: .mobileTextField(ontap: { field in
-            field.emptyTextField()
-            mobileField = field
-        }))
-        
-        let usernameModel = modelConfigurator.getTextFieldModel(with: .usernameTextField(ontap: { field in
-            field.emptyTextField()
-            usernameField = field
-        }))
-        let passwordModel = modelConfigurator.getTextFieldModel(with: .passwordTextField(ontap: { field in
-            field.emptyTextField()
-            passwordField = field
-        }))
-        
-        let registrationButton = modelConfigurator.getButtoModel(with: .registration(onTap: { _ in
-            self.registrationClicked(username: usernameField?.getText() ,
-                                    password: passwordField?.getText() ,
-                                    firstName: nameField?.getText(),
-                                    lastName: surnameField?.getText(),
-                                    email:emailField?.getText(),
-                                    mobile: mobileField?.getText())
-        }))
-        let textFieldModels: [ListSection.Row] = [textField(with: usernameModel),
-                                                  textField(with: passwordModel),
-            textField(with: nameModel) ,
-                                                  textField(with: surnameModel),
-                                                  textField(with: email),
-                                                  textField(with: mobile),
-                                                  ]
-        let registrationClickableLabelModel = modelConfigurator.getClickableLabelModel(with: .registration(onTap: { _ in
-            self.pageType = .signIn
-            self.constructDataSource()
-        }))
-        
-        return ListSection.init(
-            id: "",
-            rows: [self.pageDescriptionRowRegistration()] + textFieldModels + [
-                self.button(with: registrationButton),
-                self.clickableLabel(with: registrationClickableLabelModel)] )
-    }
-    
-    private func registrationClicked(username: String? ,
-                                     password: String? ,
-                                     firstName: String? ,
-                                     lastName: String? ,
-                                     email: String? ,
-                                     mobile: String?) {
-        if let usernamew = username,
-           let passwordw = password,
-           let firstNamew = firstName,
-           let lastNamew = lastName,
-           let emailw = email,
-           let mobilew = mobile {
-            let params = ["username": usernamew,
-                                        "password": passwordw,
-                                        "firstName": firstNamew,
-                                        "lastName": lastNamew,
-                                        "email": emailw,
-                                        "mobileNumber": mobilew]
-            callRegister(params: params)
-        }else {
-            self.view?.displayBanner(type: .negative,
-                                     title: "დაფიქსირდა შეცდომა",
-                                     description: "გთხოვთ შეავსოთ ყველა საჭირო ველი")
-        }
     }
 }

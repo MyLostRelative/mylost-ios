@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Core
+import Components
 
 protocol PostCreateView: AnyObject {
     var tableView: UITableView {get}
@@ -69,7 +71,6 @@ class PostCreatePresenterImpl: PostCreatePresenter {
         }
     }
     
-    
     private func constructDataSource() {
         DispatchQueue.main.async {
             self.tableViewDataSource?.reload(
@@ -79,11 +80,11 @@ class PostCreatePresenterImpl: PostCreatePresenter {
     }
 }
 
-//MARK: Service Call
+// MARK: Service Call
 extension PostCreatePresenterImpl {
     private func postStatement(statementPost: StatementPost) {
         self.statementPostGateway.postStatementPost(params: statementPost.toJSON()) { result in
-            switch result{
+            switch result {
             case .success(_):
                 self.postStatementSucceded()
             case .failure(_):
@@ -106,9 +107,9 @@ extension PostCreatePresenterImpl {
     }
 }
 
-//MARK: Table Section
+// MARK: Table Section
 extension PostCreatePresenterImpl {
-    private func mainSection()-> ListSection {
+    private func mainSection() -> ListSection {
         let titleRow = textField(with: .init(title: "განცხადების სახელი", onTap: { field in
             self.titleField = field
         }))
@@ -129,14 +130,14 @@ extension PostCreatePresenterImpl {
     }
 }
 
-//MARK: Table Rows
+// MARK: Table Rows
 extension PostCreatePresenterImpl {
     private func clickableLabelRow(with model: TiTleButtonTableCell.ViewModel) -> ListRow<TiTleButtonTableCell> {
         ListRow(model: model,
                 height: UITableView.automaticDimension)
     }
     
-    private func backNavigateLabelRow() -> ListRow<TiTleButtonTableCell>  {
+    private func backNavigateLabelRow() -> ListRow<TiTleButtonTableCell> {
         self.clickableLabelRow(with: .init(
             title: "უკან დაბრუნება",
             onTap: { _ in
@@ -152,13 +153,13 @@ extension PostCreatePresenterImpl {
         ListRow(
             model: PickerViewCell.ViewModel(title: type.title,
                                             pickerData: [type.data],
-                                            onTap:  { pickers in
+                                            onTap: { pickers in
                                                 self.didChangePicker(type: type, pickers: pickers)
                                             }),
             height: UITableView.automaticDimension)
     }
     
-    private func postField() -> ListRow <RoundedTextFieldTableCell>{
+    private func postField() -> ListRow <RoundedTextFieldTableCell> {
         ListRow(model: RoundedTextFieldTableCell.Model(placeHolderText: "დაწერეთ",
                                                        title: "დაპოსტვა",onTap: { (field) in
                                                         if !self.tapHappend {
@@ -170,7 +171,7 @@ extension PostCreatePresenterImpl {
     }
 }
 
-//MARK: Taps
+// MARK: Taps
 extension PostCreatePresenterImpl {
     private func didChangePicker(type: PickerDataManagerImpl.PickerType, pickers: [String]) {
         let index = self.pickerManager.getIntType(with: type,

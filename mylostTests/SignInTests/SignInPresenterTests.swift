@@ -18,7 +18,8 @@ class SignInPresenterTests: XCTestCase {
          controller = SignInViewController()
         router = SignInRouterMock()
         presenter = SignInPresenterImpl(router: router,
-                                        loginGateway: LoginGatewayImpl())
+                                        loginGateway: LoginGatewayImpl(),
+                                        registrationGateway: RegistrationGatewayImpl())
         controller.presenter = presenter
     }
     

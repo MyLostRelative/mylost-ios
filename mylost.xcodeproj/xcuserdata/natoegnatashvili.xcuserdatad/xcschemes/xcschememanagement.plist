@@ -7,7 +7,20 @@
 		<key>mylost.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>5297D98B26E3D6760014F2FF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52D80C58264EF64200ACBC16</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

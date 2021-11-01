@@ -5,8 +5,8 @@
 //  Created by Nato Egnatashvili on 01.09.21.
 //
 
-
 import Swinject
+import Core
 
 class MyProfileAssembly: UIAssembly {
     private let userID: Int
@@ -38,10 +38,8 @@ class MyProfileAssembly: UIAssembly {
             return presenter
         }
         
-        container.register(MyProfileRouterImpl.self) {resolver in
+        container.register(MyProfileRouterImpl.self) {_ in
             return MyProfileRouterImpl()
         }
     }
 }
-
-

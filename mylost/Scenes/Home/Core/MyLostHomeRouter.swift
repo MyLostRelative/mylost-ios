@@ -5,11 +5,14 @@
 //  Created by Nato Egnatashvili on 6/21/21.
 //
 
-import Foundation
+import RxRelay
+import Core
 
 protocol MyLostHomeRouter {
-    func move2UserDetails(guestUserID: Int)
+    func move2UserDetails(guestUserID: Int, guestImgUrl: String?)
     func move2Filter(delegate: FilterDetailsPresenterDelegate)
+    func move2H()
+    func move2Fav(favouriteStatements: BehaviorRelay<[Statement]>)
 }
 
 class MyLostHomeRouterImpl: MyLostHomeRouter {
@@ -20,14 +23,14 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
         self.controller = controller
     }
     
-    func move2UserDetails(guestUserID: Int) {
-        guard let vc = DIAssembly(uiAssemblies: [ContactDetailsAssembly(guestUserID: guestUserID)],
+    func move2UserDetails(guestUserID: Int, guestImgUrl: String?) {
+        guard let vc = DIAssembly(uiAssemblies: [ContactDetailsAssembly(guestUserID: guestUserID,
+                                                                        guestImgUrl: guestImgUrl)],
                                   networkAssemblies: [UserInfoetworkAssembly()])
             .resolver
                 .resolve(ContactDetailsViewController.self) else { return }
         
-        self.controller?.navigationController?.pushViewController(vc, animated: true)
-        
+       self.controller?.navigationController?.pushViewController(vc, animated: true)
     }
     
     func move2Filter(delegate: FilterDetailsPresenterDelegate) {
@@ -37,5 +40,22 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
                 .resolve(FilterDetailsViewController.self) else { return }
         self.controller?.navigationController?.pushViewController(vc, animated: true)
         
+    }
+    
+    func move2Fav(favouriteStatements: BehaviorRelay<[Statement]>) {
+        guard let vc = DIAssembly(
+                uiAssemblies: [FavouriteStatementsAssembly(favouriteStatements: favouriteStatements)],
+                                  networkAssemblies: [])
+            .resolver
+                .resolve(FavouriteStatementsController.self) else { return }
+        
+       self.controller?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func move2H() {
+        let otherPaymentConfigure = MyLostHomeConfiguratorImpl()
+        let otherProductsVC = MyLostHomeController()
+        otherPaymentConfigure.configure(otherProductsVC )
+        self.controller?.navigationController?.pushViewController(otherProductsVC, animated: true)
     }
 }

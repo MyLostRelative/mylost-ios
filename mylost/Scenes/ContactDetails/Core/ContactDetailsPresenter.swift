@@ -5,10 +5,13 @@
 //  Created by Nato Egnatashvili on 06.09.21.
 //
 import UIKit
+import Core
+import Components
 
 protocol ContactDetailsView: AnyObject {
     var tableView: UITableView {get}
     func displayBanner(type: Bannertype, title: String, description: String)
+    func setImg(with url: String)
 }
 
 protocol ContactDetailsPresenter {
@@ -20,21 +23,26 @@ class ContactDetailsPresenterImpl: ContactDetailsPresenter {
     
     private weak var view: ContactDetailsView?
     private var router: ContactDetailsRouter
+    private let guestImgUrl: String?
     private var tableViewDataSource: ListViewDataSource?
     private let guestUserID: Int
     private var guestUserInfo: GuestUserInfo?
     private let userInfoGateway: UserInfoGateway
     private var isLoading: Bool = true
+    
     init(router: ContactDetailsRouter,
          guestUserID: Int,
+         guestImgUrl: String?,
          userInfoGateway: UserInfoGateway) {
         self.router = router
         self.guestUserID = guestUserID
         self.userInfoGateway = userInfoGateway
+        self.guestImgUrl = guestImgUrl
     }
     
     func viewDidLoad() {
         fetchGuestUserInfo()
+        setImg()
         configureDataSource()
         constructDataSource()
     }
@@ -81,13 +89,18 @@ class ContactDetailsPresenterImpl: ContactDetailsPresenter {
             }
         }
     }
+    
+    private func setImg() {
+        guard let guestImg = self.guestImgUrl else { return }
+        self.view?.setImg(with: guestImg)
+    }
 }
 
 
 //MARK: Table Section
 extension ContactDetailsPresenterImpl {
     private func mainSection()-> ListSection {
-        return ListSection(id: "", rows: [backNavigateLabelRow(), pageDescriptionRow() ])
+        return ListSection(id: "", rows: [ pageDescriptionRow() ])
     }
 }
 

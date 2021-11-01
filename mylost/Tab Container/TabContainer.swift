@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Core
+import Components
 
 class ProductContainer: PagerTabStripViewController {
     enum UserType {
@@ -16,7 +18,7 @@ class ProductContainer: PagerTabStripViewController {
     @IBOutlet weak var segments: ScrollableTabView!
     var lastSelectedIndex = 0
     var moduleVisitDate: Date = Date()
-    var userType: UserType = UserDefaultManager().getValue(key: "token") == nil ? .guest : .user{
+    var userType: UserType = UserDefaultManagerImpl().getValue(key: "token") == nil ? .guest : .user {
         didSet {
             self.items = getDatasourceModels()
             self.segments.collectionView.reloadData()
@@ -35,10 +37,20 @@ class ProductContainer: PagerTabStripViewController {
         configureSegmentsCollectionView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
     private func configureSegmentsCollectionView() {
         self.containerView.isScrollEnabled = false
         self.segments.delegate = self
-        self.segments.collectionView.backgroundColor = .clear
+        self.segments.collectionView.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
     }
 }
 
@@ -68,7 +80,7 @@ extension ProductContainer: PagerTabStripDataSource {
                 }
         
         var firstVc: UIViewController = signVC
-        if let token = UserDefaultManager().getValue(key: "token") as? String {
+        if let token = UserDefaultManagerImpl().getValue(key: "token") as? String {
             
             guard let userVc = DIAssembly(uiAssemblies: [MyProfileAssembly(userID: 1,
                                                                            bearerToken: token)],

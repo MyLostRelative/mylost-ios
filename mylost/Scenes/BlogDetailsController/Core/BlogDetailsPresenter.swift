@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Core
+import Components
 
 protocol BlogDetailsView: AnyObject {
     var tableView: UITableView {get}
@@ -50,15 +52,13 @@ class BlogDetailsPresenterImpl: BlogDetailsPresenter {
         }
     }
     
-    
     private func constructDataSource() {
         DispatchQueue.main.async {
             self.tableViewDataSource?.reload(
                 with: [
                  ListSection.init(
                     id: "",
-                    rows: [self.backNavigateLabelRow(),
-                           self.blogDetailRow(blog: self.blog)]
+                    rows: [ self.blogDetailRow(blog: self.blog)]
                 )
                 ]
             )
@@ -66,15 +66,14 @@ class BlogDetailsPresenterImpl: BlogDetailsPresenter {
     }
 }
 
-
-//MARK: Table Rows
+// MARK: Table Rows
 extension BlogDetailsPresenterImpl {
     private func clickableLabelRow(with model: TiTleButtonTableCell.ViewModel) -> ListRow<TiTleButtonTableCell> {
         ListRow(model: model,
                 height: UITableView.automaticDimension)
     }
     
-    private func blogDetailRow(blog: Blog) -> ListRow <TitleAndDescriptionCardTableCell>{
+    private func blogDetailRow(blog: Blog) -> ListRow <TitleAndDescriptionCardTableCell> {
     ListRow(
             model: TitleAndDescriptionCardTableCell
                 .Model(headerModel:
@@ -82,18 +81,11 @@ extension BlogDetailsPresenterImpl {
                             icon: .withURL(url: URL(string: blog.imageUrl ?? "")),
                             title: blog.statementTitle,
                             info1: (blog.createDate ?? "").convertedDate,
-                            description: nil),
+                            description: nil,
+                        rightIcon: nil),
                        cardModel: .init(title: "",
                                         description: blog.statementDescription)),
             
             height: UITableView.automaticDimension)
-    }
-    
-    private func backNavigateLabelRow() -> ListRow<TiTleButtonTableCell>  {
-        self.clickableLabelRow(with: .init(
-            title: "უკან დაბრუნება",
-            onTap: { _ in
-                self.router.backToBlogs()
-            }))
     }
 }

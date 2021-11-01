@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Components
 
 protocol MyProfileView: AnyObject {
     var tableView: UITableView {get}

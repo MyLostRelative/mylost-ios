@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Components
 
 class StatementsController: UIViewController {
 
@@ -21,6 +22,10 @@ class StatementsController: UIViewController {
     override func viewDidLoad() {
         addTableView()
         statementPresenter?.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        statementPresenter?.viewWillAppear()
     }
     
     private func addTableView() {

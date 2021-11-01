@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "icons48PaymentCategoryRadioSateliteFill.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}

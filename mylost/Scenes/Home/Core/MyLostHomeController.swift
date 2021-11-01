@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Components
 
 class MyLostHomeController: UIViewController {
 
     var mypresenter: MyLostHomePresenter?
+    var currentCell: UITableViewCell?
     var tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
@@ -21,16 +23,13 @@ class MyLostHomeController: UIViewController {
     override func viewDidLoad() {
         addTableView()
         mypresenter?.viewDidLoad()
+        navigationController?.delegate = self
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.navigationController?.navigationBar.isHidden = true
-//    }
-//    
-//    override func viewDidAppear(_ animated: Bool) {
-//        self.navigationController?.navigationBar.isHidden = false
-//    }
-//    
+    override func viewWillAppear(_ animated: Bool) {
+        mypresenter?.viewWillAppear()
+    }
+    
     private func addTableView() {
         self.view.addSubview(tableView)
         
@@ -42,8 +41,30 @@ class MyLostHomeController: UIViewController {
 }
 
 extension MyLostHomeController: MyLostHomeView {
+    
     func displayBanner(type: Bannertype, title: String, description: String) {
         self.displayBanner(banner: .init(type: type, title: title, description: description))
     }
 }
 
+extension MyLostHomeController: UINavigationControllerDelegate {
+    func navigationController(
+        _ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation,
+        from fromVC: UIViewController,
+        to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        switch operation {
+        case .push:
+            return TransitionManager(duration: 0.7)
+        default:
+            return nil
+        }
+        
+    }
+}
+
+extension MyLostHomeController: customNavigatable {
+    var navTiTle: String {
+        return "მთავარი გვერდი"
+    }
+}

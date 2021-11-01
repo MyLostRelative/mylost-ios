@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import LifetimeTracker
+import Components
 
-class BlogDetailsViewController: UIViewController , BlogDetailsView{
-
+class BlogDetailsViewController: UIViewController , BlogDetailsView , LifetimeTrackable{
+    class var lifetimeConfiguration: LifetimeConfiguration {
+            return LifetimeConfiguration(maxCount: 1, groupName: "VC")
+        }
+    
     var presenter: BlogDetailsPresenter?
     
     var tableView: UITableView = {
@@ -20,6 +25,7 @@ class BlogDetailsViewController: UIViewController , BlogDetailsView{
     }()
     
     override func viewDidLoad() {
+        trackLifetime()
         addTableView()
         presenter?.viewDidLoad()
     }
@@ -31,5 +37,11 @@ class BlogDetailsViewController: UIViewController , BlogDetailsView{
         tableView.left(toView: self.view)
         tableView.right(toView: self.view)
         tableView.bottom(toView: self.view)
+    }
+}
+
+extension BlogDetailsViewController: customNavigatable {
+    var navTiTle: String {
+        return "ბლოგის დეტალები"
     }
 }

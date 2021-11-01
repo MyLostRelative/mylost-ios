@@ -6,8 +6,7 @@
 //
 
 import Foundation
-
-
+import Components
 
 protocol SignInModelConfigurator {
     func getTextFieldModel(with type: SignInModelConfiguratorImpl.SignInTextFieldModelType) -> LoginTextFieldTableCell.Model

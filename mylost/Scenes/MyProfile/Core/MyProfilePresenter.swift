@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Core
+import Components
 
 protocol MyProfilePresenterDelegate: AnyObject {
     func MyProfilePresenterUpdate(_ presenter: PostCreatePresenterImpl)
@@ -90,7 +92,7 @@ class MyProfilePresenterImpl: MyProfilePresenter {
     }
 }
 
-//MARK: Service
+// MARK: Service
 extension MyProfilePresenterImpl {
     private func getUserInfo() {
         userInfoBearerGateway.getUser(bearerToken: self.bearerToken){ [weak self] response in
@@ -129,7 +131,7 @@ extension MyProfilePresenterImpl {
         }
 }
 
-//MARK: Section
+// MARK: Section
 extension MyProfilePresenterImpl {
     private func cardsSection() -> ListSection{
         return ListSection.init(
@@ -158,7 +160,7 @@ extension MyProfilePresenterImpl {
         
     }
     
-    private func cardAnimation() -> ListSection{
+    private func cardAnimation() -> ListSection {
         ListSection(id: "", rows: [cardAnimationRow(), cardAnimationRow()])
     }
 
@@ -169,9 +171,9 @@ extension MyProfilePresenterImpl {
     }
 }
 
-//MARK: ROWS
+// MARK: ROWS
 extension MyProfilePresenterImpl {
-    private func userCardRow() -> ListRow <SavedUserTableCell>  {
+    private func userCardRow() -> ListRow <SavedUserTableCell> {
         guard let firstName = userInfo?.firstName,
               let lastName = userInfo?.lastName,
               let username = userInfo?.username else {
@@ -184,7 +186,7 @@ extension MyProfilePresenterImpl {
         return ListRow(model: .init(avatar: Resourcebook.Image.Icons24.generalUserRetailFill.template,
                              username: firstName + " " + lastName,
                              age: username,
-                             buttonTitle: "პროფილი") { cell in
+                             buttonTitle: "პროფილი") { _ in
             guard let userInfo = self.userInfo else { return }
             self.router.move2ProfileDetails(userInfo: userInfo)
             
@@ -206,13 +208,13 @@ extension MyProfilePresenterImpl {
                 height: UITableView.automaticDimension)
     }
     
-    private func cardAnimationRow() -> ListRow <CardAnimationTableCell>{
+    private func cardAnimationRow() -> ListRow <CardAnimationTableCell> {
         ListRow(
             model: "",
             height: UITableView.automaticDimension)
     }
     
-    private func errorPageDescriptionRow() -> ListRow <PageDescriptionWithButtonTableCell>{
+    private func errorPageDescriptionRow() -> ListRow <PageDescriptionWithButtonTableCell> {
         ListRow(
             model: MyLostHomePresenterImpl.ModelBuilder().getErrorPgaeDescription(tap: { (_) in
                 self.isLoading = true
@@ -221,7 +223,7 @@ extension MyProfilePresenterImpl {
             height: UITableView.automaticDimension)
     }
     
-    private func statementRow(statement: Statement) -> ListRow <TitleAndDescriptionCardTableCell>{
+    private func statementRow(statement: Statement) -> ListRow <TitleAndDescriptionCardTableCell> {
         return ListRow(
             model: TitleAndDescriptionCardTableCell
                 .Model(headerModel:
@@ -232,12 +234,13 @@ extension MyProfilePresenterImpl {
                             info2: "სქესი: " + (statement.gender?.rawValue ?? "უცნობია"),
                             info3: "ნათესაობის ტიპი: " + (statement.relationType?.rawValue ?? "უცნობია"),
                             info4: "ქალაქი: " + (statement.city ?? "უცნობია"),
-                            description: nil),
+                            description: nil,
+                        rightIcon: nil),
                        cardModel: .init(title: "",
                                         description: statement.statementDescription)),
             
             height: UITableView.automaticDimension,
-            tapClosure: {_,_ in
+            tapClosure: {_,_,_  in
                 print("dw")
             })
     }

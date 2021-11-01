@@ -6,6 +6,7 @@
 //
 
 import Swinject
+import Core
 
 class DIAssembly: NSObject {
     var uiAssemblies: [UIAssembly]
@@ -27,7 +28,4 @@ protocol UIAssembly: Assembly {
     
 }
 
-protocol NetworkAssembly: Assembly {
-    
-}
 

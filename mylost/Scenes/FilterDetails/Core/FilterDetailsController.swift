@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Components
 
 class FilterDetailsViewController: UIViewController {
 
@@ -41,3 +42,8 @@ extension FilterDetailsViewController: FilterDetailsView {
     }
 }
 
+extension FilterDetailsViewController: customNavigatable {
+    var navTiTle: String {
+        "ფილტრები"
+    }
+}

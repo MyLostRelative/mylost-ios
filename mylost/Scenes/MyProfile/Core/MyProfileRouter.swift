@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 protocol MyProfileRouter {
     func attach(controller: MyProfileViewController)
