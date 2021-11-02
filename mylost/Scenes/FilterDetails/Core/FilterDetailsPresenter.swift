@@ -73,9 +73,6 @@ class FilterDetailsPresenterImpl: FilterDetailsPresenter {
             )
         }
     }
-    
-    
-    
 }
 
 // MARK: Table Rows

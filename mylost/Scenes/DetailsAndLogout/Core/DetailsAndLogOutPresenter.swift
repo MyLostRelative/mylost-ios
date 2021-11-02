@@ -5,7 +5,6 @@
 //  Created by Nato Egnatashvili on 04.09.21.
 //
 
-
 import UIKit
 import Core
 import Components
@@ -56,7 +55,7 @@ class DetailsAndLogOutPresenterImpl: DetailsAndLogOutPresenter {
         }
     }
     
-    private func pageDescriptionRow() -> ListRow <PageDescriptionTableCell>  {
+    private func pageDescriptionRow() -> ListRow <PageDescriptionTableCell> {
         ListRow(model: PageDescriptionTableCell.Model(imageType: (image: Resourcebook.Image.Icons24.generalUserRetailFill.template,
                                                                   tint: Resourcebook.Color.Information.solid300.uiColor),
                                                       title: nil,
@@ -75,10 +74,10 @@ class DetailsAndLogOutPresenterImpl: DetailsAndLogOutPresenter {
     }
 }
 
-//MARK: Sign Up Section
+// MARK: - Sign Up Section
 extension DetailsAndLogOutPresenterImpl {
-    private func normalState() -> [ListSection]{
-         [navigationAndPageDescriptionSection(), rowItemSection(), logOutSection() ]
+    private func normalState() -> [ListSection] {
+         [pageDescriptionSection(), rowItemSection()]
     }
     
     private func rowItemSection() -> ListSection {
@@ -93,21 +92,7 @@ extension DetailsAndLogOutPresenterImpl {
         return ListSection(id: "", rows: rowItems)
     }
     
-    private func navigationAndPageDescriptionSection() -> ListSection{
-        let clickableLabel1 = clickableLabel(with: .init(title: "უკან დაბრუნება",
-                                                   onTap: { _ in
-                                                    self.router.backToProfile()
-                                                   }))
-        return ListSection(id: "", rows: [clickableLabel1 , pageDescriptionRow()  ])
-    }
-    
-    private func logOutSection() -> ListSection {
-        let logOutLabel = clickableLabel(with: .init(title: "გასვლა",
-                                                     colorStyle: .negative,
-                                                     onTap: { _ in
-                                                        UserDefaultManagerImpl().removeValue(key: "token")
-                                                        self.router.changeToLogOut()
-                                                     }))
-        return ListSection(id: "", rows: [logOutLabel ])
+    private func pageDescriptionSection() -> ListSection {
+        return ListSection(id: "", rows: [pageDescriptionRow()  ])
     }
 }

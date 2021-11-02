@@ -21,6 +21,7 @@ protocol MyLostHomeView: AnyObject {
 protocol MyLostHomePresenter {
     func viewDidLoad()
     func viewWillAppear()
+    func attach(view: MyLostHomeView)
 }
 
 class MyLostHomePresenterImpl: MyLostHomePresenter {
@@ -42,11 +43,18 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
     }
     let favouriteStatements: BehaviorRelay<[Statement]> = BehaviorRelay(value: [])
     private let manager: PickerDataManager = PickerDataManagerImpl()
+    private let statementsAndBlogsAdapter: StatementsAndBlogsAdapter
     
-    init(view: MyLostHomeView, statementsGateway: StatementGateway, router: MyLostHomeRouter) {
-        self.view = view
+    init(statementsGateway: StatementGateway,
+         router: MyLostHomeRouter,
+         statementsAndBlogsAdapter: StatementsAndBlogsAdapter) {
         self.statementsGateway = statementsGateway
         self.router = router
+        self.statementsAndBlogsAdapter = statementsAndBlogsAdapter
+    }
+    
+    func attach(view: MyLostHomeView) {
+        self.view = view
     }
     
     func viewDidLoad() {
@@ -66,7 +74,7 @@ class MyLostHomePresenterImpl: MyLostHomePresenter {
     }
     
     private func fetchFavourites() {
-        favouriteStatements.accept(statements.filter({$0.isFavourite ?? false}))
+        statementsAndBlogsAdapter.favouriteStatements.accept(statements.filter({$0.isFavourite ?? false}))
     }
 }
 
@@ -189,7 +197,7 @@ extension MyLostHomePresenterImpl {
             id: "",
             rows:  [clickableLabel(with: .init(title: "ფავორიტების სია",
                                                onTap: { _ in
-                                                self.router.move2Fav(favouriteStatements: self.favouriteStatements)
+                                                   self.router.move2Fav(favouriteStatements: self.statementsAndBlogsAdapter.favouriteStatements )
                                                }))
             ] )
     }
@@ -266,10 +274,11 @@ extension MyLostHomePresenterImpl {
                               statement: Statement) {
         if success {
             if becomeFavourite {
-                self.favouriteStatements.accept(self.favouriteStatements.value + [statement])
+                self.statementsAndBlogsAdapter.favouriteStatements.accept(self.statementsAndBlogsAdapter.favouriteStatements.value  + [statement])
             } else {
-                let removedFav = self.favouriteStatements.value.filter({$0 != statement})
-                self.favouriteStatements.accept(removedFav)
+                let removedFav = self.statementsAndBlogsAdapter.favouriteStatements.value.filter({$0 != statement})
+                self.statementsAndBlogsAdapter.favouriteStatements.accept(removedFav)
+                
             }
             constructDataSource()
         } else {
@@ -284,7 +293,7 @@ extension MyLostHomePresenterImpl {
     }
     
     private func statementRow(statement: Statement) -> ListRow <TitleAndDescriptionCardTableCell> {
-        let isFav = self.favouriteStatements.value.filter({ $0 == statement }).first != nil
+        let isFav = self.statementsAndBlogsAdapter.favouriteStatements.value.filter({ $0 == statement }).first != nil
         return ListRow(
             model: TitleAndDescriptionCardTableCell
                 .Model(headerModel:

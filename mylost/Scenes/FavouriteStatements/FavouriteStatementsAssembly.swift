@@ -33,7 +33,7 @@ class FavouriteStatementsAssembly: UIAssembly {
             return presenter
         }
         
-        container.register(FavouriteStatementsRouterImpl.self) {resolver in
+        container.register(FavouriteStatementsRouterImpl.self) {_ in
             return FavouriteStatementsRouterImpl()
         }
     }

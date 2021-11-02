@@ -23,9 +23,6 @@ class DIAssembly: NSObject {
     }
 }
 
-
 protocol UIAssembly: Assembly {
     
 }
-
-

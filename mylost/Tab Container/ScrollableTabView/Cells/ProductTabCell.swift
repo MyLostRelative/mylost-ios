@@ -44,7 +44,7 @@ class ProductTabCell: UICollectionViewCell {
     }
 }
 
-// MARK:- Setup
+// MARK: - Setup
 private extension ProductTabCell {
     func setUp() {
         self.contentView.addSubview(stackView)
@@ -59,10 +59,10 @@ private extension ProductTabCell {
     }
 }
 
-// MARK:- Configuration
+// MARK: - Configuration
 extension ProductTabCell : CollectionConfigurable {
     func configure(model: TabCollectionCellModel) {
-        if let model = model as?  ProductTabModel{
+        if let model = model as?  ProductTabModel {
             self.configure(title: model.title , state: model.state)
         }
     }
@@ -76,7 +76,7 @@ extension ProductTabCell : CollectionConfigurable {
     }
 }
 
-// MARK:- Touches
+// MARK: - Touches
 extension ProductTabCell {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -122,12 +122,12 @@ extension ProductTabCell {
     }
 }
 
-extension ProductTabCell{
+extension ProductTabCell {
     enum State { case active, enabled, pressed, disabled }
 }
 
 extension ProductTabCell.State {
-    func getBackgroundColor()-> UIColor? {
+    func getBackgroundColor() -> UIColor? {
         switch self {
         case .active: return .clear
         case .enabled: return .clear

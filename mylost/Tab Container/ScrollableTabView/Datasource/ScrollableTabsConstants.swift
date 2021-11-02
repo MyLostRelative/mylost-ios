@@ -49,7 +49,6 @@ struct AppScrollableTabs {
         static let padding: CGFloat = 35
         static let height:CGFloat = 25
         
-        
         struct Colors {
             static let background: UIColor? = Resourcebook.Color.Information.solid150.uiColor
         }

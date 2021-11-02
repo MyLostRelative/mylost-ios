@@ -64,7 +64,6 @@ class ContactDetailsPresenterImpl: ContactDetailsPresenter {
         }
     }
     
-    
     private func constructDataSource() {
         let state: [ListSection] = isLoading ? [mainSection(),  cardAnimationSection()] :
             [self.mainSection(), self.rowItemSection()]
@@ -78,7 +77,7 @@ class ContactDetailsPresenterImpl: ContactDetailsPresenter {
     private func fetchGuestUserInfo() {
         self.userInfoGateway.getUser(userID: guestUserID) { [weak self] result in
             self?.isLoading = false
-            switch result{
+            switch result {
             case .success(let resp):
                 self?.guestUserInfo = resp.getGuestUserInfo()
                 self?.constructDataSource()
@@ -96,15 +95,14 @@ class ContactDetailsPresenterImpl: ContactDetailsPresenter {
     }
 }
 
-
-//MARK: Table Section
+// MARK: - Table Section
 extension ContactDetailsPresenterImpl {
-    private func mainSection()-> ListSection {
-        return ListSection(id: "", rows: [ pageDescriptionRow() ])
+    private func mainSection() -> ListSection {
+        return ListSection(id: "", rows: [pageDescriptionRow()])
     }
 }
 
-//MARK: Table Rows
+// MARK: - Table Rows
 extension ContactDetailsPresenterImpl {
     private func rowItemSection() -> ListSection {
         var rowItems: [ListRow <RowItemTableCell> ] = []
@@ -125,7 +123,7 @@ extension ContactDetailsPresenterImpl {
                 height: UITableView.automaticDimension)
     }
     
-    private func backNavigateLabelRow() -> ListRow<TiTleButtonTableCell>  {
+    private func backNavigateLabelRow() -> ListRow<TiTleButtonTableCell> {
         self.clickableLabelRow(with: .init(
             title: "უკან დაბრუნება",
             onTap: { _ in
@@ -138,7 +136,7 @@ extension ContactDetailsPresenterImpl {
                 height: UITableView.automaticDimension)
     }
     
-    private func pageDescriptionRow() -> ListRow <PageDescriptionTableCell>  {
+    private func pageDescriptionRow() -> ListRow <PageDescriptionTableCell> {
         ListRow(model: PageDescriptionTableCell.Model(imageType: (image: Resourcebook.Image.Icons24.contactsContacts.template,
                                                                   tint: Resourcebook.Color.Information.solid300.uiColor),
                                                       title: "დაკონტაქტება",
@@ -151,7 +149,7 @@ extension ContactDetailsPresenterImpl {
                     rows: [self.cardAnimationRow(), cardAnimationRow()])
     }
 
-    private func cardAnimationRow() -> ListRow <CardAnimationTableCell>{
+    private func cardAnimationRow() -> ListRow <CardAnimationTableCell> {
         ListRow(
             model: "",
             height: UITableView.automaticDimension)

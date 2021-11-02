@@ -8,7 +8,7 @@
 import Swinject
 
 class FilterDetailsAssembly: UIAssembly {
-    private let delegate: FilterDetailsPresenterDelegate?
+    private weak var delegate: FilterDetailsPresenterDelegate?
     init(delegate: FilterDetailsPresenterDelegate?) {
         self.delegate = delegate
     }
@@ -29,9 +29,8 @@ class FilterDetailsAssembly: UIAssembly {
             return presenter
         }
         
-        container.register(FilterDetailsRouterImpl.self) {resolver in
+        container.register(FilterDetailsRouterImpl.self) {_ in
             return FilterDetailsRouterImpl()
         }
     }
 }
-

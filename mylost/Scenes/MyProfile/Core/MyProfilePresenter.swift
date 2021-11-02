@@ -8,6 +8,7 @@
 import UIKit
 import Core
 import Components
+import RxRelay
 
 protocol MyProfilePresenterDelegate: AnyObject {
     func MyProfilePresenterUpdate(_ presenter: PostCreatePresenterImpl)
@@ -36,22 +37,45 @@ class MyProfilePresenterImpl: MyProfilePresenter {
             self.constructDataSource()
         }
     }
+    private let actionSheetFactory: MyProfileSliderActionSheetFactory
+    private let statementsAndBlogsAdapter: StatementsAndBlogsAdapter
     private var statements: [Statement] = []
     private var userInfo: UserInfo?
     
+    private lazy var favouriteTap : (() -> Void)? = {[weak self] in
+        self?.router.move2Fav(favouriteStatements: self?.statementsAndBlogsAdapter.favouriteStatements ?? BehaviorRelay<[Statement]>(value: []))
+    }
+    
+    private lazy var readedTap : (() -> Void)? = {[weak self] in
+        self?.router.move2Fav(favouriteStatements: self?.statementsAndBlogsAdapter.favouriteStatements ?? BehaviorRelay<[Statement]>(value: []))
+    }
+    
+    private lazy var profileDetailTap : (() -> Void)? = {[weak self] in
+        guard let userInfo = self?.userInfo else { return }
+        self?.router.move2ProfileDetails(userInfo: userInfo)
+    }
+    
+    private lazy var logoutTap : (() -> Void)? = {[weak self] in
+        UserDefaultManagerImpl().removeValue(key: "token")
+        self?.router.changeToLogOut()
+    }
     
     init(router: MyProfileRouter,
          userID: Int,
          bearerToken: String,
          userInfoGateway: UserInfoGateway,
          userInfoBearerGateway: UserInfoBearerGateway,
-         statementGateway: StatementGateway) {
+         statementGateway: StatementGateway,
+         actionSheetFactory: MyProfileSliderActionSheetFactory,
+         statementsAndBlogsAdapter: StatementsAndBlogsAdapter) {
         self.router = router
         self.userID = userID
         self.bearerToken = bearerToken
         self.userInfoGateway = userInfoGateway
         self.userInfoBearerGateway = userInfoBearerGateway
         self.statementGateway = statementGateway
+        self.actionSheetFactory = actionSheetFactory
+        self.statementsAndBlogsAdapter = statementsAndBlogsAdapter
     }
     
     func attach(view: MyProfileView) {
@@ -83,7 +107,7 @@ class MyProfilePresenterImpl: MyProfilePresenter {
     
     private func constructDataSource() {
         let stateDependent = self.isLoading ?  [self.cardAnimation()] :
-            (self.statementLoading ? self.statementAnimationState() : self.statementLoadedState() )
+        (self.statementLoading ? self.statementAnimationState() : self.statementLoadedState() )
         DispatchQueue.main.async {
             self.tableViewDataSource?.reload(
                 with: stateDependent
@@ -95,7 +119,7 @@ class MyProfilePresenterImpl: MyProfilePresenter {
 // MARK: Service
 extension MyProfilePresenterImpl {
     private func getUserInfo() {
-        userInfoBearerGateway.getUser(bearerToken: self.bearerToken){ [weak self] response in
+        userInfoBearerGateway.getUser(bearerToken: self.bearerToken) { [weak self] response in
             self?.isLoading = false
             switch response {
             case .success(let resp):
@@ -105,7 +129,6 @@ extension MyProfilePresenterImpl {
                     self?.fetchStatements()
                     self?.constructDataSource()
                 }
-                
             case .failure(_):
                 self?.fetchFailed = true
             }
@@ -114,34 +137,32 @@ extension MyProfilePresenterImpl {
     
     private func fetchStatements() {
         statementGateway.getStatementListByUser(userID: userInfo?.id ?? self.userID) { [weak self] response  in
-                self?.statementLoading = false
-                switch response {
-                case .success(let resp):
-                    DispatchQueue.main.async {
-                        self?.statements = resp
-                        self?.constructDataSource()
-                    }
-                    
-                case .failure(_):
-                    self?.view?.displayBanner(type: .negative,
-                                              title: "მოხდა შეცდომა",
-                                              description: "თქვენი განცხადება ვერ ჩაიტვირთა")
+            self?.statementLoading = false
+            switch response {
+            case .success(let resp):
+                DispatchQueue.main.async {
+                    self?.statements = resp
+                    self?.constructDataSource()
                 }
+            case .failure(_):
+                self?.view?.displayBanner(type: .negative,
+                                          title: "მოხდა შეცდომა",
+                                          description: "თქვენი განცხადება ვერ ჩაიტვირთა")
             }
         }
+    }
 }
 
 // MARK: Section
 extension MyProfilePresenterImpl {
-    private func cardsSection() -> ListSection{
+    private func cardsSection() -> ListSection {
         return ListSection.init(
             id: "",
-            rows: [self.userCardRow(), 
+            rows: [self.userCardRow(),
                    self.clickableLabel(with: .init(title: "პოსტის შექმნა",
                                                    colorStyle: .positive,
-                                                   onTap: { _ in
-                                                    self.router.move2CreatePost(userID: self.userInfo?.id ??  self.userID,
-                                                                                myProfileDelegate: self)
+                                                   onTap: { _ in                                         self.router.move2CreatePost(userID: self.userInfo?.id ??  self.userID,
+                                                                                                                                       myProfileDelegate: self)
                                                    }))] )
     }
     
@@ -156,14 +177,14 @@ extension MyProfilePresenterImpl {
     private func statementSection() -> ListSection {
         let statementRows = statements.map({statementRow(statement: $0)})
         return ListSection(id: "",
-                    rows: statementRows)
+                           rows: statementRows)
         
     }
     
     private func cardAnimation() -> ListSection {
         ListSection(id: "", rows: [cardAnimationRow(), cardAnimationRow()])
     }
-
+    
     private func errorStatementsSection() -> ListSection {
         ListSection(
             id: "",
@@ -174,24 +195,22 @@ extension MyProfilePresenterImpl {
 // MARK: ROWS
 extension MyProfilePresenterImpl {
     private func userCardRow() -> ListRow <SavedUserTableCell> {
-        guard let firstName = userInfo?.firstName,
-              let lastName = userInfo?.lastName,
-              let username = userInfo?.username else {
-            return ListRow(model: .init(avatar: Resourcebook.Image.Icons24.generalUserRetailFill.template,
-                                        username: "",
-                                        age: "",
-                                        buttonTitle: "პროფილი", onTap: nil) ,
-                   height: UITableView.automaticDimension)
-        }
+        let menus = [MyProfileMenuType.profileDetail(tap: profileDetailTap),
+            MyProfileMenuType.favouriteStatement(tap: favouriteTap),
+                     MyProfileMenuType.readedBlogStatement(tap: readedTap),
+                     MyProfileMenuType.logout(tap: logoutTap)]
+        let profile = actionSheetFactory.profileDescriptionSection(name: self.userInfo?.firstName ?? "",
+                                                                   mail: self.userInfo?.email)
+        let menuSection = actionSheetFactory.menuItemsSection(items: menus)
+        
         return ListRow(model: .init(avatar: Resourcebook.Image.Icons24.generalUserRetailFill.template,
-                             username: firstName + " " + lastName,
-                             age: username,
-                             buttonTitle: "პროფილი") { _ in
-            guard let userInfo = self.userInfo else { return }
-            self.router.move2ProfileDetails(userInfo: userInfo)
+                                    username: userInfo?.firstName ?? "" + " " + (userInfo?.lastName ?? ""),
+                                    description: userInfo?.firstName ?? "") { _ in
+            self.router.presentActionSheet(
+             sections: [profile, menuSection])
             
         },
-        height: UITableView.automaticDimension)
+                       height: UITableView.automaticDimension)
     }
     
     private func textField(with model: LoginTextFieldTableCell.Model) -> ListRow <LoginTextFieldTableCell> {
@@ -235,7 +254,7 @@ extension MyProfilePresenterImpl {
                             info3: "ნათესაობის ტიპი: " + (statement.relationType?.rawValue ?? "უცნობია"),
                             info4: "ქალაქი: " + (statement.city ?? "უცნობია"),
                             description: nil,
-                        rightIcon: nil),
+                            rightIcon: nil),
                        cardModel: .init(title: "",
                                         description: statement.statementDescription)),
             

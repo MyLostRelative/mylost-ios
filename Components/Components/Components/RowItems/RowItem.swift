@@ -9,7 +9,7 @@ import UIKit
 
 public class RowItem: UIView {
     
-    private var verticalStack: UIStackView = {
+    private var horizontalStack: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.spacing = 4
@@ -17,6 +17,14 @@ public class RowItem: UIView {
         view.alignment = .fill
         
         return view
+    }()
+    
+    private var icon: UIImageView = {
+        let imgView = UIImageView()
+        imgView.height(equalTo: 20)
+        imgView.width(equalTo: 20)
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        return imgView
     }()
     
     private var titleLbl: UILabel = {
@@ -49,6 +57,7 @@ public class RowItem: UIView {
             titleLbl.text = title + ": "
         }
         descriptionLbl.text = model.description
+        icon.image = model.icon
     }
     
     required init?(coder: NSCoder) {
@@ -68,13 +77,14 @@ extension RowItem {
     }
     
     private func setUpVerticalStack() {
-        self.addSubview(verticalStack)
-        verticalStack.stretchLayout(with: 8, to: self)
+        self.addSubview(horizontalStack)
+        horizontalStack.stretchLayout(with: 8, to: self)
     }
     
     private func setUpTitleAndDescription() {
-        self.verticalStack.addArrangedSubview(titleLbl)
-        self.verticalStack.addArrangedSubview(descriptionLbl)
+        self.horizontalStack.addArrangedSubview(icon)
+        self.horizontalStack.addArrangedSubview(titleLbl)
+        self.horizontalStack.addArrangedSubview(descriptionLbl)
     }
     
 }

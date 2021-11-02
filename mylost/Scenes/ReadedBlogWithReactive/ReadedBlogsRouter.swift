@@ -18,6 +18,4 @@ class ReadedBlogsRouterImpl: ReadedBlogsRouter {
     func attach(controller: ReadedBlogsController) {
         self.controller = controller
     }
-    
 }
-

@@ -10,7 +10,7 @@ import RxCocoa
 import RxDataSources
 import Components
 
-class FavouriteStatementsController: UIViewController , RXTableConfigurable{
+class FavouriteStatementsController: UIViewController , RXTableConfigurable {
     
     var presenter: FavouriteStatementsPresenter?
     var tableView: UITableView = {
@@ -23,7 +23,6 @@ class FavouriteStatementsController: UIViewController , RXTableConfigurable{
     
     private let bag = DisposeBag()
     var viewModel = FavouriteViewModel()
-    
     
     override func viewDidLoad() {
         addTableView()
@@ -60,5 +59,11 @@ extension FavouriteStatementsController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+}
+
+extension FavouriteStatementsController: customNavigatable {
+    var navTiTle: String {
+        return "ფავორიტების სია"
     }
 }

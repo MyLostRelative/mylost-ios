@@ -18,7 +18,6 @@
 		521951982722E20A00295424 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521951942722E20A00295424 /* RegistrationController.swift */; };
 		521951992722E20A00295424 /* RegistrationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521951952722E20A00295424 /* RegistrationAssembly.swift */; };
 		5219519B2722E48500295424 /* RegistrationModelsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5219519A2722E48500295424 /* RegistrationModelsFactory.swift */; };
-		521951A02722FBDF00295424 /* RegistrationInputTypeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5219519F2722FBDF00295424 /* RegistrationInputTypeModels.swift */; };
 		521951A62727EF5A00295424 /* ReadedBlogsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521951A22727EF5A00295424 /* ReadedBlogsPresenter.swift */; };
 		521951A72727EF5A00295424 /* ReadedBlogsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521951A32727EF5A00295424 /* ReadedBlogsRouter.swift */; };
 		521951A82727EF5A00295424 /* ReadedBlogsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521951A42727EF5A00295424 /* ReadedBlogsController.swift */; };
@@ -46,6 +45,9 @@
 		52734E41272C09DB00CA4206 /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52734E3E272C09D700CA4206 /* assets.xcassets */; };
 		52734E42272C09DB00CA4206 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52734E40272C09DB00CA4206 /* Colors.xcassets */; };
 		52734E44272C115200CA4206 /* MyLostNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E43272C115200CA4206 /* MyLostNavigationController.swift */; };
+		52734E55272FED6000CA4206 /* MyProfileSliderActionSheetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E54272FED6000CA4206 /* MyProfileSliderActionSheetFactory.swift */; };
+		52734E5A272FFB5800CA4206 /* StatementsAndBlogsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E59272FFB5800CA4206 /* StatementsAndBlogsAdapter.swift */; };
+		52734E5D27301FF700CA4206 /* MyProfileMenuModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E5C27301FF700CA4206 /* MyProfileMenuModels.swift */; };
 		527888D226E526ED00324041 /* PostCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888CF26E526ED00324041 /* PostCreateRouter.swift */; };
 		527888D326E526ED00324041 /* PostCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D026E526ED00324041 /* PostCreateController.swift */; };
 		527888D426E526ED00324041 /* PostCreateAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D126E526ED00324041 /* PostCreateAssembly.swift */; };
@@ -93,7 +95,7 @@
 		52DC59D52680D82A00B35E35 /* MyLostHomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59D12680D82A00B35E35 /* MyLostHomePresenter.swift */; };
 		52DC59D62680D82A00B35E35 /* MyLostHomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59D22680D82A00B35E35 /* MyLostHomeRouter.swift */; };
 		52DC59D72680D82A00B35E35 /* MyLostHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59D32680D82A00B35E35 /* MyLostHomeController.swift */; };
-		52DC59D82680D82A00B35E35 /* MyLostHomeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59D42680D82A00B35E35 /* MyLostHomeConfigurator.swift */; };
+		52DC59D82680D82A00B35E35 /* MyLostHomeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59D42680D82A00B35E35 /* MyLostHomeAssembly.swift */; };
 		52DC59E02680DDC800B35E35 /* StatementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59DC2680DDC800B35E35 /* StatementsPresenter.swift */; };
 		52DC59E12680DDC800B35E35 /* StatementsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59DD2680DDC800B35E35 /* StatementsRouter.swift */; };
 		52DC59E22680DDC800B35E35 /* StatementsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59DE2680DDC800B35E35 /* StatementsController.swift */; };
@@ -154,7 +156,6 @@
 		521951942722E20A00295424 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		521951952722E20A00295424 /* RegistrationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationAssembly.swift; sourceTree = "<group>"; };
 		5219519A2722E48500295424 /* RegistrationModelsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModelsFactory.swift; sourceTree = "<group>"; };
-		5219519F2722FBDF00295424 /* RegistrationInputTypeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInputTypeModels.swift; sourceTree = "<group>"; };
 		521951A22727EF5A00295424 /* ReadedBlogsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadedBlogsPresenter.swift; sourceTree = "<group>"; };
 		521951A32727EF5A00295424 /* ReadedBlogsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadedBlogsRouter.swift; sourceTree = "<group>"; };
 		521951A42727EF5A00295424 /* ReadedBlogsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadedBlogsController.swift; sourceTree = "<group>"; };
@@ -182,6 +183,9 @@
 		52734E3E272C09D700CA4206 /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
 		52734E40272C09DB00CA4206 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		52734E43272C115200CA4206 /* MyLostNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLostNavigationController.swift; sourceTree = "<group>"; };
+		52734E54272FED6000CA4206 /* MyProfileSliderActionSheetFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileSliderActionSheetFactory.swift; sourceTree = "<group>"; };
+		52734E59272FFB5800CA4206 /* StatementsAndBlogsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementsAndBlogsAdapter.swift; sourceTree = "<group>"; };
+		52734E5C27301FF700CA4206 /* MyProfileMenuModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileMenuModels.swift; sourceTree = "<group>"; };
 		527888CF26E526ED00324041 /* PostCreateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateRouter.swift; sourceTree = "<group>"; };
 		527888D026E526ED00324041 /* PostCreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateController.swift; sourceTree = "<group>"; };
 		527888D126E526ED00324041 /* PostCreateAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateAssembly.swift; sourceTree = "<group>"; };
@@ -233,7 +237,7 @@
 		52DC59D12680D82A00B35E35 /* MyLostHomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLostHomePresenter.swift; sourceTree = "<group>"; };
 		52DC59D22680D82A00B35E35 /* MyLostHomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLostHomeRouter.swift; sourceTree = "<group>"; };
 		52DC59D32680D82A00B35E35 /* MyLostHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLostHomeController.swift; sourceTree = "<group>"; };
-		52DC59D42680D82A00B35E35 /* MyLostHomeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLostHomeConfigurator.swift; sourceTree = "<group>"; };
+		52DC59D42680D82A00B35E35 /* MyLostHomeAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLostHomeAssembly.swift; sourceTree = "<group>"; };
 		52DC59DC2680DDC800B35E35 /* StatementsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementsPresenter.swift; sourceTree = "<group>"; };
 		52DC59DD2680DDC800B35E35 /* StatementsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementsRouter.swift; sourceTree = "<group>"; };
 		52DC59DE2680DDC800B35E35 /* StatementsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementsController.swift; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 		520E21B126E005A700A5EF70 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
+				52734E5B27301FE400CA4206 /* Models */,
+				52734E58272FFB1D00CA4206 /* Adapter */,
 				520E21B226E005BB00A5EF70 /* Core */,
 			);
 			path = MyProfile;
@@ -285,6 +291,7 @@
 				520E21B526E005D900A5EF70 /* MyProfilePresenter.swift */,
 				520E21B726E005E300A5EF70 /* MyProfileRouter.swift */,
 				520E21B926E005EE00A5EF70 /* MyProfileAssembly.swift */,
+				52734E54272FED6000CA4206 /* MyProfileSliderActionSheetFactory.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -300,7 +307,6 @@
 		5219518E2722DC8800295424 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				5219519E2722FBCD00295424 /* Models */,
 				5219518F2722DC9100295424 /* Scenes */,
 			);
 			path = Registration;
@@ -316,14 +322,6 @@
 				5219519A2722E48500295424 /* RegistrationModelsFactory.swift */,
 			);
 			path = Scenes;
-			sourceTree = "<group>";
-		};
-		5219519E2722FBCD00295424 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				5219519F2722FBDF00295424 /* RegistrationInputTypeModels.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		521951A12727EF3800295424 /* ReadedBlogWithReactive */ = {
@@ -468,6 +466,22 @@
 				52734E40272C09DB00CA4206 /* Colors.xcassets */,
 			);
 			path = Colors;
+			sourceTree = "<group>";
+		};
+		52734E58272FFB1D00CA4206 /* Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				52734E59272FFB5800CA4206 /* StatementsAndBlogsAdapter.swift */,
+			);
+			path = Adapter;
+			sourceTree = "<group>";
+		};
+		52734E5B27301FE400CA4206 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				52734E5C27301FF700CA4206 /* MyProfileMenuModels.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		527888CE26E526BE00324041 /* PostCreate */ = {
@@ -724,7 +738,7 @@
 				52DC59D12680D82A00B35E35 /* MyLostHomePresenter.swift */,
 				52DC59D22680D82A00B35E35 /* MyLostHomeRouter.swift */,
 				52DC59D32680D82A00B35E35 /* MyLostHomeController.swift */,
-				52DC59D42680D82A00B35E35 /* MyLostHomeConfigurator.swift */,
+				52DC59D42680D82A00B35E35 /* MyLostHomeAssembly.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -990,6 +1004,7 @@
 			files = (
 				5272FFB126DCD11500C24CC8 /* SignInViewController.swift in Sources */,
 				5297D98626E383500014F2FF /* DetailsAndLogOutController.swift in Sources */,
+				52734E55272FED6000CA4206 /* MyProfileSliderActionSheetFactory.swift in Sources */,
 				527888D326E526ED00324041 /* PostCreateController.swift in Sources */,
 				520E21B626E005D900A5EF70 /* MyProfilePresenter.swift in Sources */,
 				52734E3B272C04FB00CA4206 /* PagerTabStripViewController.swift in Sources */,
@@ -997,7 +1012,8 @@
 				52734E44272C115200CA4206 /* MyLostNavigationController.swift in Sources */,
 				52734E3A272C04FB00CA4206 /* PagerTabStripError.swift in Sources */,
 				52734E15272C034000CA4206 /* ProductsTabDataSourceModel.swift in Sources */,
-				52DC59D82680D82A00B35E35 /* MyLostHomeConfigurator.swift in Sources */,
+				52DC59D82680D82A00B35E35 /* MyLostHomeAssembly.swift in Sources */,
+				52734E5D27301FF700CA4206 /* MyProfileMenuModels.swift in Sources */,
 				527888E426E5441900324041 /* PickerData.swift in Sources */,
 				528FC8612701BD5100ABAAF0 /* FavouriteStatementsRouter.swift in Sources */,
 				52DC59E02680DDC800B35E35 /* StatementsPresenter.swift in Sources */,
@@ -1030,9 +1046,9 @@
 				527888D626E5273A00324041 /* PostCreatePresenter.swift in Sources */,
 				521951962722E20A00295424 /* RegistrationPresenter.swift in Sources */,
 				5297D9C026E4DD3C0014F2FF /* BlogDetailsRouter.swift in Sources */,
+				52734E5A272FFB5800CA4206 /* StatementsAndBlogsAdapter.swift in Sources */,
 				5297D9C326E4DD520014F2FF /* BlogDetailsAssembly.swift in Sources */,
 				528FC8622701BD5100ABAAF0 /* FavouriteStatementsController.swift in Sources */,
-				521951A02722FBDF00295424 /* RegistrationInputTypeModels.swift in Sources */,
 				52DC59E22680DDC800B35E35 /* StatementsController.swift in Sources */,
 				520E21BA26E005EE00A5EF70 /* MyProfileAssembly.swift in Sources */,
 				528FC8602701BD5100ABAAF0 /* FavouriteStatementsPresenter.swift in Sources */,

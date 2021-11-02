@@ -40,7 +40,6 @@ class ReadedBlogsAssembly: UIAssembly {
         }
     }
     
-    
     private func registerRouter(with container: Container) {
         container.register(ReadedBlogsRouterImpl.self) {_ in
             return ReadedBlogsRouterImpl()

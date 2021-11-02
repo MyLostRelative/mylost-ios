@@ -45,7 +45,7 @@ class FavouriteStatementsPresenterImpl: FavouriteStatementsPresenter {
         success: Bool = true,
         statement: Statement) {
             if success {
-                let removedFav = self.favouriteStatements.value.filter( { $0 != statement})
+                let removedFav = self.favouriteStatements.value.filter({ $0 != statement })
                 self.favouriteStatements.accept(removedFav)
                 self.getModels()
             } else {

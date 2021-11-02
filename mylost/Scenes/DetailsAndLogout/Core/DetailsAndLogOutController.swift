@@ -22,7 +22,6 @@ class DetailsAndLogOutController: UIViewController {
         return table
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
@@ -43,4 +42,3 @@ class DetailsAndLogOutController: UIViewController {
 extension DetailsAndLogOutController: DetailsAndLogOutView {
     
 }
-

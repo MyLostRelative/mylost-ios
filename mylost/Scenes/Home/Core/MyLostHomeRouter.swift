@@ -11,15 +11,15 @@ import Core
 protocol MyLostHomeRouter {
     func move2UserDetails(guestUserID: Int, guestImgUrl: String?)
     func move2Filter(delegate: FilterDetailsPresenterDelegate)
-    func move2H()
     func move2Fav(favouriteStatements: BehaviorRelay<[Statement]>)
+    func attach(controller: MyLostHomeController)
 }
 
 class MyLostHomeRouterImpl: MyLostHomeRouter {
     
     private weak var controller: MyLostHomeController?
     
-    init(_ controller: MyLostHomeController?) {
+    func attach(controller: MyLostHomeController) {
         self.controller = controller
     }
     
@@ -52,10 +52,13 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
        self.controller?.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func move2H() {
-        let otherPaymentConfigure = MyLostHomeConfiguratorImpl()
-        let otherProductsVC = MyLostHomeController()
-        otherPaymentConfigure.configure(otherProductsVC )
-        self.controller?.navigationController?.pushViewController(otherProductsVC, animated: true)
-    }
+//    func move2Fav(adapter: StatementsAndBlogsAdapter) {
+//        guard let vc = DIAssembly(
+//                uiAssemblies: [FavouriteStatementsAssembly(favouriteStatements: favouriteStatements)],
+//                                  networkAssemblies: [])
+//            .resolver
+//                .resolve(FavouriteStatementsController.self) else { return }
+//        
+//       self.controller?.navigationController?.pushViewController(vc, animated: true)
+//    }
 }

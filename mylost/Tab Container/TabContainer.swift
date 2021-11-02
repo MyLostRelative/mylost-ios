@@ -26,8 +26,13 @@ class ProductContainer: PagerTabStripViewController {
             
         }
     }
+    
+    private let adapter: StatementsAndBlogsAdapter = {
+        StatementsAndBlogsAdapterImpl()
+    }()
+    
     lazy var items: [ProductTabModel] = {
-       return getDatasourceModels()
+        return getDatasourceModels()
     }()
     
     override func viewDidLoad() {
@@ -73,38 +78,52 @@ extension ProductContainer: ScrollableTabViewDelegate {
 
 extension ProductContainer: PagerTabStripDataSource {
     
-    func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        guard let signVC = DIAssembly(uiAssemblies: [SignInAssembly()], networkAssemblies: [LoginNetworkAssembly(), RegistrationNetworkAssembly()])
-                .resolver.resolve(SignInViewController.self) else {
-                    fatalError("errores")
-                }
-        
-        var firstVc: UIViewController = signVC
+    private var signVC: UIViewController? {
+        DIAssembly(uiAssemblies: [SignInAssembly()], networkAssemblies: [LoginNetworkAssembly(), RegistrationNetworkAssembly()])
+            .resolver.resolve(SignInViewController.self)
+    }
+    
+    private var userVC: UIViewController? {
         if let token = UserDefaultManagerImpl().getValue(key: "token") as? String {
+            let uiAssemblies =  [MyProfileAssembly(userID: 1, bearerToken: token, statementsAndBlogsAdapter: adapter)]
+            let networkAssemblies: [NetworkAssembly] = [UserInfoetworkAssembly(), UserInfoBearerNetworkAssembly(),   StatementNetworkAssembly()]
             
-            guard let userVc = DIAssembly(uiAssemblies: [MyProfileAssembly(userID: 1,
-                                                                           bearerToken: token)],
-                                          networkAssemblies: [UserInfoetworkAssembly(), UserInfoBearerNetworkAssembly(),   StatementNetworkAssembly()])
-                    .resolver.resolve(MyProfileViewController.self) else {
-                        fatalError("errores")
-                    }
-            firstVc = userVc
+            return DIAssembly(uiAssemblies: uiAssemblies,
+                              networkAssemblies: networkAssemblies)
+                .resolver.resolve(MyProfileViewController.self)
+        }
+        return nil
+    }
+    
+    private var statementVC: UIViewController? {
+        DIAssembly(uiAssemblies: [MyLostHomeAssembly(statementsAndBlogsAdapter: adapter)],
+                   networkAssemblies: [StatementNetworkAssembly()])
+            .resolver.resolve(MyLostHomeController.self)
+    }
+    
+    private var blogVC: UIViewController {
+        let BlogConfigurator = StatementsConfiguratorImpl()
+        let BlogController = StatementsController()
+        BlogConfigurator.configure(BlogController )
+        return BlogController
+    }
+    
+    func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        guard let signVC = self.signVC else {
+            return []
+        }
+        var firstVc: UIViewController = signVC
+        if let _ = UserDefaultManagerImpl().getValue(key: "token") as? String,
+           let userVC = userVC {
+            firstVc = userVC
         }
         
-        let otherPaymentConfigure = MyLostHomeConfiguratorImpl()
-        let otherProductsVC = MyLostHomeController()
-        otherPaymentConfigure.configure(otherProductsVC )
-        
-        let statementsConfigurator = StatementsConfiguratorImpl()
-        let statementController = StatementsController()
-        statementsConfigurator.configure(statementController )
-
-        return [firstVc, otherProductsVC, statementController]
+        return [firstVc, statementVC, blogVC].compactMap({$0})
     }
     
     func getDatasourceModels() -> [ProductTabModel] {
         let dataSource = ProductsTabDataSource.init()
         return self.userType == .guest ? dataSource.models() : dataSource.loggedInmodels()
     }
-
+    
 }

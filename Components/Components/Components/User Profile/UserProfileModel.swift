@@ -12,15 +12,13 @@ extension SavedUserCard{
     public struct ViewModel {
         let avatar: UIImage
         let username: String
-        let age: String?
-        let buttonTitle: String
+        let description: String?
         let onTap: ((SavedUserCard) -> Void)?
         
-        public init(avatar: UIImage, username: String, age: String? = nil, buttonTitle: String, onTap: ((SavedUserCard) -> ())?) {
+        public init(avatar: UIImage, username: String, description: String? = nil, onTap: ((SavedUserCard) -> ())?) {
             self.avatar = avatar
             self.username = username
-            self.age = age
-            self.buttonTitle = buttonTitle
+            self.description = description
             self.onTap = onTap
         }
         
@@ -28,12 +26,12 @@ extension SavedUserCard{
     
     struct Constants {
         struct Avatar {
-            static let size: CGSize = .init(width: 36, height: 36)
+            static let size: CGSize = .init(width: 40, height: 40)
         }
         
         struct Title {
-            static var textColor: UIColor? { Resourcebook.Color.Information.tr200.uiColor }
-            static let font = Resourcebook.Font.body1
+            static var textColor: UIColor? { Resourcebook.Color.Information.tr300.uiColor }
+            static let font = Resourcebook.Font.body2
         }
         
         struct Username {

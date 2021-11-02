@@ -191,7 +191,7 @@ extension StatementsPresenterImpl {
                 if becomeReaded {
                     self.readedBlogs.accept(self.readedBlogs.value + [blog])
                 } else {
-                    let removedFav = self.readedBlogs.value.filter( {$0 != blog})
+                    let removedFav = self.readedBlogs.value.filter({ $0 != blog })
                     self.readedBlogs.accept(removedFav)
                 }
                 constructDataSource()

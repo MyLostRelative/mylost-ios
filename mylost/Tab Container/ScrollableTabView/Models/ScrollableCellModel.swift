@@ -19,7 +19,7 @@ protocol TabCollectionCellModel {
     var backgroundColor: UIColor? {get}
 }
 
-struct ProductTabModel:  TabCollectionCellModel{
+struct ProductTabModel:  TabCollectionCellModel {
     var title: String
     var state: ProductTabCell.State
     var nibName: String {return "ProductTabCell"}
@@ -29,7 +29,7 @@ struct ProductTabModel:  TabCollectionCellModel{
     var backgroundColor: UIColor? {return  AppScrollableTabs.ProductTab.Colors.background}
 }
 
-extension String{
+extension String {
     func width(withConstraintedHeight height: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)

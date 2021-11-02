@@ -93,6 +93,8 @@
 		52734DDD272BEC7A00CA4206 /* MaterialChipsTableCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734AD0272BEC7900CA4206 /* MaterialChipsTableCellModel.swift */; };
 		52734DDE272BEC7A00CA4206 /* MaterialChipsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734AD1272BEC7900CA4206 /* MaterialChipsTableCell.swift */; };
 		52734DDF272BEC7A00CA4206 /* RoundedTextFieldTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734AD2272BEC7900CA4206 /* RoundedTextFieldTableCell.swift */; };
+		52734E51272FE01F00CA4206 /* SlideActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E50272FE01F00CA4206 /* SlideActionSheet.swift */; };
+		52734E53272FE0DB00CA4206 /* SlideActionSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E52272FE0DB00CA4206 /* SlideActionSheetViewModel.swift */; };
 		A1597317F2E785D4C7C515A1 /* Pods_Components.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81625FC878AC407EE672DED7 /* Pods_Components.framework */; };
 /* End PBXBuildFile section */
 
@@ -185,6 +187,8 @@
 		52734AD0272BEC7900CA4206 /* MaterialChipsTableCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialChipsTableCellModel.swift; sourceTree = "<group>"; };
 		52734AD1272BEC7900CA4206 /* MaterialChipsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialChipsTableCell.swift; sourceTree = "<group>"; };
 		52734AD2272BEC7900CA4206 /* RoundedTextFieldTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldTableCell.swift; sourceTree = "<group>"; };
+		52734E50272FE01F00CA4206 /* SlideActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideActionSheet.swift; sourceTree = "<group>"; };
+		52734E52272FE0DB00CA4206 /* SlideActionSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideActionSheetViewModel.swift; sourceTree = "<group>"; };
 		81625FC878AC407EE672DED7 /* Pods_Components.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Components.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF43E7F862A350456C389207 /* Pods-Components.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Components.release.xcconfig"; path = "Target Support Files/Pods-Components/Pods-Components.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -256,6 +260,7 @@
 		527346D7272BEC3000CA4206 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				52734E4F272FE00C00CA4206 /* Slide Action Sheet */,
 				527346D8272BEC3000CA4206 /* User Profile */,
 				527346DB272BEC3000CA4206 /* RoundedTextField */,
 				527346DE272BEC3000CA4206 /* RoundedTitleAndDescription */,
@@ -608,6 +613,15 @@
 			path = "Material Chips";
 			sourceTree = "<group>";
 		};
+		52734E4F272FE00C00CA4206 /* Slide Action Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				52734E50272FE01F00CA4206 /* SlideActionSheet.swift */,
+				52734E52272FE0DB00CA4206 /* SlideActionSheetViewModel.swift */,
+			);
+			path = "Slide Action Sheet";
+			sourceTree = "<group>";
+		};
 		87248DC9118895CDA5985B21 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,10 +814,12 @@
 				52734DD6272BEC7A00CA4206 /* RoundedButtonTableCell.swift in Sources */,
 				52734DA3272BEC7A00CA4206 /* DifCalculator.swift in Sources */,
 				52734DC4272BEC7A00CA4206 /* BrandbookResources.swift in Sources */,
+				52734E53272FE0DB00CA4206 /* SlideActionSheetViewModel.swift in Sources */,
 				52734AE9272BEC7900CA4206 /* LocalButton.swift in Sources */,
 				52734AE2272BEC7900CA4206 /* RowItem.swift in Sources */,
 				52734D97272BEC7A00CA4206 /* TabContainer.swift in Sources */,
 				52734DD8272BEC7A00CA4206 /* TitleHeaderCell.swift in Sources */,
+				52734E51272FE01F00CA4206 /* SlideActionSheet.swift in Sources */,
 				52734DCA272BEC7A00CA4206 /* Font.swift in Sources */,
 				52734DC7272BEC7A00CA4206 /* ImageWrapper.swift in Sources */,
 				52734DD0272BEC7A00CA4206 /* RoundButtonTableCell.swift in Sources */,

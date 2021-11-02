@@ -31,7 +31,7 @@ class DetailsAndLogOutAssembly: UIAssembly {
             return presenter
         }
         
-        container.register(DetailsAndLogOutRouterImpl.self) {resolver in
+        container.register(DetailsAndLogOutRouterImpl.self) {_ in
             return DetailsAndLogOutRouterImpl()
         }
     }

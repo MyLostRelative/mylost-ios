@@ -5,7 +5,6 @@
 //  Created by Nato Egnatashvili on 30.08.21.
 //
 
-import Foundation
 import Components
 
 protocol SignInModelConfigurator {
@@ -14,29 +13,29 @@ protocol SignInModelConfigurator {
     func getClickableLabelModel(with type: SignInModelConfiguratorImpl.SignInClickableTextModelType) -> TiTleButtonTableCell.Model
 }
 
-class SignInModelConfiguratorImpl:  SignInModelConfigurator{
+class SignInModelConfiguratorImpl:  SignInModelConfigurator {
     
     enum SignInTextFieldModelType {
-        case name(ontap: ((LoginTextFieldTableCell) -> ())?)
-        case surname(ontap: ((LoginTextFieldTableCell) -> ())?)
-        case usernameTextField(ontap: ((LoginTextFieldTableCell) -> ())?)
-        case passwordTextField(ontap: ((LoginTextFieldTableCell) -> ())?)
-        case mailTextField(ontap: ((LoginTextFieldTableCell) -> ())?)
-        case mobileTextField(ontap: ((LoginTextFieldTableCell) -> ())?)
-        case ageTextField(ontap: ((LoginTextFieldTableCell) -> ())?)
+        case name(ontap: ((LoginTextFieldTableCell) -> Void)?)
+        case surname(ontap: ((LoginTextFieldTableCell) -> Void)?)
+        case usernameTextField(ontap: ((LoginTextFieldTableCell) -> Void)?)
+        case passwordTextField(ontap: ((LoginTextFieldTableCell) -> Void)?)
+        case mailTextField(ontap: ((LoginTextFieldTableCell) -> Void)?)
+        case mobileTextField(ontap: ((LoginTextFieldTableCell) -> Void)?)
+        case ageTextField(ontap: ((LoginTextFieldTableCell) -> Void)?)
     }
     
     enum SignInButtonModelType {
-        case login(onTap: ((RoundedButtonTableCell) -> ())?)
-        case registration(onTap: ((RoundedButtonTableCell) -> ())?)
+        case login(onTap: ((RoundedButtonTableCell) -> Void)?)
+        case registration(onTap: ((RoundedButtonTableCell) -> Void)?)
     }
     
     enum SignInClickableTextModelType {
-        case login(onTap: ((TiTleButtonTableCell) -> ())?)
-        case registration(onTap: ((TiTleButtonTableCell) -> ())?)
+        case login(onTap: ((TiTleButtonTableCell) -> Void)?)
+        case registration(onTap: ((TiTleButtonTableCell) -> Void)?)
     }
     
-    func getTextFieldModel(with type: SignInTextFieldModelType) -> LoginTextFieldTableCell.Model{
+    func getTextFieldModel(with type: SignInTextFieldModelType) -> LoginTextFieldTableCell.Model {
         switch type {
         case .name(let ontap):
             return LoginTextFieldTableCell.Model.init(title: "სახელი",

@@ -47,6 +47,4 @@ class ReadedBlogsFactoryImpl: ReadedBlogsFactory {
             rightIconHide: false,
             onTap: onTap)
     }
-    
 }
-

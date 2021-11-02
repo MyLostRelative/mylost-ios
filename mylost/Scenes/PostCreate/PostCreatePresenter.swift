@@ -149,7 +149,7 @@ extension PostCreatePresenterImpl {
         ListRow(model: model, height: UITableView.automaticDimension)
     }
     
-    private func pickerRow(type: PickerDataManagerImpl.PickerType)-> ListRow <PickerViewCell> {
+    private func pickerRow(type: PickerDataManagerImpl.PickerType) -> ListRow <PickerViewCell> {
         ListRow(
             model: PickerViewCell.ViewModel(title: type.title,
                                             pickerData: [type.data],

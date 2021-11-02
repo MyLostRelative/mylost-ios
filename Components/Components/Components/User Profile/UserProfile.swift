@@ -19,8 +19,8 @@ public class SavedUserCard: UIView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 4
+        stackView.alignment = .center
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -70,25 +70,7 @@ public class SavedUserCard: UIView {
         return stackView
     }()
     
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = Resourcebook.Color.Information.tr100.uiColor
-        button.roundCorners(with: .constant(radius: 10))
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = Resourcebook.Font.caption2
-        button.height(equalTo: 20)
-        button.width(equalTo: 20)
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        return button
-    }()
-    
     private var onTap: ((SavedUserCard) ->())?
-    
-    public var buttonTitle: String? {
-        didSet {
-            button.setImage(Resourcebook.Image.Icons24.systemInfoOutline.image.withTintColor(Resourcebook.Color.Information.tr300.uiColor), for: .normal)
-        }
-    }
     
     public init(with model: ViewModel? = nil) {
         super.init(frame: .zero)
@@ -99,12 +81,17 @@ public class SavedUserCard: UIView {
     
     public func configure(with model: ViewModel) {
         userAvatar.image = model.avatar
-        ageLabel.text = model.age
+        ageLabel.text = model.description
         usernameLabel.text = model.username
-        buttonTitle = model.buttonTitle
         self.onTap = model.onTap
+        addGesture()
     }
     
+    private func addGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        tap.delegate = self
+        self.addGestureRecognizer(tap)
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -127,38 +114,51 @@ extension SavedUserCard {
     
     private func setup() {
         addSubviews()
-        setupConstraints()
+        setUpUI()
     }
     
-    private func addSubviews() {
+    private func setUpMainStackViewConstraint() {
         addSubview(mainStack)
-        mainStack.stretchLayout(to: self)
+        mainStack.left(toView: self, constant: 30)
+        mainStack.right(toView: self, constant: 30)
+        mainStack.top(toView: self)
+        mainStack.bottom(toView: self)
+    }
+    
+    private func addArrangedSubviews() {
         mainStack.addArrangedSubview(firstStack)
         mainStack.addArrangedSubview(textContainerStack)
         
-        firstStack.addArrangedSubview(button)
         firstStack.addArrangedSubview(userAvatar)
         
         textContainerStack.addArrangedSubview(usernameLabel)
         textContainerStack.addArrangedSubview(ageLabel)
     }
     
-    private func setupConstraints() {
-        button.left(toView: self, constant: 5)
-        self.mainStack.roundCorners(with: .constant(radius: 15))
-        self.mainStack.backgroundColor = Resourcebook.Color.Invert.Component.tr5 .uiColor
+    private func addSubviews() {
+        setUpMainStackViewConstraint()
+        addArrangedSubviews()
+    }
+    
+    private func setUpUI() {
+        self.roundCorners(with: .constant(radius: 15))
+        self.backgroundColor = Resourcebook.Color.Invert.Component.tr5 .uiColor
         
     }
     
 }
 
 // MARK: Touch events
-extension SavedUserCard {
+extension SavedUserCard: UIGestureRecognizerDelegate {
     
     @objc
     private func didTapButton() {
         self.onTap?(self)
     }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        self.onTap?(self)
+      }
     
 }
 

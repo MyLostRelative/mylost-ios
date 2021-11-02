@@ -26,7 +26,7 @@ class FavouriteViewModel {
 
 protocol RXTableConfigurable {
     var dataSource: RxTableViewSectionedReloadDataSource<SectionOfFavourites> { get }
-    var configureCell: RxTableViewSectionedReloadDataSource<SectionOfFavourites >.ConfigureCell  { get }
+    var configureCell: RxTableViewSectionedReloadDataSource<SectionOfFavourites >.ConfigureCell { get }
     
 }
 

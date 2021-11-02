@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import mylost
+@testable import Core
 
 class SignInPresenterTests: XCTestCase {
 

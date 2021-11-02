@@ -1,4 +1,3 @@
-
 import UIKit
 
 struct ScrollableTabViewModel {
@@ -66,7 +65,7 @@ extension ScrollableTabView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let nib = self.delegate?.model(at: indexPath.row)?.nibName ,
               let model = self.delegate?.model(at: indexPath.row) else {return UICollectionViewCell()}
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nib, for: indexPath) as? CollectionConfigurable{
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nib, for: indexPath) as? CollectionConfigurable {
             cell.configure(model: model)
             return cell as! UICollectionViewCell
         }
@@ -84,4 +83,3 @@ extension ScrollableTabView: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: self.collectionView.frame.height)
     }
 }
-

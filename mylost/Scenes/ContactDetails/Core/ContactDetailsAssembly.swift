@@ -34,7 +34,7 @@ class ContactDetailsAssembly: UIAssembly {
             return presenter
         }
         
-        container.register(ContactDetailsRouterImpl.self) {resolver in
+        container.register(ContactDetailsRouterImpl.self) {_ in
             return ContactDetailsRouterImpl()
         }
     }

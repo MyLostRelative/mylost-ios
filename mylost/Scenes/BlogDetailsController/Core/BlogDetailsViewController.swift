@@ -9,7 +9,7 @@ import UIKit
 import LifetimeTracker
 import Components
 
-class BlogDetailsViewController: UIViewController , BlogDetailsView , LifetimeTrackable{
+class BlogDetailsViewController: UIViewController , BlogDetailsView , LifetimeTrackable {
     class var lifetimeConfiguration: LifetimeConfiguration {
             return LifetimeConfiguration(maxCount: 1, groupName: "VC")
         }

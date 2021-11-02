@@ -11,10 +11,14 @@ import Core
 class MyProfileAssembly: UIAssembly {
     private let userID: Int
     private let bearerToken: String
+    private let statementsAndBlogsAdapter: StatementsAndBlogsAdapter
+    
     init(userID: Int,
-         bearerToken: String) {
+         bearerToken: String,
+         statementsAndBlogsAdapter: StatementsAndBlogsAdapter) {
         self.userID = userID
         self.bearerToken = bearerToken
+        self.statementsAndBlogsAdapter = statementsAndBlogsAdapter
     }
     
     func assemble(container: Container) {
@@ -31,10 +35,12 @@ class MyProfileAssembly: UIAssembly {
         container.register(MyProfilePresenterImpl.self) {resolver in
             let presenter = MyProfilePresenterImpl(router: resolver.resolve(MyProfileRouterImpl.self)!,
                                                    userID: self.userID,
-                                                   bearerToken: self.bearerToken, 
+                                                   bearerToken: self.bearerToken,
                                                    userInfoGateway: resolver.resolve(UserInfoGatewayImpl.self)!,
                                                    userInfoBearerGateway: resolver.resolve(UserInfoBearerGatewayImpl.self)!,
-                                                   statementGateway: resolver.resolve(StatementGatewayImpl.self)!)
+                                                   statementGateway: resolver.resolve(StatementGatewayImpl.self)!,
+                                                   actionSheetFactory: MyProfileSliderActionSheetFactoryImpl(),
+                                                   statementsAndBlogsAdapter: self.statementsAndBlogsAdapter)
             return presenter
         }
         

@@ -10,7 +10,7 @@ import Core
 
 class PostCreateAssembly: UIAssembly {
     private let userID: Int
-    private let myProfileDelegate: MyProfilePresenterDelegate?
+    private weak var myProfileDelegate: MyProfilePresenterDelegate?
     init(userID: Int,
          myProfileDelegate: MyProfilePresenterDelegate?) {
         self.userID = userID

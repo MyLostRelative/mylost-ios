@@ -27,9 +27,8 @@ class SignInAssembly: UIAssembly {
             return presenter
         }
         
-        container.register(SignInRouterImpl.self) {resolver in
+        container.register(SignInRouterImpl.self) {_ in
             return SignInRouterImpl()
         }
     }
 }
-

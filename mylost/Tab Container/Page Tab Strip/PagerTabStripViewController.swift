@@ -30,8 +30,6 @@
 // THE SOFTWARE.
 
 import UIKit
-
-
 protocol PagerTabStripDelegate: AnyObject {
 
     func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int)
