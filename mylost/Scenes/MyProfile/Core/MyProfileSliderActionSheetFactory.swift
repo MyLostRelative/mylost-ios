@@ -58,8 +58,8 @@ extension MyProfileSliderActionSheetFactoryImpl {
     
     private func getProfileDescription(name: String, mail: String?) -> PageDescription.ViewModel {
         .init(imageType: (
-            image: Resourcebook.Image.Icons24.systemInfoFill.template,
-            tint: Resourcebook.Color.Information.solid25.uiColor),
+            image: Resourcebook.Image.Icons24.generalProfileFill.template,
+            tint: Resourcebook.Color.Positive.tr200.uiColor),
               title: name,
               description: mail)
     }

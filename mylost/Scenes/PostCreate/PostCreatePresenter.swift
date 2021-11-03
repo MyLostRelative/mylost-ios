@@ -66,15 +66,19 @@ class PostCreatePresenterImpl: PostCreatePresenter {
                     LoginTextFieldTableCell.self,
                     PickerViewCell.self,
                     LoginTextFieldTableCell.self,
-                    RoundedTextFieldTableCell.self
-                ])
+                    RoundedTextFieldTableCell.self,
+                    PickerViewCell.self,
+                    RoundButtonTableCell.self,
+                    MaterialChipsTableCell.self,
+                    TwoInputTableCell.self
+                ], reusableViews: [TitleHeaderCell.self])
         }
     }
     
     private func constructDataSource() {
         DispatchQueue.main.async {
             self.tableViewDataSource?.reload(
-                with: [self.mainSection()]
+                with: [self.textFieldSection()] + self.chipsSections() + [self.postFieldSection()]
             )
         }
     }
@@ -109,7 +113,7 @@ extension PostCreatePresenterImpl {
 
 // MARK: Table Section
 extension PostCreatePresenterImpl {
-    private func mainSection() -> ListSection {
+    private func textFieldSection() -> ListSection {
         let titleRow = textField(with: .init(title: "განცხადების სახელი", onTap: { field in
             self.titleField = field
         }))
@@ -119,44 +123,22 @@ extension PostCreatePresenterImpl {
         let imageURLRow = textField(with: .init(title: "სურათის URL", onTap: { field in
             self.imageField = field
         }))
-        return ListSection(id: "", rows: [backNavigateLabelRow(),
+        return ListSection(id: "", rows: [
                                           titleRow,
                                           cityRow,
-                                          imageURLRow,
-                                          pickerRow(type: .bloodType) ,
-                                          pickerRow(type: .relativeType),
-                                          pickerRow(type: .sexType),
-                                          postField()])
+                                          imageURLRow])
     }
 }
 
 // MARK: Table Rows
 extension PostCreatePresenterImpl {
-    private func clickableLabelRow(with model: TiTleButtonTableCell.ViewModel) -> ListRow<TiTleButtonTableCell> {
-        ListRow(model: model,
-                height: UITableView.automaticDimension)
-    }
-    
-    private func backNavigateLabelRow() -> ListRow<TiTleButtonTableCell> {
-        self.clickableLabelRow(with: .init(
-            title: "უკან დაბრუნება",
-            onTap: { _ in
-                self.router.moveToback()
-            }))
+    private func postFieldSection() -> ListSection {
+        ListSection(id: "postField",
+                    rows: [postField()])
     }
     
     private func textField(with model: LoginTextFieldTableCell.Model) -> ListRow <LoginTextFieldTableCell> {
         ListRow(model: model, height: UITableView.automaticDimension)
-    }
-    
-    private func pickerRow(type: PickerDataManagerImpl.PickerType) -> ListRow <PickerViewCell> {
-        ListRow(
-            model: PickerViewCell.ViewModel(title: type.title,
-                                            pickerData: [type.data],
-                                            onTap: { pickers in
-                                                self.didChangePicker(type: type, pickers: pickers)
-                                            }),
-            height: UITableView.automaticDimension)
     }
     
     private func postField() -> ListRow <RoundedTextFieldTableCell> {
@@ -167,6 +149,45 @@ extension PostCreatePresenterImpl {
                                                             self.didTapPost(field: field)
                                                         }
                                                        }),
+                height: UITableView.automaticDimension)
+    }
+    
+    private func chipsSections() -> [ListSection] {
+        [self.chipsSection(type: .bloodType),
+         self.chipsSection(type: .relativeType),
+         self.chipsSection(type: .sexType)]
+    }
+    
+    private func chipsSection(type: PickerDataManagerImpl.PickerType) -> ListSection {
+        ListSection(id: "chips",
+                    header: customHeader(title: type.title),
+                    rows: [chipsRow(type: type, data: type.vectorData[0])])
+    }
+    
+    private func chipAgeSection() -> ListSection {
+        let type = PickerDataManagerImpl.PickerType.age
+        return ListSection(id: "age inputs",
+                    header: customHeader(title: type.title),
+                    rows: [ageInputField()])
+    }
+    
+    private func customHeader(title: String) -> ListViewHeaderFooter <TitleHeaderCell> {
+        return ListViewHeaderFooter(model: TitleHeaderCell.ViewModel(title: title),
+                                    height: UITableView.automaticDimension)
+    }
+    
+    private func chipsRow(type: PickerDataManagerImpl.PickerType, data: [String]) -> ListRow <MaterialChipsTableCell> {
+        return ListRow(
+            model: .init(chipTitles: data, onTap: { [weak self] chip in
+                self?.didChangePicker(type: type, pickers: [chip])
+            }),
+                       height: 90)
+    }
+    
+    private func ageInputField() -> ListRow <TwoInputTableCell> {
+        ListRow(model: .init(firstInputPlaceHolder: "From",
+                             secondInputPlaceHolder: "To",
+                             delegate: self),
                 height: UITableView.automaticDimension)
     }
 }
@@ -208,4 +229,10 @@ extension PostCreatePresenterImpl {
                       bloodType: self.bloodType)
         self.postStatement(statementPost: entity)
        }
+}
+
+extension PostCreatePresenterImpl: TwoInputTableCellDelegate {
+    func TwoInputTableCellDelegate(_ cell: TwoInputTableCell, firstText: String, secondText: String) {
+        self.didChangePicker(type: .age, pickers: [firstText, secondText])
+    }
 }
