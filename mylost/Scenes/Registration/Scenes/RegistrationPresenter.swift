@@ -16,7 +16,7 @@ protocol RegistrationPresenter {
 
 class RegistrationPresenterImpl: RegistrationPresenter {
     
-    private weak var view: RegistrationView?
+    private var view: RegistrationView?
     private var router: RegistrationRouter
     private var modelsFactory: RegistrationModelsFactory
     private var tableViewDataSource: ListViewDataSource?

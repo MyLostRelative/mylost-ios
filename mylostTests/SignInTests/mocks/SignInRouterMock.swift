@@ -10,8 +10,11 @@ import Foundation
 @testable import mylost
 
 class SignInRouterMock: SignInRouter {
+    
+    
     var controller: SignInViewController?
     var changeToUserHappen: Bool = false
+    var moveToRegistrationHappen: Bool = false
     
     func attach(controller: SignInViewController) {
         self.controller = controller
@@ -19,6 +22,10 @@ class SignInRouterMock: SignInRouter {
     
     func changeToUser() {
         changeToUserHappen = true
+    }
+    
+    func move2Registration() {
+        moveToRegistrationHappen = true
     }
     
 }

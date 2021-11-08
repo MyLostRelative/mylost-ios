@@ -6,6 +6,8 @@
 //
 
 import XCTest
+import Core
+import RxRelay
 @testable import mylost
 
 class MyLostHomePresenterTest: XCTestCase {
@@ -17,10 +19,12 @@ class MyLostHomePresenterTest: XCTestCase {
     override func setUp() {
          controller = MyLostHomeController()
         router = MyLostHomeRouterMock()
-        presenter = MyLostHomePresenterImpl(view: controller,
-                                            statementsGateway: StatementGatewayImpl(),
-                                            router: router)
+        presenter = MyLostHomePresenterImpl(statementsGateway: StatementGatewayImpl(),
+                                            router: router,
+                                            statementsAndBlogsAdapter: StatementsAndBlogsAdapterImpl())
         controller.mypresenter = presenter
+        presenter.attach(view: controller)
+        router.attach(controller: controller)
     }
     
     func testViewDidLoad() {
@@ -38,5 +42,21 @@ class MyLostHomePresenterTest: XCTestCase {
             wait(for: [expectation], timeout: 10.0)
     }
 
+    func testMove2UserDetails() {
+        router.move2UserDetails()
+        XCTAssertTrue(router.move2UserDetailsHappend, "user Details")
+    }
+    
+    func testMove2Filter() {
+        router.move2Filter(delegate: presenter)
+        XCTAssertTrue(router.move2FilterHappen, "user Details")
+    }
+    
+    
+    func move2Fav(favouriteStatements: BehaviorRelay<[Statement]>) {
+        router.move2Fav(favouriteStatements: BehaviorRelay<[Statement]>(value: []))
+        XCTAssertTrue(router.move2FavHappend, "user Details")
+    }
+    
 }
 

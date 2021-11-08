@@ -17,7 +17,9 @@ class ProductContainer: PagerTabStripViewController {
     
     @IBOutlet weak var segments: ScrollableTabView!
     var lastSelectedIndex = 0
+    private var tipsDataSource: [TipModel] = TipDataSource.init().models()
     var moduleVisitDate: Date = Date()
+    private let userDef = UserDefaultManagerImpl()
     var userType: UserType = UserDefaultManagerImpl().getValue(key: "token") == nil ? .guest : .user {
         didSet {
             self.items = getDatasourceModels()
@@ -40,6 +42,7 @@ class ProductContainer: PagerTabStripViewController {
         self.navigationController?.view.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
         super.viewDidLoad()
         configureSegmentsCollectionView()
+        changeTipDefault()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +59,49 @@ class ProductContainer: PagerTabStripViewController {
         self.containerView.isScrollEnabled = false
         self.segments.delegate = self
         self.segments.collectionView.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
+    }
+    
+    private func changeTipDefault() {
+        guard let tipIsShown = userDef.getValue(key: "tipIsShown") as? Bool,
+           tipIsShown else {
+               userDef.saveKeyName(key: "tipIsShown", value: true)
+               DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                   self.tipCol()
+               }
+               return
+        }
+    
+    }
+    
+    private func tipCol() {
+        let vc = TipComponent.init(model: TipComponent.ViewModel.init(
+            imageType: (image: Resourcebook.Image.Icons24.systemInfoFill.template,
+                        tint: .blue),
+            title: tipsDataSource[lastSelectedIndex].title,
+            description: nil,
+            type: .up,
+            buttonType: .title(title: tipsDataSource[lastSelectedIndex].buttonTitle,
+                               color: tipsDataSource[lastSelectedIndex].buttonColor),
+            viewFrame: segments.segmentFrames[lastSelectedIndex], onTap: { _ in
+                self.changeTabAndTip()
+            }))
+        self.present(vc, animated: true, completion: nil)
+    }
+    private func changeTabAndTip() {
+        self.dismiss(animated: true, completion: nil)
+        self.lastSelectedIndex += 1
+        
+        if self.lastSelectedIndex != numberOfItems {
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                self.tipCol()
+            }
+        } else {
+            lastSelectedIndex = 0
+        }
+        
+        self.itemSelected(at: lastSelectedIndex)
+        self.segments.collectionView.reloadData()
+        self.reloadPagerTabStripView()
     }
 }
 
@@ -102,7 +148,7 @@ extension ProductContainer: PagerTabStripDataSource {
     }
     
     private var blogVC: UIViewController {
-        let BlogConfigurator = StatementsConfiguratorImpl()
+        let BlogConfigurator = StatementsConfiguratorImpl(statementsAndBlogsAdapter: adapter)
         let BlogController = StatementsController()
         BlogConfigurator.configure(BlogController )
         return BlogController

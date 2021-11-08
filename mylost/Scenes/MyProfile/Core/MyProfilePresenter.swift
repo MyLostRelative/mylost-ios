@@ -47,7 +47,7 @@ class MyProfilePresenterImpl: MyProfilePresenter {
     }
     
     private lazy var readedTap : (() -> Void)? = {[weak self] in
-        self?.router.move2Fav(favouriteStatements: self?.statementsAndBlogsAdapter.favouriteStatements ?? BehaviorRelay<[Statement]>(value: []))
+        self?.router.move2ReadedBlogs(readedBlogs: self?.statementsAndBlogsAdapter.readedBlogs ?? BehaviorRelay<[Blog]>(value: []))
     }
     
     private lazy var profileDetailTap : (() -> Void)? = {[weak self] in
@@ -162,7 +162,7 @@ extension MyProfilePresenterImpl {
                    self.clickableLabel(with: .init(title: "პოსტის შექმნა",
                                                    colorStyle: .positive,
                                                    onTap: { _ in                                         self.router.move2CreatePost(userID: self.userInfo?.id ??  self.userID,
-                                                                                                                                       myProfileDelegate: self)
+                                                                                                                                     myProfileDelegate: self)
                                                    }))] )
     }
     
@@ -196,7 +196,7 @@ extension MyProfilePresenterImpl {
 extension MyProfilePresenterImpl {
     private func userCardRow() -> ListRow <SavedUserTableCell> {
         let menus = [MyProfileMenuType.profileDetail(tap: profileDetailTap),
-            MyProfileMenuType.favouriteStatement(tap: favouriteTap),
+                     MyProfileMenuType.favouriteStatement(tap: favouriteTap),
                      MyProfileMenuType.readedBlogStatement(tap: readedTap),
                      MyProfileMenuType.logout(tap: logoutTap)]
         let profile = actionSheetFactory.profileDescriptionSection(name: self.userInfo?.firstName ?? "",
@@ -207,7 +207,7 @@ extension MyProfilePresenterImpl {
                                     username: userInfo?.firstName ?? "" + " " + (userInfo?.lastName ?? ""),
                                     description: userInfo?.firstName ?? "") { _ in
             self.router.presentActionSheet(
-             sections: [profile, menuSection])
+                sections: [profile, menuSection])
             
         },
                        height: UITableView.automaticDimension)
@@ -235,7 +235,7 @@ extension MyProfilePresenterImpl {
     
     private func errorPageDescriptionRow() -> ListRow <PageDescriptionWithButtonTableCell> {
         ListRow(
-            model: MyLostHomePresenterImpl.ModelBuilder().getErrorPgaeDescription(tap: { (_) in
+            model: getErrorPgaeDescription(tap: { (_) in
                 self.isLoading = true
                 self.fetchFailed = false
             }),
@@ -262,6 +262,17 @@ extension MyProfilePresenterImpl {
             tapClosure: {_,_,_  in
                 print("dw")
             })
+    }
+    
+    func getErrorPgaeDescription(tap: ((ButtonWithLine) -> Void)? )-> PageDescriptionWithButtonTableCell.ViewModel {
+        PageDescriptionWithButtonTableCell.ViewModel(pageDescriptionModel: .init(
+            imageType: (image: Resourcebook.Image.Icons24.systemErrorOutline.template,
+                        tint: .red),
+            title: "დაფიქსირდა შეცდომა",
+            description: "დაფიქსირდა შეცდომა , სცადეთ მოგვიანებით ან დააჭირეთ განახლება ღილაკს"),
+                                                     buttonModel: .init(
+                                                        title: "განახლება",
+                                                        onTap: tap))
     }
 }
 

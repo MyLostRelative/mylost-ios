@@ -118,6 +118,8 @@ extension Resourcebook {
             public static let systemChevronLeft                     = ImageWrapper(name: "icons24SystemChevronLeft")
             public static let systemChevronUp                       = ImageWrapper(name: "icons24SystemChevronUp")
             public static let systemDownload                        = ImageWrapper(name: "icons24SystemDownload")
+            public static let systemComment                         = ImageWrapper(name: "icons24SystemComment")
+            public static let systemCommentUp                       = ImageWrapper(name: "icons24SystemCommentUp")
             public static let paymentTransferTemplateNew            = ImageWrapper(name: "icons24PaymentTransferTemplateNew")
             public static let socialLinkedin                        = ImageWrapper(name: "icons24SocialLinkedin")
             public static let systemErrorFill                       = ImageWrapper(name: "icons24SystemErrorFill")

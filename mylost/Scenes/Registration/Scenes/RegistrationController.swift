@@ -18,10 +18,7 @@ protocol RegistrationView: AnyObject {
     func stopLoading()
 }
 
-class RegistrationController: UIViewController, LifetimeTrackable {
-    class var lifetimeConfiguration: LifetimeConfiguration {
-        return LifetimeConfiguration(maxCount: 1, groupName: "VC")
-    }
+class RegistrationController: UIViewController {
     var presenter_: RegistrationPresenter!
     lazy var tableView: UITableView = {
         let table = UITableView()

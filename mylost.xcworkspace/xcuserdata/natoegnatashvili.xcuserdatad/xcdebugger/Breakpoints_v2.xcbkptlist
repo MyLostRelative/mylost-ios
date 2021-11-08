@@ -78,8 +78,8 @@
             filePath = "mylost/Tab Container/TabContainer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "configureSegmentsCollectionView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -130,38 +130,6 @@
             endingLineNumber = "156"
             landmarkName = "didTapButton()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "54661D9E-5330-476E-892A-E717525C4D03 - 3c5d485bb717f68f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Components.SavedUserCard.didTapButton() -&gt; ()"
-                  moduleName = "Components"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/natoegnatashvili/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/My%20Bac/mylost-ios/Components/Components/Components/User%20Profile/UserProfile.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
-                  offsetFromSymbolStart = "108">
-               </Location>
-               <Location
-                  uuid = "54661D9E-5330-476E-892A-E717525C4D03 - 3c5d485bb717f68f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Components.SavedUserCard.didTapButton() -&gt; ()"
-                  moduleName = "Components"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/natoegnatashvili/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/My%20Bac/mylost-ios/Components/Components/Components/User%20Profile/UserProfile.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

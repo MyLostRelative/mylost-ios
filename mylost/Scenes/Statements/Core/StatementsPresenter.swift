@@ -30,12 +30,16 @@ class StatementsPresenterImpl: StatementsPresenter {
     private var isLoading: Bool = true
     private var blogs: [Blog] = []
     private let modelBuilder = ModelBuilder()
-    private var readedBlogs: BehaviorRelay<[Blog]> = BehaviorRelay(value: [])
+    private let statementsAndBlogsAdapter: StatementsAndBlogsAdapter
     
-    init(view: StatementsView, router: StatementsRouter, blogGateway: BlogGateway) {
+    init(view: StatementsView,
+         router: StatementsRouter,
+         blogGateway: BlogGateway,
+         statementsAndBlogsAdapter: StatementsAndBlogsAdapter) {
         self.view = view
         self.router = router
         self.blogGateway = blogGateway
+        self.statementsAndBlogsAdapter = statementsAndBlogsAdapter
     }
     
     func viewDidLoad() {
@@ -154,7 +158,7 @@ extension StatementsPresenterImpl {
     }
     
     private func blogRow(blog: Blog) -> ListRow <TitleAndDescriptionCardTableCell> {
-        let isReaded = self.readedBlogs.value.contains(where: { $0 == blog })
+        let isReaded = self.statementsAndBlogsAdapter.readedBlogs.value.contains(where: { $0 == blog })
         return ListRow(
             model: TitleAndDescriptionCardTableCell
                 .Model(headerModel:
@@ -189,10 +193,10 @@ extension StatementsPresenterImpl {
         blog: Blog) {
             if success {
                 if becomeReaded {
-                    self.readedBlogs.accept(self.readedBlogs.value + [blog])
+                    self.statementsAndBlogsAdapter.readedBlogs.accept(self.statementsAndBlogsAdapter.readedBlogs.value + [blog])
                 } else {
-                    let removedFav = self.readedBlogs.value.filter({ $0 != blog })
-                    self.readedBlogs.accept(removedFav)
+                    let removedFav = self.statementsAndBlogsAdapter.readedBlogs.value.filter({ $0 != blog })
+                    self.statementsAndBlogsAdapter.readedBlogs.accept(removedFav)
                 }
                 constructDataSource()
             } else {
@@ -204,7 +208,7 @@ extension StatementsPresenterImpl {
         self.clickableLabelRow(with: .init(
             title: "წაკითხული ბლოგების ნახვა",
             onTap: { _ in
-                self.router.move2ReadedBlogs(readedBlogs: self.readedBlogs)
+                self.router.move2ReadedBlogs(readedBlogs: self.statementsAndBlogsAdapter.readedBlogs)
             }))
     }
     

@@ -109,7 +109,6 @@ public class HeaderWithDetails: UIView {
     
     func didTapFavourite() {
         self.onTap?(self)
-        self.rightButton.isSelected = !self.rightButton.isSelected
     }
     
     public func getIcon() -> UIImageView {

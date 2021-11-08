@@ -16,6 +16,7 @@ protocol MyProfileRouter {
     func move2CreatePost(userID: Int, myProfileDelegate: MyProfilePresenterDelegate?)
     func presentActionSheet(sections: [ListSection])
     func move2Fav(favouriteStatements: BehaviorRelay<[Statement]>)
+    func move2ReadedBlogs(readedBlogs: BehaviorRelay<[Blog]>) 
     func changeToLogOut()
 }
 
@@ -62,6 +63,15 @@ class MyProfileRouterImpl: MyProfileRouter {
             networkAssemblies: [])
                 .resolver
                 .resolve(FavouriteStatementsController.self) else { return }
+        dismissActionSheet()
+        self.controller?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func move2ReadedBlogs(readedBlogs: BehaviorRelay<[Blog]>) {
+        guard let vc = DIAssembly.init(uiAssemblies: [ReadedBlogsAssembly(readedBlogs: readedBlogs)],
+                        networkAssemblies: [])
+            .resolver
+                .resolve(ReadedBlogsController.self) else { return }
         dismissActionSheet()
         self.controller?.navigationController?.pushViewController(vc, animated: true)
     }

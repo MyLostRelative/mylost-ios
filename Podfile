@@ -37,6 +37,7 @@ def application_pods
 	pod 'LifetimeTracker'
 	
 	pod 'IQKeyboardManagerSwift'
+	pod 'MessageKit'
 end
 
 target 'mylost' do

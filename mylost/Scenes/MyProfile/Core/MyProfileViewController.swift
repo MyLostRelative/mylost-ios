@@ -24,7 +24,6 @@ class MyProfileViewController: UIViewController {
         return table
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()

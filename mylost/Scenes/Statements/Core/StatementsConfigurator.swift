@@ -13,6 +13,11 @@ protocol StatementsConfigurator {
 }
 
 class StatementsConfiguratorImpl: StatementsConfigurator {
+    private let statementsAndBlogsAdapter: StatementsAndBlogsAdapter
+    
+    init(statementsAndBlogsAdapter: StatementsAndBlogsAdapter) {
+        self.statementsAndBlogsAdapter = statementsAndBlogsAdapter
+    }
     
     func configure(_ controller: StatementsController) {
         let router: StatementsRouter = StatementsRouterImpl(controller)
@@ -20,7 +25,8 @@ class StatementsConfiguratorImpl: StatementsConfigurator {
         let presenter: StatementsPresenter = StatementsPresenterImpl(
             view: controller,
             router: router,
-            blogGateway: gateway
+            blogGateway: gateway,
+            statementsAndBlogsAdapter: statementsAndBlogsAdapter
         )
         
         controller.statementPresenter = presenter

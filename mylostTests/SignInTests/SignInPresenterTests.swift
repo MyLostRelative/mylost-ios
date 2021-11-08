@@ -39,6 +39,8 @@ class SignInPresenterTests: XCTestCase {
             wait(for: [expectation], timeout: 10.0)
     }
     
-    
-
+    func testmoveToRegistration () {
+        router.move2Registration()
+        XCTAssertTrue(router.moveToRegistrationHappen, "registration Click")
+    }
 }

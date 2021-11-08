@@ -7,17 +7,21 @@
 
 import RxRelay
 import Core
+import Components
 
 protocol MyLostHomeRouter {
     func move2UserDetails(guestUserID: Int, guestImgUrl: String?)
     func move2Filter(delegate: FilterDetailsPresenterDelegate)
     func move2Fav(favouriteStatements: BehaviorRelay<[Statement]>)
     func attach(controller: MyLostHomeController)
+    func dispayDialog(model: DialogComponent.ViewModel)
+    func dismissPresentedView()
 }
 
 class MyLostHomeRouterImpl: MyLostHomeRouter {
     
     private weak var controller: MyLostHomeController?
+    private var presentedView: UIViewController?
     
     func attach(controller: MyLostHomeController) {
         self.controller = controller
@@ -34,6 +38,10 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
     }
     
     func move2Filter(delegate: FilterDetailsPresenterDelegate) {
+        let v = ChatViewController()
+        
+        self.controller?.navigationController?.pushViewController(v, animated: true)
+        return 
         guard let vc = DIAssembly(uiAssemblies: [FilterDetailsAssembly(delegate: delegate)],
                                   networkAssemblies: [])
             .resolver
@@ -61,4 +69,14 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
 //        
 //       self.controller?.navigationController?.pushViewController(vc, animated: true)
 //    }
+    
+    func dispayDialog(model: DialogComponent.ViewModel) {
+        let comp = DialogComponent.init(model: model)
+        presentedView = comp
+        self.controller?.present(comp, animated: true, completion: nil)
+    }
+    
+    func dismissPresentedView() {
+        presentedView?.dismiss(animated: true, completion: nil)
+    }
 }

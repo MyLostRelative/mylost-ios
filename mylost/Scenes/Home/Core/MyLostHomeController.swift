@@ -11,7 +11,6 @@ import Components
 class MyLostHomeController: UIViewController {
 
     var mypresenter: MyLostHomePresenter?
-    var currentCell: UITableViewCell?
     var tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
@@ -23,7 +22,7 @@ class MyLostHomeController: UIViewController {
     override func viewDidLoad() {
         addTableView()
         mypresenter?.viewDidLoad()
-        navigationController?.delegate = self
+        // navigationController?.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +37,20 @@ class MyLostHomeController: UIViewController {
         tableView.right(toView: self.view)
         tableView.bottom(toView: self.view)
     }
+    
+    private func addSubv() {
+        let v = PageDescriptionTableCell()
+        
+        v.top(toView: self.view)
+        v.left(toView: self.view)
+        v.right(toView: self.view)
+        v.bottom(toView: self.view)
+        v.configure(with: .init(imageType: (image: Resourcebook.Image.Icons48.generalUserBusinessFill.image,
+                                            tint: .red),
+                                title: "gamarjoba",
+                                description: "description cota naklebia"))
+        
+    }
 }
 
 extension MyLostHomeController: MyLostHomeView {
@@ -47,21 +60,21 @@ extension MyLostHomeController: MyLostHomeView {
     }
 }
 
-extension MyLostHomeController: UINavigationControllerDelegate {
-    func navigationController(
-        _ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation,
-        from fromVC: UIViewController,
-        to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        switch operation {
-        case .push:
-            return TransitionManager(duration: 0.7)
-        default:
-            return nil
-        }
-        
-    }
-}
+// extension MyLostHomeController: UINavigationControllerDelegate {
+//    func navigationController(
+//        _ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation,
+//        from fromVC: UIViewController,
+//        to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//
+//        switch operation {
+//        case .push:
+//            return TransitionManager(duration: 0.7)
+//        default:
+//            return nil
+//        }
+//
+//    }
+// }
 
 extension MyLostHomeController: customNavigatable {
     var navTiTle: String {

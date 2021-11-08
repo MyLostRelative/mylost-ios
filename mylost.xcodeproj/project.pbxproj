@@ -48,6 +48,14 @@
 		52734E55272FED6000CA4206 /* MyProfileSliderActionSheetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E54272FED6000CA4206 /* MyProfileSliderActionSheetFactory.swift */; };
 		52734E5A272FFB5800CA4206 /* StatementsAndBlogsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E59272FFB5800CA4206 /* StatementsAndBlogsAdapter.swift */; };
 		52734E5D27301FF700CA4206 /* MyProfileMenuModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E5C27301FF700CA4206 /* MyProfileMenuModels.swift */; };
+		52734EE32732AC9300CA4206 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734EE22732AC9300CA4206 /* MessageViewController.swift */; };
+		52734EE52732AD1500CA4206 /* BasicAudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734EE42732AD1500CA4206 /* BasicAudioController.swift */; };
+		52734EE92732ADC200CA4206 /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734EE82732ADC200CA4206 /* MockMessage.swift */; };
+		52734EF3273517E400CA4206 /* FavouriteStatementsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734EF2273517E300CA4206 /* FavouriteStatementsControllerTests.swift */; };
+		52734EF5273517F000CA4206 /* FavouriteStatementsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734EF4273517F000CA4206 /* FavouriteStatementsPresenterTests.swift */; };
+		52734EF72735183600CA4206 /* FavouriteStatementsPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734EF62735183600CA4206 /* FavouriteStatementsPresenterMock.swift */; };
+		52734EF92735183F00CA4206 /* FavouriteStatementsRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734EF82735183F00CA4206 /* FavouriteStatementsRouterMock.swift */; };
+		52734F1027392BCC00CA4206 /* MyLostHomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734F0F27392BCC00CA4206 /* MyLostHomeFactory.swift */; };
 		527888D226E526ED00324041 /* PostCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888CF26E526ED00324041 /* PostCreateRouter.swift */; };
 		527888D326E526ED00324041 /* PostCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D026E526ED00324041 /* PostCreateController.swift */; };
 		527888D426E526ED00324041 /* PostCreateAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527888D126E526ED00324041 /* PostCreateAssembly.swift */; };
@@ -100,7 +108,6 @@
 		52DC59E12680DDC800B35E35 /* StatementsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59DD2680DDC800B35E35 /* StatementsRouter.swift */; };
 		52DC59E22680DDC800B35E35 /* StatementsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59DE2680DDC800B35E35 /* StatementsController.swift */; };
 		52DC59E32680DDC800B35E35 /* StatementsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC59DF2680DDC800B35E35 /* StatementsConfigurator.swift */; };
-		52F248AE2688911D00A6CC6D /* MyLostHomePage + ModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F248AD2688911D00A6CC6D /* MyLostHomePage + ModelBuilder.swift */; };
 		99BB25347253F7C36D942EEB /* Pods_mylost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D349D1DBF7F13EF663F20BC1 /* Pods_mylost.framework */; };
 /* End PBXBuildFile section */
 
@@ -186,6 +193,14 @@
 		52734E54272FED6000CA4206 /* MyProfileSliderActionSheetFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileSliderActionSheetFactory.swift; sourceTree = "<group>"; };
 		52734E59272FFB5800CA4206 /* StatementsAndBlogsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementsAndBlogsAdapter.swift; sourceTree = "<group>"; };
 		52734E5C27301FF700CA4206 /* MyProfileMenuModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileMenuModels.swift; sourceTree = "<group>"; };
+		52734EE22732AC9300CA4206 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		52734EE42732AD1500CA4206 /* BasicAudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAudioController.swift; sourceTree = "<group>"; };
+		52734EE82732ADC200CA4206 /* MockMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
+		52734EF2273517E300CA4206 /* FavouriteStatementsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStatementsControllerTests.swift; sourceTree = "<group>"; };
+		52734EF4273517F000CA4206 /* FavouriteStatementsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStatementsPresenterTests.swift; sourceTree = "<group>"; };
+		52734EF62735183600CA4206 /* FavouriteStatementsPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStatementsPresenterMock.swift; sourceTree = "<group>"; };
+		52734EF82735183F00CA4206 /* FavouriteStatementsRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStatementsRouterMock.swift; sourceTree = "<group>"; };
+		52734F0F27392BCC00CA4206 /* MyLostHomeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLostHomeFactory.swift; sourceTree = "<group>"; };
 		527888CF26E526ED00324041 /* PostCreateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateRouter.swift; sourceTree = "<group>"; };
 		527888D026E526ED00324041 /* PostCreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateController.swift; sourceTree = "<group>"; };
 		527888D126E526ED00324041 /* PostCreateAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateAssembly.swift; sourceTree = "<group>"; };
@@ -242,7 +257,6 @@
 		52DC59DD2680DDC800B35E35 /* StatementsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementsRouter.swift; sourceTree = "<group>"; };
 		52DC59DE2680DDC800B35E35 /* StatementsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementsController.swift; sourceTree = "<group>"; };
 		52DC59DF2680DDC800B35E35 /* StatementsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementsConfigurator.swift; sourceTree = "<group>"; };
-		52F248AD2688911D00A6CC6D /* MyLostHomePage + ModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyLostHomePage + ModelBuilder.swift"; sourceTree = "<group>"; };
 		BE9F521A104C1B6D2B5106FB /* Pods-mylost.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mylost.release.xcconfig"; path = "Target Support Files/Pods-mylost/Pods-mylost.release.xcconfig"; sourceTree = "<group>"; };
 		D349D1DBF7F13EF663F20BC1 /* Pods_mylost.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mylost.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -484,6 +498,43 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		52734EDE2732AC7E00CA4206 /* MessageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				52734EE12732AC8700CA4206 /* Core */,
+			);
+			path = MessageViewController;
+			sourceTree = "<group>";
+		};
+		52734EE12732AC8700CA4206 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				52734EE22732AC9300CA4206 /* MessageViewController.swift */,
+				52734EE42732AD1500CA4206 /* BasicAudioController.swift */,
+				52734EE82732ADC200CA4206 /* MockMessage.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		52734EEE273517B500CA4206 /* FavouriteStatementsTests */ = {
+			isa = PBXGroup;
+			children = (
+				52734EF1273517C800CA4206 /* Mocks */,
+				52734EF2273517E300CA4206 /* FavouriteStatementsControllerTests.swift */,
+				52734EF4273517F000CA4206 /* FavouriteStatementsPresenterTests.swift */,
+			);
+			path = FavouriteStatementsTests;
+			sourceTree = "<group>";
+		};
+		52734EF1273517C800CA4206 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				52734EF62735183600CA4206 /* FavouriteStatementsPresenterMock.swift */,
+				52734EF82735183F00CA4206 /* FavouriteStatementsRouterMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		527888CE26E526BE00324041 /* PostCreate */ = {
 			isa = PBXGroup;
 			children = (
@@ -584,6 +635,7 @@
 		5297D98D26E3D6760014F2FF /* mylostTests */ = {
 			isa = PBXGroup;
 			children = (
+				52734EEE273517B500CA4206 /* FavouriteStatementsTests */,
 				5219517C2722BEA200295424 /* LeakTests */,
 				5297D9B526E4C6420014F2FF /* NetworkTests */,
 				5297D9AB26E4C2330014F2FF /* SignInTests */,
@@ -707,6 +759,7 @@
 		52DC59CE2680D7EF00B35E35 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				52734EDE2732AC7E00CA4206 /* MessageViewController */,
 				521951A12727EF3800295424 /* ReadedBlogWithReactive */,
 				528FC85B2701BD1A00ABAAF0 /* FavouriteStatements */,
 				527888F526E5ED6F00324041 /* FilterDetails */,
@@ -739,6 +792,7 @@
 				52DC59D22680D82A00B35E35 /* MyLostHomeRouter.swift */,
 				52DC59D32680D82A00B35E35 /* MyLostHomeController.swift */,
 				52DC59D42680D82A00B35E35 /* MyLostHomeAssembly.swift */,
+				52734F0F27392BCC00CA4206 /* MyLostHomeFactory.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -766,7 +820,6 @@
 		52F248AC2688910600A6CC6D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				52F248AD2688911D00A6CC6D /* MyLostHomePage + ModelBuilder.swift */,
 				52D437F026ED2CB90067BC98 /* TransitionManager.swift */,
 			);
 			path = Helpers;
@@ -991,9 +1044,13 @@
 				5297D99F26E3F53E0014F2FF /* MyLostHomeRouterMock.swift in Sources */,
 				5219517E2722BEB000295424 /* LeakTest.swift in Sources */,
 				5297D99B26E3D8CA0014F2FF /* MyLostHomePresenterMock.swift in Sources */,
+				52734EF3273517E400CA4206 /* FavouriteStatementsControllerTests.swift in Sources */,
 				5297D9AE26E4C2520014F2FF /* SignInViewControllerTests.swift in Sources */,
 				5297D9B026E4C2600014F2FF /* SignInPresenterTests.swift in Sources */,
+				52734EF92735183F00CA4206 /* FavouriteStatementsRouterMock.swift in Sources */,
+				52734EF5273517F000CA4206 /* FavouriteStatementsPresenterTests.swift in Sources */,
 				5297D9B226E4C26D0014F2FF /* SignInPresenterMock.swift in Sources */,
+				52734EF72735183600CA4206 /* FavouriteStatementsPresenterMock.swift in Sources */,
 				5297D99826E3D8380014F2FF /* MyLostHomeViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1027,6 +1084,7 @@
 				521951AB27293A5200295424 /* ReadedBlogsFactory.swift in Sources */,
 				52734E19272C034000CA4206 /* ScrollableCellModel.swift in Sources */,
 				5272FFB326DCD18A00C24CC8 /* SignInPresenter.swift in Sources */,
+				52734EE52732AD1500CA4206 /* BasicAudioController.swift in Sources */,
 				52DC59E12680DDC800B35E35 /* StatementsRouter.swift in Sources */,
 				5219519B2722E48500295424 /* RegistrationModelsFactory.swift in Sources */,
 				521951992722E20A00295424 /* RegistrationAssembly.swift in Sources */,
@@ -1036,6 +1094,8 @@
 				5297D98526E383500014F2FF /* DetailsAndLogOutRouter.swift in Sources */,
 				5297D9BE26E4DD320014F2FF /* BlogDetailsPresenter.swift in Sources */,
 				528FC8692701C32300ABAAF0 /* FavouriteStatementModel.swift in Sources */,
+				52734F1027392BCC00CA4206 /* MyLostHomeFactory.swift in Sources */,
+				52734EE32732AC9300CA4206 /* MessageViewController.swift in Sources */,
 				52D80C5D264EF64200ACBC16 /* AppDelegate.swift in Sources */,
 				5272FFBA26DCD1C700C24CC8 /* DIManager.swift in Sources */,
 				521951972722E20A00295424 /* RegistrationRouter.swift in Sources */,
@@ -1056,6 +1116,7 @@
 				52DC595B267E2DE800B35E35 /* TabContainer.swift in Sources */,
 				527888F026E59A7F00324041 /* ContactDetailsRouter.swift in Sources */,
 				52734E39272C04FB00CA4206 /* PagerTabStripBehaviour.swift in Sources */,
+				52734EE92732ADC200CA4206 /* MockMessage.swift in Sources */,
 				521951A92727EF5A00295424 /* ReadedBlogsAssembly.swift in Sources */,
 				52D80C5F264EF64200ACBC16 /* SceneDelegate.swift in Sources */,
 				527888FD26E5ED8D00324041 /* FilterDetailsController.swift in Sources */,
@@ -1067,7 +1128,6 @@
 				52734E17272C034000CA4206 /* ProductTabCell.swift in Sources */,
 				52DC59D52680D82A00B35E35 /* MyLostHomePresenter.swift in Sources */,
 				5272FFB526DCD19B00C24CC8 /* SignInRouter.swift in Sources */,
-				52F248AE2688911D00A6CC6D /* MyLostHomePage + ModelBuilder.swift in Sources */,
 				52DC59D72680D82A00B35E35 /* MyLostHomeController.swift in Sources */,
 				52D437F126ED2CB90067BC98 /* TransitionManager.swift in Sources */,
 				52DC59E32680DDC800B35E35 /* StatementsConfigurator.swift in Sources */,
@@ -1276,7 +1336,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = mylost/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1296,7 +1356,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = mylost/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

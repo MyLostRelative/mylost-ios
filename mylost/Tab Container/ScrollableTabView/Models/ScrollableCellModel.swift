@@ -19,6 +19,12 @@ protocol TabCollectionCellModel {
     var backgroundColor: UIColor? {get}
 }
 
+struct TipModel {
+    var title: String
+    var buttonTitle: String
+    var buttonColor: UIColor
+}
+
 struct ProductTabModel:  TabCollectionCellModel {
     var title: String
     var state: ProductTabCell.State

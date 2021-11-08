@@ -1,5 +1,8 @@
 PODS:
   - Differentiator (5.0.0)
+  - InputBarAccessoryView (5.4.0):
+    - InputBarAccessoryView/Core (= 5.4.0)
+  - InputBarAccessoryView/Core (5.4.0)
   - IQKeyboardManagerSwift (6.5.6)
   - LifetimeTracker (1.8.0)
   - MaterialComponents/ActivityIndicator (124.2.0):
@@ -131,6 +134,8 @@ PODS:
     - MDFTextAccessibility
   - MDFInternationalization (3.0.0)
   - MDFTextAccessibility (2.0.1)
+  - MessageKit (3.7.0):
+    - InputBarAccessoryView (~> 5.4.0)
   - MotionAnimator (4.0.1):
     - MotionInterchange (~> 3.0)
   - MotionInterchange (3.0.0)
@@ -159,6 +164,7 @@ DEPENDENCIES:
   - "MaterialComponents/TextControls+FilledTextFields"
   - "MaterialComponents/TextControls+OutlinedTextAreas"
   - "MaterialComponents/TextControls+OutlinedTextFields"
+  - MessageKit
   - RxCocoa (= 6.2.0)
   - RxDataSources
   - RxSwift (= 6.2.0)
@@ -169,11 +175,13 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Differentiator
+    - InputBarAccessoryView
     - IQKeyboardManagerSwift
     - LifetimeTracker
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
+    - MessageKit
     - MotionAnimator
     - MotionInterchange
     - RxCocoa
@@ -186,11 +194,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
+  InputBarAccessoryView: 74d471ab1fa1736806be50328df79257e52865a9
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   LifetimeTracker: a7a0fcf35bbf933f83b1c1020e267996d17cdcea
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
+  MessageKit: 8e76dd8d65ad44b49e1651c673497146416461e9
   MotionAnimator: 5f99d7c9592928c0f28a66283eda9c3b657dc480
   MotionInterchange: 13adae439b377e31d1674cc165539d50e1d1566a
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
@@ -201,6 +211,6 @@ SPEC CHECKSUMS:
   SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
   Swinject: db795b8d6d78559b25fbebb0170d2635be1176e2
 
-PODFILE CHECKSUM: 9784b43dfdcd8d673e9d29044d301e7be4f5aeb0
+PODFILE CHECKSUM: 6b85661bb8135c0869eb98f7fd9bad6ce3110036
 
 COCOAPODS: 1.11.2

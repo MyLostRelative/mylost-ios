@@ -95,6 +95,15 @@
 		52734DDF272BEC7A00CA4206 /* RoundedTextFieldTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734AD2272BEC7900CA4206 /* RoundedTextFieldTableCell.swift */; };
 		52734E51272FE01F00CA4206 /* SlideActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E50272FE01F00CA4206 /* SlideActionSheet.swift */; };
 		52734E53272FE0DB00CA4206 /* SlideActionSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734E52272FE0DB00CA4206 /* SlideActionSheetViewModel.swift */; };
+		52734EFE273531F700CA4206 /* TipComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734EFD273531F700CA4206 /* TipComponent.swift */; };
+		52734F002735321800CA4206 /* TipComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734EFF2735321800CA4206 /* TipComponentModel.swift */; };
+		52734F07273916A500CA4206 /* DialogComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734F06273916A500CA4206 /* DialogComponent.swift */; };
+		52734F09273916B100CA4206 /* DialogComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734F08273916B100CA4206 /* DialogComponentModel.swift */; };
+		52734F0C273923F000CA4206 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734F0B273923F000CA4206 /* PrimaryButton.swift */; };
+		52734F0E273923FA00CA4206 /* PrimaryButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734F0D273923FA00CA4206 /* PrimaryButtonModel.swift */; };
+		52734F152739494500CA4206 /* ShadowCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734F142739494500CA4206 /* ShadowCard.swift */; };
+		52734F172739494F00CA4206 /* ShadowCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734F162739494F00CA4206 /* ShadowCardModel.swift */; };
+		52734F1A27394BF300CA4206 /* ShadowCardTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52734F1927394BF300CA4206 /* ShadowCardTableCell.swift */; };
 		A1597317F2E785D4C7C515A1 /* Pods_Components.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81625FC878AC407EE672DED7 /* Pods_Components.framework */; };
 /* End PBXBuildFile section */
 
@@ -189,6 +198,15 @@
 		52734AD2272BEC7900CA4206 /* RoundedTextFieldTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldTableCell.swift; sourceTree = "<group>"; };
 		52734E50272FE01F00CA4206 /* SlideActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideActionSheet.swift; sourceTree = "<group>"; };
 		52734E52272FE0DB00CA4206 /* SlideActionSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideActionSheetViewModel.swift; sourceTree = "<group>"; };
+		52734EFD273531F700CA4206 /* TipComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipComponent.swift; sourceTree = "<group>"; };
+		52734EFF2735321800CA4206 /* TipComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipComponentModel.swift; sourceTree = "<group>"; };
+		52734F06273916A500CA4206 /* DialogComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogComponent.swift; sourceTree = "<group>"; };
+		52734F08273916B100CA4206 /* DialogComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogComponentModel.swift; sourceTree = "<group>"; };
+		52734F0B273923F000CA4206 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		52734F0D273923FA00CA4206 /* PrimaryButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonModel.swift; sourceTree = "<group>"; };
+		52734F142739494500CA4206 /* ShadowCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCard.swift; sourceTree = "<group>"; };
+		52734F162739494F00CA4206 /* ShadowCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCardModel.swift; sourceTree = "<group>"; };
+		52734F1927394BF300CA4206 /* ShadowCardTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCardTableCell.swift; sourceTree = "<group>"; };
 		81625FC878AC407EE672DED7 /* Pods_Components.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Components.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF43E7F862A350456C389207 /* Pods-Components.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Components.release.xcconfig"; path = "Target Support Files/Pods-Components/Pods-Components.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -260,6 +278,10 @@
 		527346D7272BEC3000CA4206 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				52734F132739493800CA4206 /* ShadowCard */,
+				52734F0A273923E200CA4206 /* PrimaryButton */,
+				52734F052739169800CA4206 /* Dialog */,
+				52734EFC273531E900CA4206 /* TipComponent */,
 				52734E4F272FE00C00CA4206 /* Slide Action Sheet */,
 				527346D8272BEC3000CA4206 /* User Profile */,
 				527346DB272BEC3000CA4206 /* RoundedTextField */,
@@ -556,6 +578,7 @@
 		52734AB9272BEC7900CA4206 /* Generic Cells */ = {
 			isa = PBXGroup;
 			children = (
+				52734F1827394B7700CA4206 /* ShadowCardCell */,
 				52734ABA272BEC7900CA4206 /* PickerViewCell.swift */,
 				52734ABB272BEC7900CA4206 /* TiTleButtonTableCell.swift */,
 				52734ABC272BEC7900CA4206 /* SavedUserTableCell.swift */,
@@ -620,6 +643,50 @@
 				52734E52272FE0DB00CA4206 /* SlideActionSheetViewModel.swift */,
 			);
 			path = "Slide Action Sheet";
+			sourceTree = "<group>";
+		};
+		52734EFC273531E900CA4206 /* TipComponent */ = {
+			isa = PBXGroup;
+			children = (
+				52734EFD273531F700CA4206 /* TipComponent.swift */,
+				52734EFF2735321800CA4206 /* TipComponentModel.swift */,
+			);
+			path = TipComponent;
+			sourceTree = "<group>";
+		};
+		52734F052739169800CA4206 /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				52734F06273916A500CA4206 /* DialogComponent.swift */,
+				52734F08273916B100CA4206 /* DialogComponentModel.swift */,
+			);
+			path = Dialog;
+			sourceTree = "<group>";
+		};
+		52734F0A273923E200CA4206 /* PrimaryButton */ = {
+			isa = PBXGroup;
+			children = (
+				52734F0B273923F000CA4206 /* PrimaryButton.swift */,
+				52734F0D273923FA00CA4206 /* PrimaryButtonModel.swift */,
+			);
+			path = PrimaryButton;
+			sourceTree = "<group>";
+		};
+		52734F132739493800CA4206 /* ShadowCard */ = {
+			isa = PBXGroup;
+			children = (
+				52734F142739494500CA4206 /* ShadowCard.swift */,
+				52734F162739494F00CA4206 /* ShadowCardModel.swift */,
+			);
+			path = ShadowCard;
+			sourceTree = "<group>";
+		};
+		52734F1827394B7700CA4206 /* ShadowCardCell */ = {
+			isa = PBXGroup;
+			children = (
+				52734F1927394BF300CA4206 /* ShadowCardTableCell.swift */,
+			);
+			path = ShadowCardCell;
 			sourceTree = "<group>";
 		};
 		87248DC9118895CDA5985B21 /* Pods */ = {
@@ -762,6 +829,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52734ADB272BEC7900CA4206 /* RoundedTitleAndDescription.swift in Sources */,
+				52734F152739494500CA4206 /* ShadowCard.swift in Sources */,
 				52734AE1272BEC7900CA4206 /* LogInTextField.swift in Sources */,
 				52734DC3272BEC7A00CA4206 /* UIView + Extensions.swift in Sources */,
 				52734DA5272BEC7A00CA4206 /* CollectionViewRow.swift in Sources */,
@@ -790,17 +858,21 @@
 				52734ADA272BEC7900CA4206 /* RoundedTitleAndDescriptionViewModel + Constants.swift in Sources */,
 				52734D9C272BEC7A00CA4206 /* Table Extensions.swift in Sources */,
 				52734D9B272BEC7A00CA4206 /* UserDefault.swift in Sources */,
+				52734F09273916B100CA4206 /* DialogComponentModel.swift in Sources */,
 				52734D9A272BEC7A00CA4206 /* TableSectionProtocols.swift in Sources */,
 				52734AE0272BEC7900CA4206 /* LogInTextField ViewModel.swift in Sources */,
 				52734AD9272BEC7900CA4206 /* RoundedTextField.swift in Sources */,
 				52734DC6272BEC7A00CA4206 /* Color.swift in Sources */,
+				52734F07273916A500CA4206 /* DialogComponent.swift in Sources */,
 				52734DA4272BEC7A00CA4206 /* CollectionViewDataSource.swift in Sources */,
 				52734DD4272BEC7A00CA4206 /* PageDescriptionTableCell.swift in Sources */,
 				52734AD8272BEC7900CA4206 /* RoundedTextFieldViewModel + Constants.swift in Sources */,
+				52734F172739494F00CA4206 /* ShadowCardModel.swift in Sources */,
 				52734DA1272BEC7A00CA4206 /* ListSection.swift in Sources */,
 				52734AE3272BEC7900CA4206 /* RowItemModel.swift in Sources */,
 				52734DDE272BEC7A00CA4206 /* MaterialChipsTableCell.swift in Sources */,
 				52734318272BE1EC00CA4206 /* Components.docc in Sources */,
+				52734F1A27394BF300CA4206 /* ShadowCardTableCell.swift in Sources */,
 				52734DCC272BEC7A00CA4206 /* TiTleButtonTableCell.swift in Sources */,
 				52734DD9272BEC7A00CA4206 /* TwoInputTableCellModel.swift in Sources */,
 				52734AE6272BEC7900CA4206 /* BannerDisplay.swift in Sources */,
@@ -810,9 +882,11 @@
 				52734ADC272BEC7900CA4206 /* HeaderWithDetailsViewModel + Constants.swift in Sources */,
 				52734ADD272BEC7900CA4206 /* HeaderWithDetails.swift in Sources */,
 				52734DDC272BEC7A00CA4206 /* PageDescriptionWithButtonTableCell.swift in Sources */,
+				52734F0E273923FA00CA4206 /* PrimaryButtonModel.swift in Sources */,
 				52734DBE272BEC7A00CA4206 /* TextInputValidation.swift in Sources */,
 				52734DD6272BEC7A00CA4206 /* RoundedButtonTableCell.swift in Sources */,
 				52734DA3272BEC7A00CA4206 /* DifCalculator.swift in Sources */,
+				52734F0C273923F000CA4206 /* PrimaryButton.swift in Sources */,
 				52734DC4272BEC7A00CA4206 /* BrandbookResources.swift in Sources */,
 				52734E53272FE0DB00CA4206 /* SlideActionSheetViewModel.swift in Sources */,
 				52734AE9272BEC7900CA4206 /* LocalButton.swift in Sources */,
@@ -822,9 +896,11 @@
 				52734E51272FE01F00CA4206 /* SlideActionSheet.swift in Sources */,
 				52734DCA272BEC7A00CA4206 /* Font.swift in Sources */,
 				52734DC7272BEC7A00CA4206 /* ImageWrapper.swift in Sources */,
+				52734EFE273531F700CA4206 /* TipComponent.swift in Sources */,
 				52734DD0272BEC7A00CA4206 /* RoundButtonTableCell.swift in Sources */,
 				52734ADE272BEC7900CA4206 /* Button With Line.swift in Sources */,
 				52734DA0272BEC7A00CA4206 /* ListViewDataSource.swift in Sources */,
+				52734F002735321800CA4206 /* TipComponentModel.swift in Sources */,
 				52734D9E272BEC7A00CA4206 /* Reusable.swift in Sources */,
 				52734AD7272BEC7900CA4206 /* UserProfileModel.swift in Sources */,
 				52734AD3272BEC7900CA4206 /* CustomNavigatable.swift in Sources */,
@@ -974,7 +1050,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1004,7 +1080,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

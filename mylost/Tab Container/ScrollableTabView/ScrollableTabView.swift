@@ -18,7 +18,7 @@ class ScrollableTabView: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     weak var delegate: ScrollableTabViewDelegate?
-    
+    public var segmentFrames: [CGRect] = []
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.register(UINib.init(nibName: CellIdentifier.ID, bundle: nil), forCellWithReuseIdentifier: CellIdentifier.ID)
@@ -67,6 +67,7 @@ extension ScrollableTabView: UICollectionViewDataSource {
               let model = self.delegate?.model(at: indexPath.row) else {return UICollectionViewCell()}
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nib, for: indexPath) as? CollectionConfigurable {
             cell.configure(model: model)
+            segmentFrames.append((cell as! UICollectionViewCell).frame)
             return cell as! UICollectionViewCell
         }
         return UICollectionViewCell()
