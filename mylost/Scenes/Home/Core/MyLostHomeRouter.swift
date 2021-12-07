@@ -38,10 +38,6 @@ class MyLostHomeRouterImpl: MyLostHomeRouter {
     }
     
     func move2Filter(delegate: FilterDetailsPresenterDelegate) {
-        let v = ChatViewController()
-        
-        self.controller?.navigationController?.pushViewController(v, animated: true)
-        return 
         guard let vc = DIAssembly(uiAssemblies: [FilterDetailsAssembly(delegate: delegate)],
                                   networkAssemblies: [])
             .resolver

@@ -28,6 +28,26 @@ class ProductContainer: PagerTabStripViewController {
             
         }
     }
+    private var animationHappen: Bool = UserDefaultManagerImpl().getValue(key: "tipIsShown") != nil
+    private var messages: [String] = ["Welcome to My Lost App",
+                                      "This is Search App for lost people"]
+    private let lbl: UILabel = {
+        let lbl = UILabel()
+        lbl.font = .systemFont(ofSize: 18, weight: .semibold)
+        lbl.textColor = .gray
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
+    private let vv: UIView = {
+        let lbl = UIView()
+        lbl.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
+        lbl.width(equalTo: UIScreen.main.bounds.width - 100)
+        lbl.height(equalTo: 40)
+        lbl.layer.cornerRadius = 10
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
     
     private let adapter: StatementsAndBlogsAdapter = {
         StatementsAndBlogsAdapterImpl()
@@ -36,25 +56,41 @@ class ProductContainer: PagerTabStripViewController {
     lazy var items: [ProductTabModel] = {
         return getDatasourceModels()
     }()
-    
+
     override func viewDidLoad() {
         self.datasource = self
-        self.navigationController?.view.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
         super.viewDidLoad()
-        configureSegmentsCollectionView()
-        changeTipDefault()
+        self.navigationController?.view.backgroundColor = Resourcebook.Color.Invert.Background.canvas.uiColor
+        self.configureSegmentsCollectionView()
+        self.changeTipDefault()
+        self.addAnimationLabel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if !animationHappen {
+            self.showMessage(index: 0)
+            animationHappen = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        if !animationHappen {
+            self.containerView.isHidden = true
+            self.segments.isHidden = true
+            searchFlyingAnimation()
+        } else {
+            self.lbl.isHidden  = true
+            self.vv.isHidden = true
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }
-    
+
     private func configureSegmentsCollectionView() {
         self.containerView.isScrollEnabled = false
         self.segments.delegate = self
@@ -65,7 +101,7 @@ class ProductContainer: PagerTabStripViewController {
         guard let tipIsShown = userDef.getValue(key: "tipIsShown") as? Bool,
            tipIsShown else {
                userDef.saveKeyName(key: "tipIsShown", value: true)
-               DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+               DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
                    self.tipCol()
                }
                return
@@ -172,4 +208,78 @@ extension ProductContainer: PagerTabStripDataSource {
         return self.userType == .guest ? dataSource.models() : dataSource.loggedInmodels()
     }
     
+}
+
+// MARK: - Animations
+extension ProductContainer{
+    private func addAnimationLabel() {
+        self.view.addSubview(vv)
+        self.vv.addSubview(lbl)
+        vv.centerHorizontally(to: self.view)
+        vv.centerVertically(to: self.view)
+        lbl.centerHorizontally(to: self.view)
+        lbl.centerVertically(to: self.view)
+        
+    }
+    
+    func showMessage(index: Int) {
+        lbl.text = messages[index]
+        lbl.center.y = self.view.bounds.height/2 - 100
+        UIView.transition(with: vv, duration: 2, options: [.curveEaseOut, .transitionCurlDown], animations: {
+            self.lbl.isHidden  = false
+            self.vv.isHidden = false
+        }) { _ in
+            UIView.animate(withDuration: 1.0, delay: 0, options: []) {
+            } completion: { _ in
+                if index < self.messages.count - 1 {
+                    self.removeMessage(index: index)
+                } else {
+                    self.resetForm()
+                }
+            }
+        }
+    }
+    
+    func removeMessage(index: Int) {
+        UIView.animate(withDuration: 1, delay: 0.3, options: [], animations: {
+            self.lbl.center.x += self.view.frame.size.width
+            self.vv.center.x += self.view.frame.size.width
+        }) { _ in
+            self.lbl.isHidden = true
+            self.vv.isHidden = true
+            self.lbl.center = self.view.center
+            self.showMessage(index: index + 1)
+        }
+    }
+    
+    func resetForm() {
+        containerLoadingANimation()
+    }
+    
+    private func containerLoadingANimation() {
+        UIView.animate(withDuration: 1, delay: 0,  options: [.curveLinear]) {
+            self.lbl.isHidden = true
+            self.vv.isHidden = true
+            self.containerView.isHidden = false
+            self.segments.isHidden = false
+        }
+    }
+    
+    private func searchFlyingAnimation() {
+        let balloon = CALayer()
+        balloon.contents = Resourcebook.Image.Icons24.systemSearch.template.cgImage
+        balloon.frame = CGRect(x: -50.0, y: 0.0, width: 50.0, height: 50.0)
+        self.view.layer.addSublayer(balloon)
+        let flight = CAKeyframeAnimation(keyPath: "position")
+        flight.duration = 4
+        flight.values = [
+            CGPoint(x: -50.0, y: 0.0),
+            CGPoint(x: self.view.center.x - 40 , y: self.view.center.y - 40),
+            CGPoint(x: self.view.center.x + 40 , y: self.view.center.y - 40),
+            CGPoint(x: self.view.center.x + 40 , y: self.view.center.y + 40),
+            CGPoint(x: self.view.center.x - 40 , y: self.view.center.y + 40),
+            CGPoint(x: -50.0, y: self.view.center.y + 100)
+        ].map { NSValue(cgPoint: $0) }
+        balloon.add(flight, forKey: nil)
+    }
 }

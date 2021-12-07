@@ -17,10 +17,10 @@ protocol SignInView: AnyObject {
     func stopLoading()
 }
 
-class SignInViewController: UIViewController, LifetimeTrackable {
-    class var lifetimeConfiguration: LifetimeConfiguration {
-        return LifetimeConfiguration(maxCount: 1, groupName: "VC")
-    }
+class SignInViewController: UIViewController {
+//    class var lifetimeConfiguration: LifetimeConfiguration {
+//        return LifetimeConfiguration(maxCount: 1, groupName: "VC")
+//    }
     
     var presenter: SignInPresenter?
     

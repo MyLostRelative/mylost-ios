@@ -126,14 +126,7 @@ class SignInPresenterImpl: SignInPresenter {
     private func textField(with model: LoginTextFieldTableCell.Model) -> ListRow <LoginTextFieldTableCell> {
         ListRow(model: model, height: UITableView.automaticDimension)
     }
-    
-    private func shadowCardRow() -> ListRow<ShadowCardTableCell> {
-        ListRow(model: .init(image: Resourcebook.Image.Icons24.systemInfoFill.image,
-                             title: "ვიზიტის დაჯავშნა",
-                             description: "ფიზიკურ პირთან კონსულტაცია"),
-                height: UITableView.automaticDimension)
-    }
-    
+
     private func button(with model: RoundedButtonTableCell.ViewModel) -> ListRow<RoundedButtonTableCell> {
         ListRow(model: model,
                 height: UITableView.automaticDimension)
@@ -168,7 +161,6 @@ extension SignInPresenterImpl {
         return ListSection.init(
             id: "",
             rows: [
-                self.shadowCardRow(),
                 self.pageDescriptionRow(),
                 self.textField(with: usernameModel),
                 self.textField(with: passwordModel),
